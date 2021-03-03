@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import ProductOverview from './overview/productOverview';
+import RatingsReviews from './ratings/ratingsReviews';
+import RelatedProducts from './products/relatedProducts';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,6 +12,9 @@ function App() {
   };
   return (
     <div className="main">
+      <div className="container is-primary">
+        <h1 className="title">KamelCasedKids Capstone</h1>
+      </div>
       <div>
         <p>{count}</p>
         <button type="button" onClick={() => increase()}>
@@ -16,10 +22,10 @@ function App() {
         </button>
       </div>
       <div className="overview">
-        ProductOverview
+        <ProductOverview />
       </div>
       <div className="related">
-        RelatedProducts
+        <RelatedProducts />
       </div>
       <div className="ratings">
         RatingsReviews

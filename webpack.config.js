@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(), // clears dist folder after each build
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
-    // new MiniCssExtractPlugin({ filename: './src/styles/styles.scss' }),
+    new MiniCssExtractPlugin({ filename: './src/styles/styles.css' }),
   ],
 
   // Output
