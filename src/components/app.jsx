@@ -11,7 +11,7 @@ function App() {
     <div className="main">
       <div>
         <p>{count}</p>
-        <button type="button" onClick={() => console.log('click')}>
+        <button type="button" onClick={(e) => console.log('click')}>
           Click me
         </button>
       </div>

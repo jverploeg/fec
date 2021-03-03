@@ -15,8 +15,8 @@ module.exports = {
   entry: path.resolve(__dirname, 'src', 'index.jsx'),
   // PLUGINS
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
     new CleanWebpackPlugin(), // clears dist folder after each build
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
     // new MiniCssExtractPlugin({ filename: './src/styles/styles.scss' }),
   ],
 
@@ -27,6 +27,8 @@ module.exports = {
     // the filename of the JS bundle will be bundle.js
     filename: 'bundle.js',
   },
+  // devtool helps identify where error is happening
+  devtool: 'inline-source-map',
 
   module: {
     rules: [
