@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // helpers
-import DropDown from './dropDown';
+import DropDown from '../helpers/dropDown';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
