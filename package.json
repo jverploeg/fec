@@ -71,7 +71,7 @@
       "node_modules",
       "bower_components",
       "shared",
-      "client"
+      "src"
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",

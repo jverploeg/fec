@@ -3,6 +3,25 @@
 
 @charset "utf-8";
 
+// APP
+html {
+  scroll-behavior: smooth;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + content {
+  padding-top: 60px;
+}
+
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
@@ -104,6 +123,7 @@ $tile-spacing: 0;
 .stars-95:after { width: 95%; }
 .stars-100:after { width: 100; }
 
+// IMPORTS
 // Import only what you need from Bulma
 @import "~/node_modules/bulma/sass/utilities/_all.sass";
 @import "~/node_modules/bulma/sass/base/_all.sass";
@@ -122,3 +142,4 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/menu.sass";
 @import "~/node_modules/bulma/sass/components/dropdown.sass";
 @import "~/node_modules/bulma/sass/components/card.sass";
+@import "~/node_modules/bulma/sass/helpers/_all.sass";

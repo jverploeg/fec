@@ -11,7 +11,7 @@ const getAllProducts = (cb) => {
   const options = {
     headers: {
       'Authorization': config.key
-    }
+    },
   };
   axios.get(url, options)
     .catch((err) => {

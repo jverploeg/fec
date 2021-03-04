@@ -28,26 +28,13 @@ const testProduct = {
 };
 
 function App() {
-  const [count, setCount] = useState(0);
   const [currentProduct, setCurrentProduct] = useState(testProduct);
   const [productList, setProductList] = useState(null);
-
-  const increase = () => {
-    setCount(count + 1);
-    // eslint-disable-next-line no-console
-    console.log('clicked');
-  };
 
   return (
     <div className="main">
       <div className="container is-primary">
         <h1 className="title">KamelCasedKids Capstone</h1>
-      </div>
-      <div>
-        <p>{count}</p>
-        <button type="button" onClick={() => increase()}>
-          Click me
-        </button>
       </div>
       <div className="overview">
         <ProductOverview />

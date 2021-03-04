@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
-// import bulma from 'bulma';
 import OverallStarRating from './OverallStarRating';
 import NewReview from './NewReview';
+import DropDown from '../helpers/dropDown';
+import StickyNavBar from './StickyNavBar';
 import { FiArrowUpCircle } from 'react-icons/fi';
+
+// Navbar behavior
+// When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+// Get the navbar
+var navbar = React.createRef();
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
 
 const testProduct = {
   id: 18201,
@@ -24,65 +44,9 @@ const RatingsReviews = (props) => {
 
   return (
     <div id="Ratings-Reviews" className="Ratings-Reviews">
-      {/* NAVIGATION BAR */}
-      <nav className="navbar is-fluid" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="#Ratings-Reviews">
-            <FiArrowUpCircle className="return-to-top-reviews" size={50}/>
-          </a>
 
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
-            <a class="navbar-item">
-              Documentation
-            </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-              <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  About
-                </a>
-                <a class="navbar-item">
-                  Jobs
-                </a>
-                <a class="navbar-item">
-                  Contact
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item">
-                  Report an issue
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light">
-                Log in
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </nav>
+      {/* STICKY NAV BAR */}
+      <StickyNavBar />
 
       {/* INDIVIDUAL RATING CARD */}
       <section className="hero is-grey-dark is-fullheight">
