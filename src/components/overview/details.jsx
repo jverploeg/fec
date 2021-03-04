@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+// helpers
+import DropDown from './dropDown';
+
+// variables
+const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 function Details() {
   // stuff and states
-  const [something, setSomething] = useState(0);
-  // state = {
-  //   name: '',
-  //   price: 0,
-  //   style: []
-  // }
+  const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
+
   return (
     <div>
       <div className="column star">
@@ -52,34 +53,7 @@ function Details() {
       </div>
       <div className="columns">
         <div className="column is-two-thirds size">
-          <div className="dropdown">
-            <div className="dropdown-trigger">
-              <button type="button" className="button">
-                <span>Select Size</span>
-              </button>
-            </div>
-            <div className="dropdown-menu">
-              <div className="dropdown-content">
-                <div className="dropdown-content">
-                  <li className="dropdown-item">
-                    XS
-                  </li>
-                  <li className="dropdown-item">
-                    S
-                  </li>
-                  <li className="dropdown-item">
-                    M
-                  </li>
-                  <li className="dropdown-item">
-                    L
-                  </li>
-                  <li className="dropdown-item">
-                    XL
-                  </li>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SizeDropdown />
         </div>
         <div className="column quantity">
           <button type="button">Quantity</button>
@@ -99,3 +73,31 @@ function Details() {
 }
 
 export default Details;
+/* <div className="dropdown">
+<div className="dropdown-trigger">
+  <button type="button" className="button">
+    <span>Select Size</span>
+  </button>
+</div>
+<div className="dropdown-menu">
+  <div className="dropdown-content">
+    <div className="dropdown-content">
+      <li className="dropdown-item">
+        XS
+      </li>
+      <li className="dropdown-item">
+        S
+      </li>
+      <li className="dropdown-item">
+        M
+      </li>
+      <li className="dropdown-item">
+        L
+      </li>
+      <li className="dropdown-item">
+        XL
+      </li>
+    </div>
+  </div>
+</div>
+</div> */
