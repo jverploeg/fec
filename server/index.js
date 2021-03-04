@@ -36,3 +36,25 @@ app.get('/api/reviews/all/:id', (req, res) => {
     }
   });
 });
+
+app.get('/api/products/all', (req, res) => {
+  atlier.getAllProducts((err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
+app.get('/api/products/:id', (req, res) => {
+  const productID = req.params.id;
+
+  atlier.getProductByID(productID, (err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});

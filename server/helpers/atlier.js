@@ -1,11 +1,66 @@
 // IMPORTS
 const axios = require('axios');
 const store2 = require('store2');
-// const config = require('../../atlier-config.js');
-// TODO: cant find this module
+const config = require('../../atlier-config.js');
 
 // ATLIER API HELPER FUNCTIONS
+
+// ---------- Products ----------
+const getAllProducts = (cb) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    }
+  };
+  axios.get(url, options)
+    .catch((err) => {
+      console.log('err: ', err);
+      return cb(err, null);
+    })
+    .then((res) => {
+      const key = 'allProducts';
+      const value = res.data; // array of products w/o style options
+      store2(key, value, true); // true indicates to overwrite
+      console.log('store2: ', store2());
+      return res;
+    })
+    .then((res) => {
+      return cb(null, res.data);
+    });
+};
+
+const getProductByID = (productID, cb) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    }
+  };
+  axios.get(url, options)
+    .catch((err) => {
+      console.log('err: ', err);
+      return cb(err, null);
+    })
+    .then((res) => {
+      // store all reviews for product
+      const key = `product${productID}`
+      const value = res.data; // array of reviews
+      store2(key, value, true); // true indicates to overwrite
+      return res;
+    })
+    .then((res) => {
+      return cb(null, res.data);
+    });
+};
+
+// ---------- Reviews ----------
 const getAllReviewsByProduct = (productID, cb) => {
+  /*  stores all reviews for a single product under
+      key=`allReviews${productID}` : value=[arrayOfReviews]
+    also calcs and stores average rating for the product under
+      key=`aveRating${productID}` : value=[arrayOfReviews]
+  */
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews/?product_id=${productID}&count=100`;
   const options = {
     headers: {
@@ -18,20 +73,33 @@ const getAllReviewsByProduct = (productID, cb) => {
       return cb(err, null);
     })
     .then((res) => {
-      // console.log('res.data.results:', res.data.results);
-      // store2.set('reviews', { `${productID}`: res.data.results });
-      store2.set(`allReviews${productID}`, res.data.results, true);
+      // store all reviews for product
+      const key = `allReviews${productID}`
+      const value = res.data.results; // array of reviews
+      store2(key, value, true); // true indicates to overwrite
+
+      // calc and store average rating
+      console.log('before supplement: ', store2(`product${productID}`));
+      const aveRating = calcAverageRating(res.data.results);
+      if (store2(`product${productID}`)) {
+        supplementAveRatingToProduct(productID, aveRating);
+      } else {
+        getProductByID(productID);
+        console.log('after save: ', store2(`product${productID}`));
+        supplementAveRatingToProduct(productID, aveRating);
+      }
+      console.log('after supplement: ', store2(`product${productID}`));
       return res;
     })
     .then((res) => {
-      // console.log('res:', res.data);
-      console.log(store2.getAll());
       return cb(null, res.data);
     });
 };
-
 // const getNewestTwoReviewsByProduct = (productID, )
 
+//
+//
+//
 // UTILITY HELPER FUNCTIONS
 const calcAverageRating = (allReviews) => {
   let ratingSum = 0;
@@ -39,12 +107,22 @@ const calcAverageRating = (allReviews) => {
     const { rating } = review;
     ratingSum += rating;
   });
+  // return average rating to nearest quarter value with two decimal places
   return (Math.round((ratingSum / allReviews.length) * 4) / 4).toFixed(2);
+};
+
+const supplementAveRatingToProduct = (productID, aveRating) => {
+  store2.transact(`product${productID}`, function(product) {
+    console.log('product: ', product);
+    product.aveRating = aveRating;
+  });
 };
 
 // EXPORTS
 module.exports = {
   getAllReviewsByProduct,
+  getAllProducts,
+  getProductByID,
 };
 
 //

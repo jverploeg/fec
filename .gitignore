@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# atlier api
+atlier-config.js

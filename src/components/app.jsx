@@ -3,6 +3,19 @@ import ProductOverview from './overview/productOverview';
 import RatingsReviews from './ratings/ratingsReviews';
 import RelatedProducts from './products/relatedProducts';
 
+// TODO remove at completion
+const testProduct = {
+  id: 18201,
+  campus: 'hr-bld',
+  name: 'Ernesto Sweatpants',
+  slogan: 'Odit dolorem nemo id tempora qui.',
+  description: 'A sapiente hic. Facilis et sit voluptatem. Ex sunt reiciendis qui ut perferendis qui soluta quod.',
+  category: 'Sweatpants',
+  default_price: '56.00',
+  created_at: '2021-02-23T05:08:00.520Z',
+  updated_at: '2021-02-23T05:08:00.520Z',
+};
+
 function App() {
   const [count, setCount] = useState(0);
   const increase = () => {
@@ -10,6 +23,7 @@ function App() {
     // eslint-disable-next-line no-console
     console.log('clicked');
   };
+  const [currentProduct, setProduct] = useState(testProduct)
   return (
     <div className="main">
       <div className="container is-primary">
@@ -28,7 +42,7 @@ function App() {
         <RelatedProducts />
       </div>
       <div className="ratings">
-        RatingsReviews
+        <RatingsReviews product={testProduct}/>
       </div>
     </div>
   );
