@@ -19,21 +19,20 @@ const testProduct = {
 const RatingsReviews = (props) => {
   // const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const product = props.product;
 
   return (
     <div className="RatingsReviews">
       <button type="button" className="button is-black" onClick={(e) => { console.log('hello'); }}>
         TEST BUTTON2
       </button>
-      <section className="hero is-primary is-fullheight">
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <h1 className="title">Hello, Ryne!</h1>
+      <section className="hero is-grey-dark is-fullheight">
+          <div className="container is-fluid">
+            <h1 className="title">Hello, Ryne Schroder!</h1>
             <h2 className="subtitle">This is Ratings and reviews</h2>
             {/* <OverallStarRating /> */}
-            <OverallStarRating product={props.product} />
+            <OverallStarRating product={product} />
           </div>
-        </div>
       </section>
     </div>
   );

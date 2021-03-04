@@ -5,25 +5,39 @@ import RelatedProducts from './products/relatedProducts';
 
 // TODO remove at completion
 const testProduct = {
-  id: 18201,
-  campus: 'hr-bld',
-  name: 'Ernesto Sweatpants',
-  slogan: 'Odit dolorem nemo id tempora qui.',
-  description: 'A sapiente hic. Facilis et sit voluptatem. Ex sunt reiciendis qui ut perferendis qui soluta quod.',
-  category: 'Sweatpants',
-  default_price: '56.00',
-  created_at: '2021-02-23T05:08:00.520Z',
-  updated_at: '2021-02-23T05:08:00.520Z',
+  "id": 18078,
+  "campus": "hr-bld",
+  "name": "Camo Onesie",
+  "slogan": "Blend in to your crowd",
+  "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+  "category": "Jackets",
+  "default_price": "140.00",
+  "created_at": "2021-02-23T05:08:00.350Z",
+  "updated_at": "2021-02-23T05:08:00.350Z",
+  "features": [
+      {
+          "feature": "Fabric",
+          "value": "Canvas"
+      },
+      {
+          "feature": "Buttons",
+          "value": "Brass"
+      }
+  ],
+  "aveRating": "4.50"
 };
 
 function App() {
   const [count, setCount] = useState(0);
+  const [currentProduct, setCurrentProduct] = useState(testProduct);
+  const [productList, setProductList] = useState(null);
+
   const increase = () => {
     setCount(count + 1);
     // eslint-disable-next-line no-console
     console.log('clicked');
   };
-  const [currentProduct, setProduct] = useState(testProduct)
+
   return (
     <div className="main">
       <div className="container is-primary">
@@ -42,7 +56,7 @@ function App() {
         <RelatedProducts />
       </div>
       <div className="ratings">
-        <RatingsReviews product={testProduct}/>
+        <RatingsReviews product={currentProduct}/>
       </div>
     </div>
   );
