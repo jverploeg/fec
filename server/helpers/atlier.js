@@ -22,7 +22,7 @@ const getAllProducts = (cb) => {
       const key = 'allProducts';
       const value = res.data; // array of products w/o style options
       store2(key, value, true); // true indicates to overwrite
-      console.log('store2: ', store2());
+      // console.log('store2: ', store2());
       return res;
     })
     .then((res) => {
@@ -42,15 +42,31 @@ const getProductByID = (productID, cb) => {
       console.log('err: ', err);
       return cb(err, null);
     })
+    // store product
     .then((res) => {
-      // store all reviews for product
       const key = `product${productID}`
-      const value = res.data; // array of reviews
+      const value = res.data; // object of product
       store2(key, value, true); // true indicates to overwrite
       return res;
     })
+    // gather all reviews, calc average rating, supplement average rating to product object
     .then((res) => {
-      return cb(null, res.data);
+      return new Promise((resolve, reject) => {
+        getAllReviewsByProduct(productID, (err, results) => {
+          if (err) {
+            console.log(err);
+            reject('cannot get reviews')
+          } else {
+            const aveRating = calcAverageRating(results);
+            supplementAveRatingToProduct(productID, aveRating);
+            const product = store2(`product${productID}`);
+            return resolve(product);
+          }
+        })
+      })
+    })
+    .then((product) => {
+      return cb(null, product);
     });
 };
 
@@ -74,25 +90,29 @@ const getAllReviewsByProduct = (productID, cb) => {
     })
     .then((res) => {
       // store all reviews for product
-      const key = `allReviews${productID}`
+      const key = `allReviews${productID}`;
       const value = res.data.results; // array of reviews
       store2(key, value, true); // true indicates to overwrite
 
-      // calc and store average rating
-      console.log('before supplement: ', store2(`product${productID}`));
-      const aveRating = calcAverageRating(res.data.results);
-      if (store2(`product${productID}`)) {
-        supplementAveRatingToProduct(productID, aveRating);
-      } else {
-        getProductByID(productID);
-        console.log('after save: ', store2(`product${productID}`));
-        supplementAveRatingToProduct(productID, aveRating);
-      }
-      console.log('after supplement: ', store2(`product${productID}`));
       return res;
     })
     .then((res) => {
-      return cb(null, res.data);
+      // calc and store average rating
+      if (store2(`product${productID}`)) {
+      } else {
+        getProductByID(productID, (err, results) => {
+          if (err) {
+            console.log(err);
+            return err;
+          } else {
+            return results;
+          }
+        })
+      }
+      return res;
+    })
+    .then((res) => {
+      return cb(null, res.data.results);
     });
 };
 // const getNewestTwoReviewsByProduct = (productID, )
@@ -113,8 +133,8 @@ const calcAverageRating = (allReviews) => {
 
 const supplementAveRatingToProduct = (productID, aveRating) => {
   store2.transact(`product${productID}`, function(product) {
-    console.log('product: ', product);
     product.aveRating = aveRating;
+    // console.log({product});
   });
 };
 
