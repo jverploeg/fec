@@ -15,16 +15,18 @@ function ProductOverview() {
             <div className="tile is-vertical">
               <div className="tile">
                 <div className="tile is-parent">
-                  Image
+                  <Image />
                 </div>
                 <div className="tile is-parent">
                   <div className="tile is-child box">
-                    Details
+                    <Details />
                   </div>
                 </div>
               </div>
               <div className="tile is-parent">
-                Description
+                <div className="tile is-child box">
+                  <Description />
+                </div>
               </div>
             </div>
           </div>
