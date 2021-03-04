@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProductOverview from './overview/productOverview';
-import RatingsReviews from './ratings/ratingsReviews';
+import RatingsReviews from './ratings/RatingsReviews';
 import RelatedProducts from './products/relatedProducts';
 
 // TODO remove at completion
