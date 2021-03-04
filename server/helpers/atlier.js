@@ -1,7 +1,7 @@
 // IMPORTS
 const axios = require('axios');
 const store2 = require('store2');
-// const config = require('../../atlier-config.js');
+const config = require('../../atlier-config.js');
 // TODO: cant find this module
 
 // ATLIER API HELPER FUNCTIONS
@@ -10,7 +10,7 @@ const getAllReviewsByProduct = (productID, cb) => {
   const options = {
     headers: {
       'Authorization': config.key
-    }
+    },
   };
   axios.get(url, options)
     .catch((err) => {
