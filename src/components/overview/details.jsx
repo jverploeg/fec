@@ -1,71 +1,105 @@
 import React, { useState } from 'react';
 // helpers
 import DropDown from '../helpers/dropDown';
+import OverallStarRating from '../helpers/OverallStarRating';
+import Styles from '../helpers/styles';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+// temp style array
+const styles = ['⛷️', '🛶', '🏀', '🏈', '⚾', '⚽', '🏒', '🎣'];
+// temp quantity
+const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
-function Details() {
+// TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
+
+function Details(focus) { // focus.product
   // stuff and states
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
+  const [style, StyleGrid] = Styles(styles, styles[0]);
+  const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+
+  // const [rating, useRating] = OverallStarRating(focus);
+  const current = focus.product;
 
   return (
     <div>
-      <div className="column star">
-        Ratings and Reviews
+      <div className="columns star">
+        <div className="column">
+          <strong>Ratings and Reviews</strong>
+        </div>
+        <div className="column">
+          <OverallStarRating product={current} />
+        </div>
+        <div className="column">
+          <a className="review-link" href="#ratings">Read all [#] Reviews</a>
+        </div>
       </div>
-      <div className="column details">
-        Product Name
+      <div className="columns category">
+        <div className="column is-one-third size">
+          <strong>Category</strong>
+        </div>
+        <div className="column is-one-third size">
+          {current.category}
+        </div>
       </div>
-      <div className="column price">
-        Price
+      <div className="columns details">
+        <div className="column is-one-third size">
+          <strong>Product</strong>
+        </div>
+        <div className="column is-one-third size">
+          {current.name}
+        </div>
+      </div>
+      <div className="columns price">
+        <div className="column is-one-third size">
+          <strong>Price</strong>
+        </div>
+        <div className="column is-one-third size">
+          ${current.default_price}
+        </div>
+      </div>
+      <div className="columns overview">
+        <div className="column is-one-third size">
+          <strong>Product Overview</strong>
+        </div>
+        <div className="column">
+          {current.slogan}
+        </div>
+      </div>
+      <div className="columns share">
+        <div className="column is-one-third size">
+          <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div className="column is-one-third size">
+          <a href="https://twitter.com/?lang=en">Twitter</a>
+        </div>
+        <div className="column is-one-third size">
+          <a href="https://www.pinterest.com/">Pinterest</a>
+        </div>
       </div>
       <div className="column styles">
-        Style
-        <div className="columns">
-          <div className="column">
-            <button type="button" className="button is-rounded is-link">X</button>
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-        </div>
+        <strong>Style</strong>
+        <StyleGrid />
       </div>
+      <section className="section space" />
       <div className="columns">
-        <div className="column is-two-thirds size">
+        <div className="column size">
           <SizeDropdown />
         </div>
         <div className="column quantity">
-          <button type="button">Quantity</button>
+          <QDrop />
         </div>
       </div>
 
       <div className="columns">
-        <div className="column is-three-quarters cart">
+        <div className="column cart">
           <button type="button">Add to Bag +</button>
         </div>
         <div className="column favorite">
-          <button type="button">Star</button>
+          <button type="button">
+            <a href="#related">Favorite</a>
+          </button>
         </div>
       </div>
     </div>
@@ -99,5 +133,33 @@ export default Details;
       </li>
     </div>
   </div>
+</div>
+</div> */
+/* <div className="columns">
+<div className="column">
+  <button type="button" className="button is-rounded is-link">X</button>
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+</div>
+<div className="columns">
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
 </div>
 </div> */
