@@ -3,6 +3,25 @@
 
 @charset "utf-8";
 
+// APP
+html {
+  scroll-behavior: smooth;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + content {
+  padding-top: 60px;
+}
+
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
@@ -34,10 +53,8 @@ $container-offset: (2 * $gap);
 // tile-spacing
 $tile-spacing: 0;
 
-// Change Ratings & Reviews Styling
-// input[type="radio"] {
-//   display: none;
-// }
+// REVIEWS & RATINGS
+// new review star rating
 .star-rating {
   input[type="radio"] {
     display: none;
@@ -60,6 +77,53 @@ $tile-spacing: 0;
   color: #f80;
 }
 
+// overall star rating
+.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: lightgray;
+}
+
+.stars-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: gold;
+  overflow: hidden;
+}
+
+.stars-0:after { width: 0%; }
+.stars-5:after { width: 5%; }
+.stars-10:after { width: 10%; }
+.stars-15:after { width: 15%; }
+.stars-20:after { width: 20%; }
+.stars-25:after { width: 25%; }
+.stars-30:after { width: 30%; }
+.stars-35:after { width: 35%; }
+.stars-40:after { width: 40%; }
+.stars-45:after { width: 45%; }
+.stars-50:after { width: 50%; }
+.stars-55:after { width: 55%; }
+.stars-60:after { width: 60%; }
+.stars-65:after { width: 65%; }
+.stars-70:after { width: 70%; }
+.stars-75:after { width: 75%; }
+.stars-80:after { width: 80%; }
+.stars-85:after { width: 85%; }
+.stars-90:after { width: 90%; }
+.stars-95:after { width: 95%; }
+.stars-100:after { width: 100; }
+
+// IMPORTS
 // Import only what you need from Bulma
 @import "~/node_modules/bulma/sass/utilities/_all.sass";
 @import "~/node_modules/bulma/sass/base/_all.sass";
@@ -78,3 +142,4 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/menu.sass";
 @import "~/node_modules/bulma/sass/components/dropdown.sass";
 @import "~/node_modules/bulma/sass/components/card.sass";
+@import "~/node_modules/bulma/sass/helpers/_all.sass";
