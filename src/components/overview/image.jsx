@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-function Image() {
+// temp thumbnails
+const thumbs = [];
+
+function Image(focus) { // focus.product
   // stuff and states
   const [something, setSomething] = useState(0);
 

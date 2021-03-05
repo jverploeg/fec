@@ -70,6 +70,31 @@ const getProductByID = (productID, cb) => {
     });
 };
 
+// -----------STYLES--------
+const getStyles = (id, cb) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${id}/styles`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    },
+  };
+  axios.get(url, options)
+    .catch((err) => {
+      console.log('err: ', err);
+      return cb(err, null);
+    })
+    .then((res) => {
+      const key = 'styles';
+      const value = res.data; // single product with styles
+      store2(key, value, true); // true indicates to overwrite
+      // console.log('store2: ', store2());
+      return res;
+    })
+    .then((res) => {
+      return cb(null, res.data);
+    });
+};
+
 // ---------- Reviews ----------
 const getAllReviewsByProduct = (productID, cb) => {
   /*  stores all reviews for a single product under
@@ -143,6 +168,7 @@ module.exports = {
   getAllReviewsByProduct,
   getAllProducts,
   getProductByID,
+  getStyles,
 };
 
 //
