@@ -378,7 +378,7 @@ function ProductOverview(focus) {
             <div className="tile is-vertical">
               <div className="tile">
                 <div className="tile is-parent">
-                  <Image product={current} />
+                  <Image product={data} />
                 </div>
                 <div className="tile is-parent">
                   <div className="tile is-child box">

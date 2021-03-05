@@ -11,6 +11,8 @@ const styles = ['⛷️', '🛶', '🏀', '🏈', '⚾', '⚽', '🏒', '🎣'];
 // temp quantity
 const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
+// TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
+
 function Details(focus) { // focus.product
   // stuff and states
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
