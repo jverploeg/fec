@@ -41,13 +41,13 @@ function App() {
         <ProductOverview />
       </div>
       <div>
-        <OverallStarRating product={currentProduct}/>
+        <OverallStarRating product={currentProduct} />
       </div>
       <div className="related">
         <RelatedProducts />
       </div>
       <div className="ratings">
-        <RatingsReviews product={currentProduct}/>
+        <RatingsReviews product={currentProduct} />
       </div>
     </div>
   );

@@ -7,6 +7,8 @@ import Description from './description';
 function ProductOverview() {
   const [something, setSomething] = useState(0);
 
+  // axios get from local host
+
   return (
     <div>
       <section className="hero is-grey-dark is-fullheight">
