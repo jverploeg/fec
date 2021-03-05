@@ -8,11 +8,15 @@ import Styles from '../helpers/styles';
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 // temp style array
 const styles = ['⛷️', '🛶', '🏀', '🏈', '⚾', '⚽', '🏒', '🎣'];
+// temp quantity
+const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 function Details(focus) { // focus.product
   // stuff and states
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
   const [style, StyleGrid] = Styles(styles, styles[0]);
+  const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+
   // const [rating, useRating] = OverallStarRating(focus);
   const current = focus.product;
 
@@ -53,25 +57,47 @@ function Details(focus) { // focus.product
           ${current.default_price}
         </div>
       </div>
+      <div className="columns overview">
+        <div className="column is-one-third size">
+          <strong>Product Overview</strong>
+        </div>
+        <div className="column">
+          {current.slogan}
+        </div>
+      </div>
+      <div className="columns share">
+        <div className="column is-one-third size">
+          <a href="https://www.facebook.com/">Facebook</a>
+        </div>
+        <div className="column is-one-third size">
+          <a href="https://twitter.com/?lang=en">Twitter</a>
+        </div>
+        <div className="column is-one-third size">
+          <a href="https://www.pinterest.com/">Pinterest</a>
+        </div>
+      </div>
       <div className="column styles">
         <strong>Style</strong>
         <StyleGrid />
       </div>
+      <section className="section space" />
       <div className="columns">
-        <div className="column is-two-thirds size">
+        <div className="column size">
           <SizeDropdown />
         </div>
         <div className="column quantity">
-          <button type="button">Quantity</button>
+          <QDrop />
         </div>
       </div>
 
       <div className="columns">
-        <div className="column is-three-quarters cart">
+        <div className="column cart">
           <button type="button">Add to Bag +</button>
         </div>
         <div className="column favorite">
-          <button type="button">Star</button>
+          <button type="button">
+            <a href="#related">Favorite</a>
+          </button>
         </div>
       </div>
     </div>

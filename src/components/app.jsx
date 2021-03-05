@@ -43,7 +43,7 @@ function App() {
       <div>
         <OverallStarRating product={currentProduct} />
       </div>
-      <div className="related">
+      <div className="related" id="related">
         <RelatedProducts />
       </div>
       <div className="ratings" id="ratings">
