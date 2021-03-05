@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // COMPONENT
-function OutfitList() {
+const OutfitList = (props) => {
   const [something, setSomething] = useState(0);
 
   return (
