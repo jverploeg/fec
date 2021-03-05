@@ -25,7 +25,35 @@ const testProduct = {
           "value": "Brass"
       }
   ],
-  "aveRating": "4.50"
+  "aveRating": "4.50",
+  "percentRecommended": "50",
+  "ratingsBreakdown": {
+      "total": 2,
+      "max": 1,
+      "numOfFiveStars": 1,
+      "numOfFourStars": 1,
+      "numOfThreeStars": 0,
+      "numOfTwoStars": 0,
+      "numOfOneStars": 0
+  },
+  "reviewsMeta": {
+      "Fit": {
+          "id": 60618,
+          "value": "4.0000000000000000"
+      },
+      "Length": {
+          "id": 60619,
+          "value": "3.5000000000000000"
+      },
+      "Comfort": {
+          "id": 60620,
+          "value": "5.0000000000000000"
+      },
+      "Quality": {
+          "id": 60621,
+          "value": "4.0000000000000000"
+      }
+  }
 };
 
 function App() {
@@ -34,20 +62,20 @@ function App() {
 
   return (
     <div className="main">
-      <div className="container is-primary">
+      <div className="container is-primary has-text-centered">
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
-        <ProductOverview />
+        <ProductOverview product={currentProduct} />
       </div>
       <div>
-        <OverallStarRating product={currentProduct}/>
+        <OverallStarRating product={currentProduct} />
       </div>
-      <div className="related">
+      <div className="related" id="related">
         <RelatedProducts />
       </div>
-      <div className="ratings">
-        <RatingsReviews product={currentProduct}/>
+      <div className="ratings" id="ratings">
+        <RatingsReviews product={currentProduct} />
       </div>
     </div>
   );

@@ -30,53 +30,94 @@ const getAllProducts = (cb) => {
     });
 };
 
-const getProductByID = (productID, cb) => {
-  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
+const getProductByID = (productID) => {
+  return new Promise((resolve, reject) => {
+    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
+    const options = {
+      headers: {
+        'Authorization': config.key
+      }
+    };
+    axios.get(url, options)
+      // store product
+      .then((res) => {
+        const key = `product${productID}`
+        const value = res.data; // object of product
+        store2(key, value, true); // true indicates to overwrite
+        return res;
+      })
+      // gather all reviews, calc average rating, supplement average rating, percent rating, and ratings breakdown to product object
+      .then((res) => {
+        return new Promise((resolve, reject) => {
+          getAllReviewsByProduct(productID, (err, results) => {
+            if (err) {
+              console.log(err);
+              reject('cannot get reviews')
+            } else {
+              const aveRating = calcAverageRating(results);
+              supplementAveRatingToProduct(productID, aveRating);
+              const percentRecommended = calcPercentRecommended(results);
+              supplementPercentRecommendedToProduct(productID, percentRecommended);
+              const ratingsBreakdown = analyzeReviewData(results);
+              supplementAnalyzedReviewDataToProduct(productID, ratingsBreakdown);
+
+              const product = store2(`product${productID}`);
+              return resolve(product);
+            }
+          })
+        })
+      })
+      .then((res) => {
+        return new Promise((resolve, reject) => {
+          getAndAppendReviewsMetaByProduct(productID, (err, results) => {
+            if (err) {
+              console.log(err);
+              reject('cannot get review meta data')
+            } else {
+              console.log(results);
+              resolve(results);
+            }
+          });
+        })
+      })
+      .then((product) => {
+        return resolve(product);
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+        reject(err);
+      });
+  })
+
+};
+
+// -----------STYLES--------
+const getStyles = (id, cb) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${id}/styles`;
   const options = {
     headers: {
       'Authorization': config.key
-    }
+    },
   };
   axios.get(url, options)
     .catch((err) => {
       console.log('err: ', err);
       return cb(err, null);
     })
-    // store product
     .then((res) => {
-      const key = `product${productID}`
-      const value = res.data; // object of product
+      const key = 'styles';
+      const value = res.data; // single product with styles
       store2(key, value, true); // true indicates to overwrite
+      // console.log('store2: ', store2());
       return res;
     })
-    // gather all reviews, calc average rating, supplement average rating to product object
     .then((res) => {
-      return new Promise((resolve, reject) => {
-        getAllReviewsByProduct(productID, (err, results) => {
-          if (err) {
-            console.log(err);
-            reject('cannot get reviews')
-          } else {
-            const aveRating = calcAverageRating(results);
-            supplementAveRatingToProduct(productID, aveRating);
-            const product = store2(`product${productID}`);
-            return resolve(product);
-          }
-        })
-      })
-    })
-    .then((product) => {
-      return cb(null, product);
+      return cb(null, res.data);
     });
 };
 
 // ---------- Reviews ----------
 const getAllReviewsByProduct = (productID, cb) => {
-  /*  stores all reviews for a single product under
-      key=`allReviews${productID}` : value=[arrayOfReviews]
-    also calcs and stores average rating for the product under
-      key=`aveRating${productID}` : value=[arrayOfReviews]
-  */
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews/?product_id=${productID}&count=100`;
   const options = {
     headers: {
@@ -115,12 +156,46 @@ const getAllReviewsByProduct = (productID, cb) => {
       return cb(null, res.data.results);
     });
 };
-// const getNewestTwoReviewsByProduct = (productID, )
+
+const getAndAppendReviewsMetaByProduct = (productID, cb) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews/meta/?product_id=${productID}`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    }
+  };
+  axios.get(url, options)
+    .catch((err) => {
+      console.log('err: ', err);
+      return cb(err, null);
+    })
+    .then((res) => {
+      let product = store2(`product${productID}`);
+      if (product.reviewsMeta) {
+      } else {
+        product.reviewsMeta = res.data.characteristics;
+        const key = `product${productID}`
+        const value = product; // object of product
+        store2(key, value, true);
+      }
+      product = store2(`product${productID}`);
+      console.log({product});
+      return product;
+    })
+    .then((product) => {
+      if (cb) {
+        return cb(null, product);
+      }
+      return product;
+    });
+};
 
 //
 //
 //
 // UTILITY HELPER FUNCTIONS
+//
+// average rating
 const calcAverageRating = (allReviews) => {
   let ratingSum = 0;
   allReviews.forEach((review) => {
@@ -130,11 +205,67 @@ const calcAverageRating = (allReviews) => {
   // return average rating to nearest quarter value with two decimal places
   return (Math.round((ratingSum / allReviews.length) * 4) / 4).toFixed(2);
 };
-
 const supplementAveRatingToProduct = (productID, aveRating) => {
   store2.transact(`product${productID}`, function(product) {
     product.aveRating = aveRating;
-    // console.log({product});
+  });
+};
+
+// percent recommended
+const calcPercentRecommended = (allReviews) => {
+  let recommendedCount = 0;
+  allReviews.forEach((review) => {
+    const { recommend } = review;
+    recommend ? recommendedCount++ : null;
+  });
+  // return average rating to nearest quarter value with two decimal places
+  return (Math.round((recommendedCount / allReviews.length) * 100)).toFixed(0);
+};
+const supplementPercentRecommendedToProduct = (productID, percentRecommended) => {
+  store2.transact(`product${productID}`, function(product) {
+    product.percentRecommended = percentRecommended;
+  });
+};
+
+const analyzeReviewData = (allReviews) => {
+  let ratingsBreakdown = {
+    total: 0,
+    max: 0,
+    numOfFiveStars: 0,
+    numOfFourStars: 0,
+    numOfThreeStars: 0,
+    numOfTwoStars: 0,
+    numOfOneStars: 0,
+  };
+  let max = 0;
+
+  allReviews.forEach((review) => {
+    const { rating } = review;
+    if (rating > 4.5) {
+      ratingsBreakdown.numOfFiveStars++;
+    } else if (rating > 3.5) {
+      ratingsBreakdown.numOfFourStars++;
+    } else if (rating > 2.5) {
+      ratingsBreakdown.numOfThreeStars++;
+    } else if (rating > 1.5) {
+      ratingsBreakdown.numOfTwoStars++;
+    } else if (rating > 0) {
+      ratingsBreakdown.numOfOneStars++;
+    }
+  })
+
+  for (key in ratingsBreakdown) {
+    if (ratingsBreakdown[key] > max) {
+      max = ratingsBreakdown[key];
+    }
+  }
+  ratingsBreakdown.max = max;
+  ratingsBreakdown.total = allReviews.length;
+  return ratingsBreakdown;
+};
+const supplementAnalyzedReviewDataToProduct = (productID, ratingsBreakdown) => {
+  store2.transact(`product${productID}`, function(product) {
+    product.ratingsBreakdown = ratingsBreakdown;
   });
 };
 
@@ -143,6 +274,7 @@ module.exports = {
   getAllReviewsByProduct,
   getAllProducts,
   getProductByID,
+  getStyles,
 };
 
 //
