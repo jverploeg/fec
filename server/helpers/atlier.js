@@ -30,7 +30,7 @@ const getAllProducts = (cb) => {
     });
 };
 
-const getProductByID = (productID, cb) => {
+const getProductByID = (productID) => {
   return new Promise((resolve, reject) => {
     const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
     const options = {
