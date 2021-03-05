@@ -50,13 +50,13 @@ app.get('/api/products/all', (req, res) => {
 app.get('/api/products/:id', (req, res) => {
   const productID = req.params.id;
 
-  atlier.getProductByID(productID, (err, results) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
+  atlier.getProductByID(productID)
+    .then((results) => {
       res.status(200).send(results);
-    }
-  });
+    })
+    .catch((error) => {
+      res.status(400).send(err);
+    });
 });
 
 // styles
