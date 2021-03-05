@@ -62,20 +62,20 @@ function App() {
 
   return (
     <div className="main">
-      <div className="container is-primary">
+      <div className="container is-primary has-text-centered">
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
-        <ProductOverview />
+        <ProductOverview product={currentProduct} />
       </div>
       <div>
-        <OverallStarRating product={currentProduct}/>
+        <OverallStarRating product={currentProduct} />
       </div>
-      <div className="related">
+      <div className="related" id="related">
         <RelatedProducts />
       </div>
-      <div className="ratings">
-        <RatingsReviews product={currentProduct}/>
+      <div className="ratings" id="ratings">
+        <RatingsReviews product={currentProduct} />
       </div>
     </div>
   );

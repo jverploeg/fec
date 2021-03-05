@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
-function Description() {
+function Description(focus) { // focus.product
   // stuff and states
   const [something, setSomething] = useState(0);
 
   return (
-    <div>
-      <article className="tile is-child box">
-        Product Description
-      </article>
+    <div className="tile is-child box">
+      {focus.product.description}
     </div>
   );
 }
