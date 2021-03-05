@@ -15,16 +15,7 @@ function Image(focus) { // focus.product
   // const [something, setSomething] = useState(0);
 
   return (
-    <div className="card">
-      <div className="card-image">
-        <figure className="image is-256x256">
-          <img src={current} alt={thumb} />
-        </figure>
-      </div>
-      <div className="card-content is-overlay">
-        <UsePhoto />
-      </div>
-    </div>
+    <UsePhoto />
   );
 }
 
