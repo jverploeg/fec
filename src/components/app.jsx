@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ProductOverview from './overview/productOverview';
 import OverallStarRating from './helpers/OverallStarRating';
 import RatingsReviews from './ratings/RatingsReviews';
-import RelatedProducts from './products/relatedProducts';
+import RelatedProducts from './products/RelatedProducts';
 
 // TODO remove at completion
 const testProduct = {

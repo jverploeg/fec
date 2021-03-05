@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import ProductImages from './ProductImages';
 
 const Card = (props) => {
+  useEffect(() => {
+    new Glider(document.querySelector('.glider'), {
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      draggable: true,
+      dots: '#dots',
+      arrows: {
+        prev: '.glider-prev',
+        next: '.glider-next'
+      }
+    });
+  });
+
   return (
     <div className="card">
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="" />
+          <img src={props.image[0]} alt="" />
         </figure>
       </div>
       <div className="card-content">
