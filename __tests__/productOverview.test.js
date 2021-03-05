@@ -33,3 +33,30 @@ describe('ProductOverview', () => {
     expect(comp.find('div.is-parent')).toHaveLength(3);
   });
 });
+
+// sub-component
+describe('Image', () => {
+  // const comp = shallow(<Image />);
+
+  it('should render correctly', () => {
+    shallow(<Image />);
+  });
+});
+
+// sub-component
+describe('Details', () => {
+  // const comp = shallow(<Details />);
+
+  it('should render correctly', () => {
+    shallow(<Details />);
+  });
+});
+
+// sub-component
+describe('Description', () => {
+  // const comp = shallow(<Description />);
+
+  it('should render correctly', () => {
+    shallow(<Description />);
+  });
+});
