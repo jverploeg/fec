@@ -369,6 +369,8 @@ const data = {
 function ProductOverview(focus) {
   const [meta, setMeta] = useState([]);
   const current = focus.product;
+  const [styleData, setStyleData] = useState(data);
+  // TODO: use sample data above and pass that to details
 
   return (
     <div>
@@ -378,7 +380,7 @@ function ProductOverview(focus) {
             <div className="tile is-vertical">
               <div className="tile">
                 <div className="tile is-parent">
-                  <Image product={data} />
+                  <Image product={styleData} />
                 </div>
                 <div className="tile is-parent">
                   <div className="tile is-child box">
