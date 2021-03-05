@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiArrowUpCircle } from 'react-icons/fi';
 import '../../styles/styles.scss';
 
 const StickyNavBar = (props) => {
