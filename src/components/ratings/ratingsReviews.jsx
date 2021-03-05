@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
-import OverallStarRating from './OverallStarRating';
+import OverallStarRating from '../helpers/OverallStarRating';
 import NewReview from './NewReview';
 import DropDown from '../helpers/dropDown';
 import StickyNavBar from './StickyNavBar';
 import { FiArrowUpCircle } from 'react-icons/fi';
 
 // Navbar behavior
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-// Get the navbar
-var navbar = React.createRef();
-var navbar = document.getElementById("navbar");
+// // When the user scrolls the page, execute myFunction
+// window.onscroll = function() {myFunction()};
+// // Get the navbar
+// var navbar = React.createRef();
+// var navbar = document.getElementById("navbar");
 
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
+// // Get the offset position of the navbar
+// var sticky = navbar.offsetTop;
 
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
+// // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function myFunction() {
+//   if (window.pageYOffset >= sticky) {
+//     navbar.classList.add("sticky")
+//   } else {
+//     navbar.classList.remove("sticky");
+//   }
+// }
 
 const testProduct = {
   id: 18201,

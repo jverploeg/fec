@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-// import bulma from 'bulma';
 
 // COMPONENT
 const OverallStarRating = (props) => {
@@ -10,9 +9,7 @@ const OverallStarRating = (props) => {
   const aveRating = props.product.aveRating;
   const starWidth = aveRating/5*100;
   let starClass = '';
-  console.log('star width: ', starWidth);
-  console.log('product: ', props.product);
-  console.log('aveRating: ', aveRating);
+
 
   if (starWidth <= 5) {
     starClass = 'stars-5';

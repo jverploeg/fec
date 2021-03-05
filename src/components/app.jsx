@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductOverview from './overview/productOverview';
+import OverallStarRating from './helpers/OverallStarRating';
 import RatingsReviews from './ratings/RatingsReviews';
 import RelatedProducts from './products/relatedProducts';
 
@@ -38,6 +39,9 @@ function App() {
       </div>
       <div className="overview">
         <ProductOverview />
+      </div>
+      <div>
+        <OverallStarRating product={currentProduct}/>
       </div>
       <div className="related">
         <RelatedProducts />
