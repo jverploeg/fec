@@ -1,28 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OverallStarRating from '../helpers/OverallStarRating';
 import NewReview from './NewReview';
 import DropDown from '../helpers/dropDown';
 import StickyNavBar from './StickyNavBar';
+import RatingCard from './RatingCard';
 import { FiArrowUpCircle } from 'react-icons/fi';
-
-// Navbar behavior
-// // When the user scrolls the page, execute myFunction
-// window.onscroll = function() {myFunction()};
-// // Get the navbar
-// var navbar = React.createRef();
-// var navbar = document.getElementById("navbar");
-
-// // Get the offset position of the navbar
-// var sticky = navbar.offsetTop;
-
-// // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-// function myFunction() {
-//   if (window.pageYOffset >= sticky) {
-//     navbar.classList.add("sticky")
-//   } else {
-//     navbar.classList.remove("sticky");
-//   }
-// }
 
 const testProduct = {
   id: 18201,
@@ -40,29 +22,56 @@ const testProduct = {
 const RatingsReviews = (props) => {
   // const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
-  const product = props.product;
+  const currentProduct = props.product;
+
+  // sticky navbar handler
+  useEffect(() => {
+    const header = document.getElementById("navbar");
+    const sticky = header.offsetTop;
+    const scrollCallBack = window.addEventListener("scroll", () => {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
+  }, []);
 
   return (
-    <div id="Ratings-Reviews" className="Ratings-Reviews">
+    <div id="Ratings-Reviews" className="columns is-mobile">
 
-      {/* STICKY NAV BAR */}
-      <StickyNavBar />
+      {/* HORIZONTAL SPACER */}
+      <div className="column is-2"/>
 
-      {/* INDIVIDUAL RATING CARD */}
-      <section className="hero is-grey-dark is-fullheight">
-        <div className="container is-fluid">
-          <h2 className="subtitle">RATINGS & REVIEWS</h2>
-          {/* <OverallStarRating /> */}
-          <OverallStarRating product={product}/>
-          <div className="tile">
-            <div className="tile is-parent">
-              <div className="tile is-child box">
-                Details
-              </div>
-            </div>
+      {/* OVERALL RATING CARD AND REVIEWS LIST */}
+      {/* OVERALL RATING CARD */}
+      <div className="column">
+        <div className="block">
+          <div class="tile is-ancestor">
+            {/* INDIVIDUAL RATING CARD */}
+            <RatingCard product={currentProduct}/>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* REVIEWS LIST AND NAV BAR */}
+      <div className="column is-6">
+        <div className="block">
+          <section className="hero is-grey-dark">>
+            {/* STICKY NAV BAR */}
+            <StickyNavBar />
+
+            {/* REVIEWS LIST COMPONENT */}
+
+          </section>
+        </div>
+      </div>
+
+      {/* HORIZONTAL SPACER */}
+      <div className="column"/>
 
     </div>
   );

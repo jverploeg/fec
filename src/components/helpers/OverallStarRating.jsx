@@ -53,13 +53,12 @@ const OverallStarRating = (props) => {
     starClass = 'stars-100';
   }
 
-  console.log(starClass);
   const starBarClass = `stars-container ${starClass}`;
 
   return (
-    <div>
+    <>
       <span className={starBarClass}>★★★★★</span>
-    </div>
+    </>
   );
 };
 

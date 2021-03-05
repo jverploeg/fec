@@ -3,12 +3,6 @@ import { FiArrowUpCircle } from 'react-icons/fi';
 import '../../styles/styles.scss';
 
 const StickyNavBar = (props) => {
-  const [visible, setVisible] = useState(false);
-
-  // useEffect(() => {
-
-  // });
-
 
   return (
     <div id="navbar">
