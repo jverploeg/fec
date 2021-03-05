@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 // helpers
 import DropDown from '../helpers/dropDown';
+import OverallStarRating from '../helpers/OverallStarRating';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-function Details() {
+function Details(focus) { // focus.product
   // stuff and states
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
+  // const [rating, useRating] = OverallStarRating(focus);
+  const current = focus.product;
 
   return (
     <div>
       <div className="column star">
         Ratings and Reviews
+        <OverallStarRating product={current} />
+        <a className="review-link" href="#ratings">Read all [#] Reviews</a>
       </div>
       <div className="column details">
-        Product Name
+        {current.name}
       </div>
       <div className="column price">
-        Price
+        Price  $
+        {current.default_price}
       </div>
       <div className="column styles">
         Style

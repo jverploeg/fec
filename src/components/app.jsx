@@ -38,7 +38,7 @@ function App() {
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
-        <ProductOverview />
+        <ProductOverview product={currentProduct} />
       </div>
       <div>
         <OverallStarRating product={currentProduct} />
@@ -46,7 +46,7 @@ function App() {
       <div className="related">
         <RelatedProducts />
       </div>
-      <div className="ratings">
+      <div className="ratings" id="ratings">
         <RatingsReviews product={currentProduct} />
       </div>
     </div>

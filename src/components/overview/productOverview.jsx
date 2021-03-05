@@ -4,8 +4,9 @@ import Details from './details';
 import Description from './description';
 
 // COMPONENT
-function ProductOverview() {
-  const [something, setSomething] = useState(0);
+function ProductOverview(focus) {
+  const [meta, setMeta] = useState([]);
+  const current = focus.product;
 
   // axios get from local host
 
@@ -17,17 +18,17 @@ function ProductOverview() {
             <div className="tile is-vertical">
               <div className="tile">
                 <div className="tile is-parent">
-                  <Image />
+                  <Image product={current} />
                 </div>
                 <div className="tile is-parent">
                   <div className="tile is-child box">
-                    <Details />
+                    <Details product={current} />
                   </div>
                 </div>
               </div>
               <div className="tile is-parent">
                 <div className="tile is-child box">
-                  <Description />
+                  <Description product={current} />
                 </div>
               </div>
             </div>
