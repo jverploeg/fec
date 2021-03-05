@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+// sample data
+// const data = require('./sampleData');
+
+
 // temp thumbnails
 const thumbs = [];
 

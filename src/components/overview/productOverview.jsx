@@ -3,12 +3,13 @@ import Image from './image';
 import Details from './details';
 import Description from './description';
 
+// sample data
+const data = require('./sampleData');
+
 // COMPONENT
 function ProductOverview(focus) {
   const [meta, setMeta] = useState([]);
   const current = focus.product;
-
-  // axios get from local host
 
   return (
     <div>
