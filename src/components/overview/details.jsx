@@ -2,60 +2,60 @@ import React, { useState } from 'react';
 // helpers
 import DropDown from '../helpers/dropDown';
 import OverallStarRating from '../helpers/OverallStarRating';
+import Styles from '../helpers/styles';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+// temp style array
+const styles = ['⛷️', '🛶', '🏀', '🏈', '⚾', '⚽', '🏒', '🎣'];
 
 function Details(focus) { // focus.product
   // stuff and states
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
+  const [style, StyleGrid] = Styles(styles, styles[0]);
   // const [rating, useRating] = OverallStarRating(focus);
   const current = focus.product;
 
   return (
     <div>
-      <div className="column star">
-        Ratings and Reviews
-        <OverallStarRating product={current} />
-        <a className="review-link" href="#ratings">Read all [#] Reviews</a>
+      <div className="columns star">
+        <div className="column">
+          <strong>Ratings and Reviews</strong>
+        </div>
+        <div className="column">
+          <OverallStarRating product={current} />
+        </div>
+        <div className="column">
+          <a className="review-link" href="#ratings">Read all [#] Reviews</a>
+        </div>
       </div>
-      <div className="column details">
-        {current.name}
+      <div className="columns category">
+        <div className="column is-one-third size">
+          <strong>Category</strong>
+        </div>
+        <div className="column is-one-third size">
+          {current.category}
+        </div>
       </div>
-      <div className="column price">
-        Price  $
-        {current.default_price}
+      <div className="columns details">
+        <div className="column is-one-third size">
+          <strong>Product</strong>
+        </div>
+        <div className="column is-one-third size">
+          {current.name}
+        </div>
+      </div>
+      <div className="columns price">
+        <div className="column is-one-third size">
+          <strong>Price</strong>
+        </div>
+        <div className="column is-one-third size">
+          ${current.default_price}
+        </div>
       </div>
       <div className="column styles">
-        Style
-        <div className="columns">
-          <div className="column">
-            <button type="button" className="button is-rounded is-link">X</button>
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-          <div className="column">
-            <button type="button" className="button is-rounded is-link" />
-          </div>
-        </div>
+        <strong>Style</strong>
+        <StyleGrid />
       </div>
       <div className="columns">
         <div className="column is-two-thirds size">
@@ -105,5 +105,33 @@ export default Details;
       </li>
     </div>
   </div>
+</div>
+</div> */
+/* <div className="columns">
+<div className="column">
+  <button type="button" className="button is-rounded is-link">X</button>
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+</div>
+<div className="columns">
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
+</div>
+<div className="column">
+  <button type="button" className="button is-rounded is-link" />
 </div>
 </div> */

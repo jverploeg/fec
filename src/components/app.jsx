@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="main">
-      <div className="container is-primary">
+      <div className="container is-primary has-text-centered">
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
