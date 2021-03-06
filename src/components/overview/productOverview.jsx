@@ -390,11 +390,11 @@ function ProductOverview(focus) {
                   </div>
                 </div>
               </div>
-              <div className="tile is-parent">
+              {/* <div className="tile is-parent">
                 <div className="tile is-child box">
                   <Description product={current} />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

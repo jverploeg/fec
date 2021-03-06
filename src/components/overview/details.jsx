@@ -60,13 +60,13 @@ function Details(focus) { // focus.product and focus.styles
           ${newStyle.original_price}
         </div>
       </div>
-      <div className="columns overview">
-        {/* <div className="column is-one-third size">
-          <strong>Product Overview</strong>
-        </div> */}
+      <div className="column slogan">
         <div className="column is-italic has-text-weight-semibold">
-          {current.slogan}
+          <strong>{current.slogan}</strong>
         </div>
+      </div>
+      <div className="column description">
+        <article>{focus.product.description}</article>
       </div>
       <div className="columns share">
         <div className="column is-one-third size">
@@ -79,11 +79,13 @@ function Details(focus) { // focus.product and focus.styles
           <a href="https://www.pinterest.com/">Pinterest</a>
         </div>
       </div>
+      <section className="section space" />
       <div className="column styles">
         <strong>Styles</strong>
         {newStyle.name}
         <NewStyleGrid />
       </div>
+      <section className="section space" />
       <section className="section space" />
       <div className="columns">
         <div className="column size">

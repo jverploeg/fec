@@ -25,18 +25,22 @@ const ImageMap = (options, current) => {
   };
 
   const imageMaker = () => (
-    <div className="card">
-      <div className="card-image">
-        <figure className="image is-256x256">
+    <div className="card equal-height">
+      <div className="card-image has-text-centered">
+        <figure className="image is-256x256 is-inline-block">
           <img src={state.url} alt={state.thumbnail_url} />
         </figure>
       </div>
       <div className="card-content is-overlay">
-        <div className="tile is-parent  is-vertical is-pulled-left">
+        <div className="tile is-parent is-vertical is-pulled-left">
           <div className="tile is-child">
             {options.map((item) => (
-              <figure className="image is-64x64" key={item.thumbnail_url} onClick={(e) => change(e)}>
-                <img src={item.thumbnail_url} alt={item.url} />
+              <figure className="image is-64x64" key={item.thumbnail_url}>
+                <img
+                  src={item.thumbnail_url}
+                  alt={item.url}
+                  onClick={(e) => change(e)}
+                />
               </figure>
             ))}
           </div>
