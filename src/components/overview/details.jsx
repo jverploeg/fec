@@ -3,21 +3,43 @@ import React, { useState } from 'react';
 import DropDown from '../helpers/dropDown';
 import OverallStarRating from '../helpers/OverallStarRating';
 import Styles from '../helpers/styles';
+import Styles2 from '../helpers/styles2';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-// temp style array
-const styles = ['⛷️', '🛶', '🏀', '🏈', '⚾', '⚽', '🏒', '🎣'];
 // temp quantity
 const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 // TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
 
-function Details(focus) { // focus.product
-  // stuff and states
+function Details(focus, { callback }) { // focus.product and focus.styles
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
-  const [style, StyleGrid] = Styles(styles, styles[0]);
+  // const [style, StyleGrid] = Styles(styles, styles[0]);
   const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+
+  // dont use square brackets when using custom hook
+  const [newStyle, NewStyleGrid] = Styles2(focus.styles.results, focus.styles.results[0]);
+
+  console.log({ newStyle }); // may need to set default when clicked...
+
+  focus.data(newStyle);
+
+  // newStyle:
+  // default?: false
+  // name: "Desert Brown & Tan"
+  // original_price: "140.00"
+  // photos: (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+  // sale_price: null
+  // skus: {560843: {…}, 560844: {…}, 560845: {…}, 560846: {…}, 560847: {…}, 560848: {…}}
+  // style_id: 96888
+
+  // const menus = () => {
+  //   sizess = newStyle.skus.map((item) => (
+  //     item.size
+  //   ));
+  // };
+
+  // const [sizes, setSizes] = menus();
 
   // const [rating, useRating] = OverallStarRating(focus);
   const current = focus.product;
@@ -56,7 +78,7 @@ function Details(focus) { // focus.product
           <strong>Price</strong>
         </div>
         <div className="column is-one-third size">
-          ${current.default_price}
+          ${newStyle.original_price}
         </div>
       </div>
       <div className="columns overview">
@@ -79,8 +101,8 @@ function Details(focus) { // focus.product
         </div>
       </div>
       <div className="column styles">
-        <strong>Style</strong>
-        <StyleGrid />
+        <strong>Style :</strong>{newStyle.name}
+        <NewStyleGrid />
       </div>
       <section className="section space" />
       <div className="columns">

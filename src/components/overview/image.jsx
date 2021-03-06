@@ -5,12 +5,17 @@ import ImageMap from '../helpers/imageMap';
 // sample data
 // const data = require('./sampleData');
 
-function Image(focus) { // focus.product
+function Image(focus) { // focus.product focus.pics
   // states
   // thumbs
-  const thumbs = focus.product.results[0].photos; // photo array
-  const current = thumbs[0].url;
-  const thumb = thumbs[0].thumbnail_url;
+  const { pics } = focus;
+  console.log({ pics });
+
+  // TODO change what this focus passed in is in product overview...
+  // const thumbs = focus.product.results[0].photos; // photo array
+  // const current = thumbs[0].url;
+  // const thumb = thumbs[0].thumbnail_url;
+  const thumbs = pics.photos;
   const [photos, UsePhoto] = ImageMap(thumbs, thumbs[0]);
   // const [something, setSomething] = useState(0);
 

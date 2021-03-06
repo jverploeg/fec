@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from './image';
 import Details from './details';
 import Description from './description';
@@ -370,7 +370,20 @@ function ProductOverview(focus) {
   const [meta, setMeta] = useState([]);
   const current = focus.product;
   const [styleData, setStyleData] = useState(data);
+  // const [photos, setPhotos] = useState([]);
   // TODO: use sample data above and pass that to details
+  console.log()
+  //get photos from children
+  // const photos = [];
+  const [photos, setPhotos] = useState(styleData.results[0]);
+  var dataP = [];
+  const callback = (e) => {
+    useEffect(() => {
+      dataP = e.photos;
+      // setPhotos(dataP);
+    })
+  };
+  console.log({ photos });
 
   return (
     <div>
@@ -380,11 +393,11 @@ function ProductOverview(focus) {
             <div className="tile is-vertical">
               <div className="tile">
                 <div className="tile is-parent">
-                  <Image product={styleData} />
+                  <Image product={styleData} pics={photos}/>
                 </div>
                 <div className="tile is-parent">
                   <div className="tile is-child box">
-                    <Details product={current} />
+                    <Details data={(e) => callback(e)} styles={styleData} product={current} />
                   </div>
                 </div>
               </div>

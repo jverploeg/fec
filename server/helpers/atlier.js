@@ -1,7 +1,7 @@
 // IMPORTS
 const axios = require('axios');
 const store2 = require('store2');
-//const config = require('../../atlier-config.js');
+const config = require('../../atlier-config.js');
 
 // ATLIER API HELPER FUNCTIONS
 
