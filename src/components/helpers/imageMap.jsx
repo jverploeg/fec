@@ -1,9 +1,16 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ImageMap = (options, current) => {
+  console.log({ current });
   const [state, setState] = useState(current);
+
+  // change current image focus on prop change
+  useEffect(() => {
+    setState(current);
+  }, [current]);
+
   // click handler to change the view/current
   const change = (e) => {
     e.persist();
