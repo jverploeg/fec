@@ -14,6 +14,7 @@ const ImageMap = (options, current) => {
   // click handler to change the view/current
   const change = (e) => {
     e.persist();
+    console.log(e, 'clicked');
     // SyntheticBaseEvent
     const thumb = e.target.src;
     const u = e.target.alt;
@@ -24,12 +25,22 @@ const ImageMap = (options, current) => {
     setState(newFocus);
   };
 
+  const test = (e) => {
+    console.log(e);
+    alert('clicked');
+  };
+
   const imageMaker = () => (
     // <div className="column">
     <div className="card equal-height">
       <div className="card-image has-text-centered">
-        <figure className="image is-256x256 is-inline-block">
-          <img src={state.url} alt={state.thumbnail_url} />
+        <figure className="image is-256x256 is-clickable">
+          <img
+            onClick={(e) => test(e)}
+            src={state.url}
+            alt={state.thumbnail_url}
+            // style={{ 'pointer-events': 'all' }}
+          />
         </figure>
       </div>
       <div className="card-content is-overlay">

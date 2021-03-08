@@ -32,8 +32,8 @@ function App() {
       .then((response) => {
         const allProducts = response.data;
         setProductList(allProducts);
-        console.log('current product ID before getbyID: ', currentProductID);
-        console.log({currentProduct});
+        // console.log('current product ID before getbyID: ', currentProductID);
+        // console.log({currentProduct});
       })
       .catch((error) => {
         console.log({error});
@@ -45,8 +45,8 @@ function App() {
       .then((response) => {
         const product = response.data;
         setCurrentProduct(product);
-        console.log('current product ID after getbyID: ', currentProductID);
-        console.log({currentProduct});
+        // console.log('current product ID after getbyID: ', currentProductID);
+        // console.log({currentProduct});
       })
       .catch((error) => {
         console.log({error});
@@ -58,8 +58,8 @@ function App() {
       .then((response) => {
         const reviews = response.data;
         setCurrentProductReviews(reviews);
-        console.log('current product reviews after getbyID: ', currentProductReviews);
-        console.log({currentProductReviews});
+        // console.log('current product reviews after getbyID: ', currentProductReviews);
+        // console.log({currentProductReviews});
       })
       .catch((error) => {
         console.log({error});
@@ -73,8 +73,8 @@ function App() {
     contextHelpers.fetchAllReviewsByProduct(currentProductID);
   }
 
-  console.log('current product ID after useEffect: ', currentProductID);
-  console.log({currentProduct});
+  // console.log('current product ID after useEffect: ', currentProductID);
+  // console.log({currentProduct});
 
   return (
     // <MyContext.Provider value={/* some value */}>
