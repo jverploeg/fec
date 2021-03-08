@@ -6,54 +6,128 @@ const config = require('../../atlier-config.js');
 // ATLIER API HELPER FUNCTIONS
 
 // ---------- Products ----------
-const getAllProducts = (cb) => {
+const getAllProducts = () => {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products`;
   const options = {
     headers: {
       'Authorization': config.key
     },
   };
-  axios.get(url, options)
-    .catch((err) => {
-      console.log('err: ', err);
-      return cb(err, null);
-    })
-    .then((res) => {
-      const key = 'allProducts';
-      const value = res.data; // array of products w/o style options
-      store2(key, value, true); // true indicates to overwrite
-      // console.log('store2: ', store2());
-      return res;
-    })
-    .then((res) => {
-      return cb(null, res.data);
-    });
+  return new Promise((resolve, reject) => {
+    axios.get(url, options)
+      .then((res) => {
+        const key = 'allProducts';
+        const value = res.data; // array of products w/o style options
+        store2(key, value, true); // true indicates to overwrite
+        // console.log('store2: ', store2());
+        return res;
+      })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        console.log('err: ', error);
+        reject(error);
+      });
+  })
 };
 
+// const getProductByID = (productID) => {
+//   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
+//   const options = {
+//     headers: {
+//       'Authorization': config.key
+//     }
+//   };
+//   return new Promise((reject, resolve) => {
+//     axios.get(url, options)
+//       // store product
+//       .then((res) => {
+//         return new Promise((resolve, reject) => {
+//           const key = `product${productID}`
+//           const value = res.data; // object of product
+//           store2(key, value, true); // true indicates to overwrite
+//           resolve(res);
+//         })
+//       })
+//       // gather all reviews, calc average rating, supplement average rating, percent rating, and ratings breakdown to product object
+//       .then((res) => {
+//         return new Promise((resolve, reject) => {
+//           getAllReviewsByProduct(productID)
+//             .then((results) => {
+//               const aveRating = calcAverageRating(results);
+//               supplementAveRatingToProduct(productID, aveRating);
+//               const percentRecommended = calcPercentRecommended(results);
+//               supplementPercentRecommendedToProduct(productID, percentRecommended);
+//               const ratingsBreakdown = analyzeReviewData(results);
+//               supplementAnalyzedReviewDataToProduct(productID, ratingsBreakdown);
+
+//               const product = store2(`product${productID}`);
+//               resolve(product);
+//             })
+//             .catch((err) => {
+//               console.log(err);
+//               reject(err)
+//             })
+//         })
+//       })
+//       .then((res) => {
+//         return new Promise((resolve, reject) => {
+//           getAndAppendReviewsMetaByProduct(productID)
+//             .then((results) => {
+//               console.log(results);
+//               resolve(results);
+//             })
+//             .catch((error) => {
+//               console.log(error);
+//               reject(error)
+//             });
+//         });
+//       })
+//       .then((product) => {
+//         return new Promise((resolve, reject) => {
+//           resolve(product);
+//         })
+//       })
+//       .catch((err) => {
+//         return new Promise((resolve, reject) => {
+//           console.log('err: ', err);
+//           reject(err);
+//         })
+//       });
+//   })
+// };
+
 const getProductByID = (productID) => {
-  return new Promise((resolve, reject) => {
-    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
-    const options = {
-      headers: {
-        'Authorization': config.key
-      }
-    };
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    }
+  };
+
+  return new Promise ((resolve, reject) => {
     axios.get(url, options)
       // store product
       .then((res) => {
         const key = `product${productID}`
         const value = res.data; // object of product
-        store2(key, value, true); // true indicates to overwrite
+        const storeData = async () => {
+          try {
+            const response = await store2(key, value, true); // true indicates to overwrite
+          } catch (error) {
+            console.log('cannot save user data');
+            reject(error);
+          }
+        };
+        storeData();
         return res;
       })
       // gather all reviews, calc average rating, supplement average rating, percent rating, and ratings breakdown to product object
       .then((res) => {
         return new Promise((resolve, reject) => {
-          getAllReviewsByProduct(productID, (err, results) => {
-            if (err) {
-              console.log(err);
-              reject('cannot get reviews')
-            } else {
+          getAllReviewsByProduct(productID)
+          .then((results) => {
               const aveRating = calcAverageRating(results);
               supplementAveRatingToProduct(productID, aveRating);
               const percentRecommended = calcPercentRecommended(results);
@@ -62,33 +136,41 @@ const getProductByID = (productID) => {
               supplementAnalyzedReviewDataToProduct(productID, ratingsBreakdown);
 
               const product = store2(`product${productID}`);
-              return resolve(product);
-            }
-          })
+              console.log('lev 1 product', product);
+              console.log('level 1 res.data', res.data);
+              resolve(res);
+            })
+            .catch((err) => {
+              console.log(err);
+              reject(err);
+            })
         })
+
       })
       .then((res) => {
         return new Promise((resolve, reject) => {
-          getAndAppendReviewsMetaByProduct(productID, (err, results) => {
-            if (err) {
-              console.log(err);
-              reject('cannot get review meta data')
-            } else {
-              console.log(results);
+          getAndAppendReviewsMetaByProduct(productID)
+          .then((results) => {
+              console.log('level 2 res.data', res.data);
+              console.log('lev 2 results', results);
               resolve(results);
-            }
-          });
+            })
+            .catch((error) => {
+              console.log(error);
+              reject(error);
+            });
         })
       })
       .then((product) => {
-        return resolve(product);
+        console.log('lev 3 product', product);
+        resolve(product);
       })
       .catch((err) => {
         console.log('err: ', err);
         reject(err);
       });
-  })
 
+  })
 };
 
 // -----------STYLES--------
@@ -117,77 +199,65 @@ const getStyles = (id, cb) => {
 };
 
 // ---------- Reviews ----------
-const getAllReviewsByProduct = (productID, cb) => {
+const getAllReviewsByProduct = (productID) => {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews/?product_id=${productID}&count=100`;
   const options = {
     headers: {
       'Authorization': config.key
     }
   };
-  axios.get(url, options)
-    .catch((err) => {
-      console.log('err: ', err);
-      return cb(err, null);
-    })
-    .then((res) => {
-      // store all reviews for product
-      const key = `allReviews${productID}`;
-      const value = res.data.results; // array of reviews
-      store2(key, value, true); // true indicates to overwrite
 
-      return res;
-    })
-    .then((res) => {
-      // calc and store average rating
-      if (store2(`product${productID}`)) {
-      } else {
-        getProductByID(productID, (err, results) => {
-          if (err) {
-            console.log(err);
-            return err;
-          } else {
-            return results;
-          }
+  return new Promise ((resolve, reject) => {
+    axios.get(url, options)
+      .then((res) => {
+        // store all reviews for product
+        return new Promise((resolve, reject) => {
+          const key = `allReviews${productID}`;
+          const value = res.data.results; // array of reviews
+          store2(key, value, true); // true indicates to overwrite
+
+          resolve(res);
         })
-      }
-      return res;
-    })
-    .then((res) => {
-      return cb(null, res.data.results);
-    });
+      })
+      .then((res) => {
+        resolve(res.data.results);
+      })
+      .catch((err) => {
+        console.log('err: ', err);
+        reject(err);
+      });
+  })
 };
 
-const getAndAppendReviewsMetaByProduct = (productID, cb) => {
+const getAndAppendReviewsMetaByProduct = (productID) => {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews/meta/?product_id=${productID}`;
   const options = {
     headers: {
       'Authorization': config.key
     }
   };
-  axios.get(url, options)
-    .catch((err) => {
-      console.log('err: ', err);
-      return cb(err, null);
-    })
-    .then((res) => {
-      let product = store2(`product${productID}`);
-      if (product.reviewsMeta) {
-      } else {
-        product.reviewsMeta = res.data.characteristics;
-        const key = `product${productID}`
-        const value = product; // object of product
-        store2(key, value, true);
-      }
-      product = store2(`product${productID}`);
-      console.log({product});
-      return product;
-    })
-    .then((product) => {
-      if (cb) {
-        return cb(null, product);
-      }
-      return product;
-    });
+  return new Promise((resolve, reject) => {
+    axios.get(url, options)
+      .then((res) => {
+        let product = store2(`product${productID}`);
+        if (product.reviewsMeta) {
+        } else {
+          product.reviewsMeta = res.data.characteristics;
+          const key = `product${productID}`
+          const value = product; // object of product
+          store2(key, value, true);
+        }
+        product = store2(`product${productID}`);
+        return product;
+      })
+      .then((product) => {
+        resolve(product);
+      })
+      .catch((error) => {
+        console.log('err: ', err);
+        reject(error);
+      });
+  });
 };
 
 //
@@ -203,7 +273,7 @@ const calcAverageRating = (allReviews) => {
     ratingSum += rating;
   });
   // return average rating to nearest quarter value with two decimal places
-  return (Math.round((ratingSum / allReviews.length) * 4) / 4).toFixed(2);
+  return (Math.round((ratingSum / allReviews.length) * 4) / 4).toFixed(1);
 };
 const supplementAveRatingToProduct = (productID, aveRating) => {
   store2.transact(`product${productID}`, function(product) {
