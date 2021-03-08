@@ -15,7 +15,7 @@ const getProductList = () => {
       // console.log(res);
       const value = results.data; // array of products w/o style options
       store2(key, value, true); // true indicates to overwrite
-      console.log('store2: ', store2());
+      // console.log('store2: ', store2());
       return results;
     })
     .catch((error) => {
@@ -29,11 +29,11 @@ const getProductByID = (productID) => {
 
   return axios.get(url)
     .then((results) => {
-      console.log('getproductbyID helper: ', results);
+      // console.log('getproductbyID helper: ', results);
       const key = `product${productID}`;
       const value = results.data; // array of products w/o style options
       store2(key, value, true); // true indicates to overwrite
-      console.log('store2: ', store2());
+      // console.log('store2: ', store2());
       return results;
     })
     .catch((error) => {
