@@ -21,24 +21,60 @@ function App() {
 
   // Effects
   useEffect(() => {
-
-    contextHelpers.fetchProductList();
-    contextHelpers.fetchProductByID();
-    contextHelpers.fetchAllReviewsByProduct();
-
+    fetchProductList();
+    fetchProductByID(currentProductID);
+    fetchAllReviewsByProduct(currentProductID);
   }, []);
 
+  // Functions
+  const fetchProductList = async () => {
+    await api.getProductList()
+      .then((response) => {
+        const allProducts = response.data;
+        setProductList(allProducts);
+        console.log('current product ID before getbyID: ', currentProductID);
+        console.log({currentProduct});
+      })
+      .catch((error) => {
+        console.log({error});
+      });
+  };
+
+  const fetchProductByID = async (currentProductID) => {
+    await api.getProductByID(currentProductID)
+      .then((response) => {
+        const product = response.data;
+        setCurrentProduct(product);
+        console.log('current product ID after getbyID: ', currentProductID);
+        console.log({currentProduct});
+      })
+      .catch((error) => {
+        console.log({error});
+      });
+  };
+
+  const fetchAllReviewsByProduct = async (currentProductID) => {
+    await api.getAllReviewsByProduct(currentProductID)
+      .then((response) => {
+        const reviews = response.data;
+        setCurrentProductReviews(reviews);
+        console.log('current product reviews after getbyID: ', currentProductReviews);
+        console.log({currentProductReviews});
+      })
+      .catch((error) => {
+        console.log({error});
+      });
+  };
 
 
   const handleChangeProduct = (productID) => {
     setCurrentProductID(productID)
-
+    contextHelpers.fetchProductByID(currentProductID);
+    contextHelpers.fetchAllReviewsByProduct(currentProductID);
   }
 
-
-    console.log('current product ID after useEffect: ', currentProductID);
-    console.log({currentProduct});
-
+  console.log('current product ID after useEffect: ', currentProductID);
+  console.log({currentProduct});
 
   return (
     // <MyContext.Provider value={/* some value */}>
@@ -57,7 +93,7 @@ function App() {
         <RelatedProducts />
       </div>
       <div className="ratings" id="ratings">
-        <RatingsReviews product={currentProduct} />
+        <RatingsReviews product={currentProduct} reviews={currentProductReviews}/>
       </div>
     </div>
   );

@@ -35,13 +35,18 @@ const RatingCard = (props) => {
   const { lengthRating } = Length;
   const { qualityRating } = Quality;
 
+  const { allReviews } = props.reviews;
+  console.log({allReviews});
+
    // state
-   const [currentReviews, setCurrentReviews] = useState(currentProduct);
-   const [productList, setProductList] = useState(null);
+   const [listedReviews, setListedReviews] = useState([]);
 
   // functions
   const handleClick = () => {
-    setFilter(params); // params are filter criteria for all reviews. Can specify # of stars.
+    // setFilter(params); // params are filter criteria for all reviews. Can specify # of stars.
+    allReviews.filter((review) => {
+
+    })
   };
 
   return (

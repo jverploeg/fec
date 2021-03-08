@@ -29,9 +29,12 @@ import { ProductContext } from '../context/product-context.js'
 
 // COMPONENT
 const RatingsReviews = (props) => {
-  // const [rating, setRating] = useState(0);
-  const [reviews, setReviews] = useState([]);
+  // variables
   const currentProduct = props.product;
+  const allReviews = props.reviews;
+
+  // state
+  const [listedReviews, setListedReviews] = useState([]);
 
   // sticky navbar handler
   useEffect(() => {
@@ -62,7 +65,7 @@ const RatingsReviews = (props) => {
         <div className="column is-3">
           <div className="block">
             {/* INDIVIDUAL RATING CARD */}
-            <RatingCard product={currentProduct}/>
+            <RatingCard product={currentProduct} reviews={allReviews}/>
           </div>
         </div>
 

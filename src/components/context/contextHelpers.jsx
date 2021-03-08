@@ -1,4 +1,5 @@
 // IMPORTS
+import App from '../app';
 import api from '../helpers/apiHelpers';
 import store2 from 'store2';
 
@@ -6,7 +7,7 @@ const fetchProductList = async () => {
   await api.getProductList()
     .then((response) => {
       const allProducts = response.data;
-      setProductList(allProducts);
+      App.setProductList(allProducts);
       console.log('current product ID before getbyID: ', currentProductID);
       console.log({currentProduct});
     })
@@ -15,11 +16,11 @@ const fetchProductList = async () => {
     });
 };
 
-const fetchProductByID = async () => {
+const fetchProductByID = async (currentProductID) => {
   await api.getProductByID(currentProductID)
     .then((response) => {
       const product = response.data;
-      setCurrentProduct(product);
+      App.setCurrentProduct(product);
       console.log('current product ID after getbyID: ', currentProductID);
       console.log({currentProduct});
     })
@@ -28,11 +29,11 @@ const fetchProductByID = async () => {
     });
 };
 
-const fetchAllReviewsByProduct = async () => {
+const fetchAllReviewsByProduct = async (currentProductID) => {
   await api.getAllReviewsByProduct(currentProductID)
     .then((response) => {
       const reviews = response.data;
-      setCurrentProductReviews(reviews);
+      App.setCurrentProductReviews(reviews);
       console.log('current product reviews after getbyID: ', currentProductReviews);
       console.log({currentProductReviews});
     })
