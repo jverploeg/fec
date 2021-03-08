@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import ProductImages from './ProductImages';
+import ProductImages from './ProductImages.jsx';
+import Images from './Images.jsx';
 
 const Card = (props) => {
-  useEffect(() => {
-    new Glider(document.querySelector('.glider'), {
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      draggable: true,
-      dots: '#dots',
-      arrows: {
-        prev: '.glider-prev',
-        next: '.glider-next'
-      }
-    });
-  });
-
   return (
     <div className="card">
-      <div className="card-image">
-        <figure className="image is-4by3">
-          <img src={props.image[0]} alt="" />
-        </figure>
+      <div className="card-content">
+          <Images theImages={props.moreImages} />
       </div>
+
       <div className="card-content">
         <div className="content">
           <span>Category</span>
