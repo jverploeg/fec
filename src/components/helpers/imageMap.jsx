@@ -25,6 +25,7 @@ const ImageMap = (options, current) => {
   };
 
   const imageMaker = () => (
+    // <div className="column">
     <div className="card equal-height">
       <div className="card-image has-text-centered">
         <figure className="image is-256x256 is-inline-block">
@@ -47,6 +48,7 @@ const ImageMap = (options, current) => {
         </div>
       </div>
     </div>
+    // </div>
   );
   return [state, imageMaker, setState];
 };
