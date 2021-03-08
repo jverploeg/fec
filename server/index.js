@@ -28,23 +28,23 @@ app.listen(port, () => {
 app.get('/api/reviews/all/:id', (req, res) => {
   const productID = req.params.id;
 
-  atlier.getAllReviewsByProduct(productID, (err, results) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      res.status(200).send(results);
-    }
-  });
+  atlier.getAllReviewsByProduct(productID)
+    .then((results) => {
+      return res.status(200).send(results)
+    })
+    .catch((error) => {
+      return res.status(400).send(error)
+    });
 });
 
 app.get('/api/products/all', (req, res) => {
-  atlier.getAllProducts((err, results) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      res.status(200).send(results);
-    }
-  });
+  atlier.getAllProducts()
+    .then((results) => {
+      return res.status(200).send(results);
+    })
+    .catch((error) => {
+      return res.status(400).send(err);
+    });
 });
 
 app.get('/api/products/:id', (req, res) => {
@@ -52,10 +52,10 @@ app.get('/api/products/:id', (req, res) => {
 
   atlier.getProductByID(productID)
     .then((results) => {
-      res.status(200).send(results);
+      return res.status(200).send(results);
     })
     .catch((error) => {
-      res.status(400).send(err);
+      return res.status(405).send(error);
     });
 });
 
