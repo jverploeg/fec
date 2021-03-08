@@ -5,7 +5,7 @@ const Images = (props) => {
     const allGliders = document.querySelectorAll('.glider-images');
     allGliders.forEach(gliderSet => {
       new Glider(gliderSet, {
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
         draggable: true
       });
