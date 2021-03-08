@@ -36,7 +36,7 @@ const ImageMap = (options, current) => {
         <div className="tile is-parent is-vertical is-pulled-left">
           <div className="tile is-child">
             {options.map((item) => (
-              <figure className="image is-64x64" key={item.thumbnail_url}>
+              <figure className="image is-square is-64x64" key={item.thumbnail_url}>
                 <img
                   src={item.thumbnail_url}
                   alt={item.url}
