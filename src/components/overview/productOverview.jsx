@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from './image';
 import Details from './details';
-import Description from './description';
+// import Description from './description';
 
 // sample data
 // TODO remove at completion
@@ -368,33 +368,39 @@ const data = {
 // COMPONENT
 function ProductOverview(focus) {
   const [meta, setMeta] = useState([]);
-  const current = focus.product;
+  const [current, setCurrent] = useState(focus.product);
   const [styleData, setStyleData] = useState(data);
-
   //get photos from children. Pass setPhotos down...
   const [photos, setPhotos] = useState(styleData.results[0]);
+
+//   function handleStyleChange(newStyle) {
+//       setPhotos(newValue);
+//   }
+
+//   useEffect(() => {
+//       setPhotos();
+//   }, [setPhotos]);
 
   return (
     <div>
       <section className="hero is-grey-dark is-fullheight">
         <div className="container is-fluid">
           <div className="tile is-ancestor has-text-centered">
-            <div className="tile is-vertical">
-              <div className="tile">
-                <div className="tile is-parent">
-                  <Image pics={photos}/>
+            <div className="tile">
+            <div className="tile is-parent">
+                <div className="tile is-child box is-vertical-center">
+                    <Image pics={photos}/>
                 </div>
-                <div className="tile is-parent">
-                  <div className="tile is-child box">
-                    <Details setPhotos={setPhotos} styles={styleData} product={current} />
-                  </div>
+            </div>
+            <div className="tile is-parent">
+                <div className="tile is-child box is-vertical-center">
+                <Details
+                    setPhotos={setPhotos}
+                    // onChange={handleStyleChange}
+                    styles={styleData}
+                    product={current} />
                 </div>
-              </div>
-              {/* <div className="tile is-parent">
-                <div className="tile is-child box">
-                  <Description product={current} />
-                </div>
-              </div> */}
+            </div>
             </div>
           </div>
         </div>
