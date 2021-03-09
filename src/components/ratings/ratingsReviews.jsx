@@ -83,11 +83,11 @@ const RatingsReviews = (props) => {
     <div id="Ratings-Reviews" className="columns is-mobile is-centered">
 
         {/* HORIZONTAL SPACER */}
-        <div className="column is-1"/>
+        <div className="column"/>
 
         {/* OVERALL RATING CARD AND REVIEWS LIST */}
         {/* OVERALL RATING CARD */}
-        <div className="column is-3">
+        <div className="column is-4">
           <section className="hero is-grey-light">
             <div className="hero-body">
               {/* INDIVIDUAL RATING CARD */}
@@ -96,10 +96,10 @@ const RatingsReviews = (props) => {
           </section>
         </div>
 
-        <div className="column is-1" />
+        <div className="column" />
 
         {/* REVIEWS LIST AND NAV BAR */}
-        <div className="column is-6.5">
+        <div className="column is-7">
           <section className="hero is-grey-light">
 
             <div className="hero-head">
@@ -137,7 +137,7 @@ const RatingsReviews = (props) => {
         </div>
 
         {/* HORIZONTAL SPACER */}
-        <div className="column is-1"/>
+        <div className="column"/>
 
     </div>
 

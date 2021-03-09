@@ -102,7 +102,7 @@ const ReviewEntry = (props) => {
             <h6 className="title is-6">{reviewSummary}</h6>
           </div>
           <div className="tile is-child">
-            <p>{reviewBody}</p>
+            <p className="has-text-primary">{reviewBody}</p>
           </div>
           {isBodyTruncated
             ?
