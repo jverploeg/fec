@@ -89,8 +89,10 @@ const RatingsReviews = (props) => {
         {/* OVERALL RATING CARD */}
         <div className="column is-3">
           <section className="hero is-grey-light">
-            {/* INDIVIDUAL RATING CARD */}
-            <RatingCard product={currentProduct} reviews={allReviews}/>
+            <div className="hero-body">
+              {/* INDIVIDUAL RATING CARD */}
+              <RatingCard product={currentProduct} reviews={allReviews}/>
+            </div>
           </section>
         </div>
 

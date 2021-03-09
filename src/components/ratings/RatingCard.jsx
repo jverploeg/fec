@@ -50,7 +50,7 @@ const RatingCard = (props) => {
   };
 
   return (
-      <div className="box">
+      <div className="box has-background-light">
         <div className="tile is-ancestor is-vertical">
 
           {/* TITLE */}
