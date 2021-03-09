@@ -384,23 +384,23 @@ function ProductOverview(focus) {
   return (
     <div>
       <section className="hero is-grey-dark is-fullheight">
-        <div className="container is-fluid">
-          <div className="tile is-ancestor has-text-centered">
-            <div className="tile">
-            <div className="tile is-parent">
-                <div className="tile is-child box is-vertical-center">
-                    <Image pics={photos}/>
+        <div className="container is-fluid is-maxwidth">
+          <div className="tile is-ancestor has-text-centered is-12">
+            <div className="tile is-12">
+                <div className="tile is-parent is-6">
+                    <div className="tile is-child box is-vertical-center">
+                        <Image pics={photos}/>
+                    </div>
                 </div>
-            </div>
-            <div className="tile is-parent">
-                <div className="tile is-child box is-vertical-center">
-                <Details
-                    setPhotos={setPhotos}
-                    // onChange={handleStyleChange}
-                    styles={styleData}
-                    product={current} />
+                <div className="tile is-parent is-6">
+                    <div className="tile is-child box is-vertical-center">
+                    <Details
+                        setPhotos={setPhotos}
+                        // onChange={handleStyleChange}
+                        styles={styleData}
+                        product={current} />
+                    </div>
                 </div>
-            </div>
             </div>
           </div>
         </div>
@@ -412,3 +412,32 @@ function ProductOverview(focus) {
 
 // EXPORT
 export default ProductOverview;
+
+// previous version
+// return (
+// <div>
+//     <section className="hero is-grey-dark is-fullheight">
+//     <div className="container is-fluid">
+//         <div className="tile is-ancestor has-text-centered">
+//         <div className="tile">
+//         <div className="tile is-parent">
+//             <div className="tile is-child box is-vertical-center">
+//                 <Image pics={photos}/>
+//             </div>
+//         </div>
+//         <div className="tile is-parent">
+//             <div className="tile is-child box is-vertical-center">
+//             <Details
+//                 setPhotos={setPhotos}
+//                 // onChange={handleStyleChange}
+//                 styles={styleData}
+//                 product={current} />
+//             </div>
+//         </div>
+//         </div>
+//         </div>
+//     </div>
+//     </section>
+//     <section className="section space" />
+// </div>
+// );
