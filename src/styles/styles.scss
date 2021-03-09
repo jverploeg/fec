@@ -142,5 +142,33 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/card.sass";
 @import "~/node_modules/bulma/sass/helpers/_all.sass";
 @import "~/node_modules/bulma/sass/elements/image.sass";
+@import "~/node_modules/bulma/sass/components/modal.sass";
+
+.is-clickable {
+  cursor: pointer;
+}
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
+.iframe-modal {
+  width: 800px;
+  height: 600px;
+}
+.iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
 
 @import "~/node_modules/bulma/sass/components/level.sass";
