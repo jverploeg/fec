@@ -66,18 +66,16 @@ function App() {
       });
   };
 
-
   const handleChangeProduct = (productID) => {
-    setCurrentProductID(productID)
+    setCurrentProductID(productID);
     contextHelpers.fetchProductByID(currentProductID);
     contextHelpers.fetchAllReviewsByProduct(currentProductID);
-  }
+  };
 
   // console.log('current product ID after useEffect: ', currentProductID);
   // console.log({currentProduct});
 
   return (
-    // <MyContext.Provider value={/* some value */}>
 
     <div className="main">
       <div className="container is-primary has-text-centered">
@@ -86,14 +84,11 @@ function App() {
       <div className="overview">
         <ProductOverview product={currentProduct} />
       </div>
-      <div>
-        <OverallStarRating product={currentProduct} />
-      </div>
       <div className="related" id="related">
         <RelatedProducts />
       </div>
       <div className="ratings" id="ratings">
-        <RatingsReviews product={currentProduct} reviews={currentProductReviews}/>
+        <RatingsReviews product={currentProduct} reviews={currentProductReviews} />
       </div>
     </div>
   );
