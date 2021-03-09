@@ -393,7 +393,7 @@ function ProductOverview(focus) {
                 </div>
             </div>
             <div className="tile is-parent">
-                <div className="tile is-child box">
+                <div className="tile is-child box is-vertical-center">
                 <Details
                     setPhotos={setPhotos}
                     // onChange={handleStyleChange}

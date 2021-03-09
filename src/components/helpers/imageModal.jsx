@@ -50,9 +50,14 @@ const ImageModal = (options, current) => {
     <div>
       <div className={`modal ${modal}`}>
         <div className="modal-content">
-          <figure className="image">
-            <img src={state.url} alt={state.thumbnail_url} />
-          </figure>
+          <div className="iframe-container is-fluid">
+            <iframe
+              className="iframe"
+              title="focus"
+              src={state.url}
+              alt={state.thumbnail_url}
+            />
+          </div>
         </div>
         <button
           className="modal-close is-large"
