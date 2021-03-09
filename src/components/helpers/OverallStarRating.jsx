@@ -3,13 +3,9 @@ import { FaStar } from 'react-icons/fa';
 
 // COMPONENT
 const OverallStarRating = (props) => {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-
   const aveRating = props.product.aveRating;
   const starWidth = aveRating/5*100;
   let starClass = '';
-
 
   if (starWidth <= 5) {
     starClass = 'stars-5';
