@@ -3,17 +3,14 @@
 import React, { useState, useEffect } from 'react';
 
 const ImageMap = (options, current) => {
-  console.log({ current });
+  // console.log({ current });
   const [state, setState] = useState(current);
 
-  // change current image focus on prop change
-  useEffect(() => {
-    setState(current);
-  }, [current]);
+
 
   // click handler to change the view/current
   const change = (e) => {
-    e.persist();
+    // e.persist();
     console.log(e, 'clicked');
     // SyntheticBaseEvent
     const thumb = e.target.src;
@@ -24,6 +21,10 @@ const ImageMap = (options, current) => {
     };
     setState(newFocus);
   };
+  // change current image focus on prop change
+  useEffect(() => {
+    setState(current);
+  }, [current]);
 
   const test = (e) => {
     console.log(e);
@@ -33,9 +34,10 @@ const ImageMap = (options, current) => {
   const imageMaker = () => (
     // <div className="column">
     <div className="card equal-height">
-      <div className="card-image has-text-centered">
+      <div className="card-image has-text-centered is-clickable">
         <figure className="image is-256x256 is-clickable">
           <img
+            className="is-clickable"
             onClick={(e) => test(e)}
             src={state.url}
             alt={state.thumbnail_url}
@@ -58,6 +60,9 @@ const ImageMap = (options, current) => {
           </div>
         </div>
       </div>
+      <button type="button" onClick={() => test(e)}>
+        Button
+      </button>
     </div>
     // </div>
   );

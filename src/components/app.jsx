@@ -86,9 +86,6 @@ function App() {
       <div className="overview">
         <ProductOverview product={currentProduct} />
       </div>
-      <div>
-        <OverallStarRating product={currentProduct} />
-      </div>
       <div className="related" id="related">
         <RelatedProducts />
       </div>

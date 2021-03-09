@@ -147,3 +147,7 @@ $tile-spacing: 0;
 .is-clickable {
   cursor: pointer;
 }
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
