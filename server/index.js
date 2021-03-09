@@ -63,11 +63,11 @@ app.get('/api/products/:id', (req, res) => {
 app.get('/api/products/:id/styles', (req, res) => {
   const productID = req.params.id;
 
-  atlier.getStyles(productID, (err, results) => {
-    if (err) {
-      res.status(400).send(err);
-    } else {
-      res.status(200).send(results);
-    }
-  });
+  atlier.getStyles(productID)
+    .then((results) => {
+      return res.status(200).send(results);
+    })
+    .catch((error) => {
+      return res.status(405).send(error);
+    });
 });

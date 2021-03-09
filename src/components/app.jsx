@@ -16,6 +16,7 @@ function App() {
   const [currentProductID, setCurrentProductID] = useState(testData.testProduct.id);
   const [productList, setProductList] = useState([]);
   const [currentProductReviews, setCurrentProductReviews] = useState([]);
+  const [currentProductStyles, setCurrentProductStyles] = useState([]);
   // const MyContext = React.createContext(defaultValue);
 
 
@@ -24,6 +25,7 @@ function App() {
     fetchProductList();
     fetchProductByID(currentProductID);
     fetchAllReviewsByProduct(currentProductID);
+    fetchAllStylesByProduct(currentProductID);
   }, []);
 
   // Functions
@@ -59,7 +61,20 @@ function App() {
         const reviews = response.data;
         setCurrentProductReviews(reviews);
         // console.log('current product reviews after getbyID: ', currentProductReviews);
-        // console.log({currentProductReviews});
+        console.log({currentProductReviews});
+      })
+      .catch((error) => {
+        console.log({error});
+      });
+  };
+  const fetchAllStylesByProduct = async (currentProductID) => {
+    await api.getStyles(currentProductID)
+      .then((response) => {
+        const styles = response.data;
+        console.log({styles});
+        setCurrentProductStyles(styles);
+        // console.log('current product styles after getbyID: ', currentProductStyles);
+        console.log({currentProductStyles});
       })
       .catch((error) => {
         console.log({error});
@@ -82,7 +97,7 @@ function App() {
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
-        <ProductOverview product={currentProduct} />
+        <ProductOverview product={currentProduct} styles={currentProductStyles} />
       </div>
       <div className="related" id="related">
         <RelatedProducts />
