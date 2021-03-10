@@ -47,6 +47,34 @@ const getAllReviewsByProduct = (productID) => {
 
   return axios.get(url)
     .then((results) => {
+      const key = `allReviews${productID}`;
+      // console.log(results);
+      const value = results.data; // array of products w/o style options
+      store2(key, value, true); // true indicates to overwrite
+      // console.log('store2: ', store2());
+      return results;
+    })
+    .catch((error) => {
+      console.log('err: ', error);
+      return error;
+    })
+};
+
+const getStyles = (productID) => { // async?
+  const url = `http://localhost:${port}/api/products/${productID}/styles`;
+
+  // await axios.get(url)
+  return axios.get(url)
+    .then((results) => {
+      const key = `allStyles${productID}`;
+      // console.log(results);
+      const value = results.data; // array of styles and data for given product
+      // console.log({value});
+      store2(key, value, true); // true indicates to overwrite
+      // console.log('store2: ', store2());
+      // console.log({results});
+      // const data = store2.get(key);
+      // console.log({data})
       // const key = `allReviews${productID}`;
       // console.log(results);
       // const value = results.data; // array of products w/o style options
