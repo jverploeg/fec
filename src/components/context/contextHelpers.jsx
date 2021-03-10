@@ -46,5 +46,5 @@ const fetchAllReviewsByProduct = async (currentProductID) => {
 export default {
   fetchProductList,
   fetchProductByID,
-  fetchAllReviewsByProduct
+  fetchAllReviewsByProduct,
 };

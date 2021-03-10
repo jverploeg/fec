@@ -1,3 +1,4 @@
+// Entire Bulma Library - do not use in production
 // @charset "utf-8";
 // @import "~bulma/bulma";
 
@@ -17,6 +18,14 @@ html {
 }
 .sticky + content {
   padding-top: 60px;
+}
+// images container
+*.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  // background-size: cover;
+  height: 128px;
+  width: 128px;
 }
 
 // Import a Google Font
@@ -120,6 +129,39 @@ $tile-spacing: 0;
 .stars-95:after { width: 95%; }
 .stars-100:after { width: 100; }
 
+// image modal
+.img-modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.img-modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.img-modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 60%;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  z-index: 101;
+  padding: 40px
+}
+
 // IMPORTS
 // Import only what you need from Bulma
 @import "~/node_modules/bulma/sass/utilities/_all.sass";
@@ -142,6 +184,41 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/card.sass";
 @import "~/node_modules/bulma/sass/helpers/_all.sass";
 @import "~/node_modules/bulma/sass/elements/image.sass";
+<<<<<<< HEAD
 
 // Joe needed the modal
 @import "~/node_modules/bulma/sass/components/modal.sass";
+=======
+@import "~/node_modules/bulma/sass/components/modal.sass";
+// Ryne
+@import "~/node_modules/bulma/sass/components/level.sass";
+
+
+.is-clickable {
+  cursor: pointer;
+}
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
+.iframe-modal {
+  width: 800px;
+  height: 600px;
+}
+.iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
+
+>>>>>>> 9767a39a94b3d34ac55d48dcda593e6b2cbc81c4

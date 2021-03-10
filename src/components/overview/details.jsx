@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 // helpers
 import DropDown from '../helpers/dropDown';
 import OverallStarRating from '../helpers/OverallStarRating';
@@ -19,10 +19,23 @@ function Details(focus) { // focus.product and focus.styles
 
   const [newStyle, NewStyleGrid] = Styles2(focus.styles.results, focus.styles.results[0]);
 
-  const current = focus.product;
-  // pass style state back up to parent
-  focus.setPhotos(newStyle);
+  const [current, setCurrent] = useState(focus.product);
 
+  // const setCurrent =
+  // pass style state back up to parent
+  // focus.setPhotos(newStyle);
+
+  useEffect(() => {
+    focus.setPhotos(newStyle);
+  });
+
+  // const callback = () => {
+  //   styleCallback.setPhotos(newStyle);
+  // };
+  // styleCallback.setPhotos(newStyle);
+  // const [photos, setPhotos] = focus.setPhotos(newStyle);
+
+  // const details = () => (
   return (
     <div>
       <div className="columns star">
@@ -57,7 +70,8 @@ function Details(focus) { // focus.product and focus.styles
           <strong>Price</strong>
         </div>
         <div className="column is-one-third size">
-          ${newStyle.original_price}
+          $
+          {newStyle.original_price}
         </div>
       </div>
       <div className="column slogan">
@@ -79,13 +93,13 @@ function Details(focus) { // focus.product and focus.styles
           <a href="https://www.pinterest.com/">Pinterest</a>
         </div>
       </div>
-      <section className="section space" />
+      {/* <section className="section space" /> */}
       <div className="column styles">
         <strong>Styles</strong>
         {newStyle.name}
         <NewStyleGrid />
       </div>
-      <section className="section space" />
+      {/* <section className="section space" /> */}
       <section className="section space" />
       <div className="columns">
         <div className="column size">
@@ -108,6 +122,7 @@ function Details(focus) { // focus.product and focus.styles
       </div>
     </div>
   );
+  // return [details, focus.setPhotos(newStyle)];
 }
 
 export default Details;

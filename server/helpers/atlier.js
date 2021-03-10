@@ -32,72 +32,6 @@ const getAllProducts = () => {
   })
 };
 
-// const getProductByID = (productID) => {
-//   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
-//   const options = {
-//     headers: {
-//       'Authorization': config.key
-//     }
-//   };
-//   return new Promise((reject, resolve) => {
-//     axios.get(url, options)
-//       // store product
-//       .then((res) => {
-//         return new Promise((resolve, reject) => {
-//           const key = `product${productID}`
-//           const value = res.data; // object of product
-//           store2(key, value, true); // true indicates to overwrite
-//           resolve(res);
-//         })
-//       })
-//       // gather all reviews, calc average rating, supplement average rating, percent rating, and ratings breakdown to product object
-//       .then((res) => {
-//         return new Promise((resolve, reject) => {
-//           getAllReviewsByProduct(productID)
-//             .then((results) => {
-//               const aveRating = calcAverageRating(results);
-//               supplementAveRatingToProduct(productID, aveRating);
-//               const percentRecommended = calcPercentRecommended(results);
-//               supplementPercentRecommendedToProduct(productID, percentRecommended);
-//               const ratingsBreakdown = analyzeReviewData(results);
-//               supplementAnalyzedReviewDataToProduct(productID, ratingsBreakdown);
-
-//               const product = store2(`product${productID}`);
-//               resolve(product);
-//             })
-//             .catch((err) => {
-//               console.log(err);
-//               reject(err)
-//             })
-//         })
-//       })
-//       .then((res) => {
-//         return new Promise((resolve, reject) => {
-//           getAndAppendReviewsMetaByProduct(productID)
-//             .then((results) => {
-//               console.log(results);
-//               resolve(results);
-//             })
-//             .catch((error) => {
-//               console.log(error);
-//               reject(error)
-//             });
-//         });
-//       })
-//       .then((product) => {
-//         return new Promise((resolve, reject) => {
-//           resolve(product);
-//         })
-//       })
-//       .catch((err) => {
-//         return new Promise((resolve, reject) => {
-//           console.log('err: ', err);
-//           reject(err);
-//         })
-//       });
-//   })
-// };
-
 const getProductByID = (productID) => {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/products/${productID}`;
   const options = {
@@ -136,8 +70,8 @@ const getProductByID = (productID) => {
               supplementAnalyzedReviewDataToProduct(productID, ratingsBreakdown);
 
               const product = store2(`product${productID}`);
-              console.log('lev 1 product', product);
-              console.log('level 1 res.data', res.data);
+              // console.log('lev 1 product', product);
+              // console.log('level 1 res.data', res.data);
               resolve(res);
             })
             .catch((err) => {
@@ -151,8 +85,8 @@ const getProductByID = (productID) => {
         return new Promise((resolve, reject) => {
           getAndAppendReviewsMetaByProduct(productID)
           .then((results) => {
-              console.log('level 2 res.data', res.data);
-              console.log('lev 2 results', results);
+              // console.log('level 2 res.data', res.data);
+              // console.log('lev 2 results', results);
               resolve(results);
             })
             .catch((error) => {
@@ -162,7 +96,7 @@ const getProductByID = (productID) => {
         })
       })
       .then((product) => {
-        console.log('lev 3 product', product);
+        // console.log('lev 3 product', product);
         resolve(product);
       })
       .catch((err) => {
@@ -242,7 +176,7 @@ const getAndAppendReviewsMetaByProduct = (productID) => {
         let product = store2(`product${productID}`);
         if (product.reviewsMeta) {
         } else {
-          product.reviewsMeta = res.data.characteristics;
+          product.reviewsMeta = res.data;
           const key = `product${productID}`
           const value = product; // object of product
           store2(key, value, true);
@@ -359,4 +293,4 @@ const exampleReviewData =
 const test1Data = exampleReviewData.results;
 const test1Result = calcAverageRating(test1Data);
 const test1Expected = 2.75 // from example data below. Use better test set when using Jest.
-console.log('Test: Calculate Average Rating of Example Review Data', test1Result, JSON.stringify(test1Result) === JSON.stringify(test1Expected));
+// console.log('Test: Calculate Average Rating of Example Review Data', test1Result, JSON.stringify(test1Result) === JSON.stringify(test1Expected));
