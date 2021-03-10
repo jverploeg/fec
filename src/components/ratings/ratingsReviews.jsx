@@ -84,21 +84,23 @@ const RatingsReviews = (props) => {
     <div id="Ratings-Reviews" className="columns is-mobile is-centered">
 
         {/* HORIZONTAL SPACER */}
-        <div className="column is-1"/>
+        <div className="column"/>
 
         {/* OVERALL RATING CARD AND REVIEWS LIST */}
         {/* OVERALL RATING CARD */}
-        <div className="column is-3">
+        <div className="column is-4">
           <section className="hero is-grey-light">
-            {/* INDIVIDUAL RATING CARD */}
-            <RatingCard product={currentProduct} reviews={allReviews}/>
+            <div className="hero-body">
+              {/* INDIVIDUAL RATING CARD */}
+              <RatingCard product={currentProduct} reviews={allReviews}/>
+            </div>
           </section>
         </div>
 
-        <div className="column is-1" />
+        <div className="column" />
 
         {/* REVIEWS LIST AND NAV BAR */}
-        <div className="column is-6.5">
+        <div className="column is-7">
           <section className="hero is-grey-light">
 
             <div className="hero-head">
@@ -109,7 +111,7 @@ const RatingsReviews = (props) => {
             <div className="hero-body">
               {/* REVIEWS LIST COMPONENT */}
               <div className="block">
-                <ReviewList product={currentProduct} reviews={listedReviews} />
+                <ReviewList product={currentProduct} reviews={listedReviews} handleImageSelect={props.handleImageSelect}/>
               </div>
 
             </div>
@@ -136,7 +138,7 @@ const RatingsReviews = (props) => {
         </div>
 
         {/* HORIZONTAL SPACER */}
-        <div className="column is-1"/>
+        <div className="column"/>
 
     </div>
 

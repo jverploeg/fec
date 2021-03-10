@@ -14,7 +14,7 @@ const ReviewList = (props) => {
     <>
       <div className="tile is-ancestor is-vertical">
         {listedReviews.map((review) => {
-          return ( <ReviewEntry product={currentProduct} review={review}/> );
+          return ( <ReviewEntry product={currentProduct} review={review} handleImageSelect={props.handleImageSelect}/> );
         })}
       </div>
 

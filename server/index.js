@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+// const gzip = require('express-static-gzip');
 const atlier = require('./helpers/atlier');
 
 // initialize app
@@ -9,6 +10,7 @@ const app = express();
 
 // render static files
 app.use(express.static(path.resolve(__dirname, '..', 'src', 'dist')));
+// app.use(gzip(path.resolve(__dirname, '..', 'src', 'dist')));
 
 // setup any middleware
 app.use(express.json());
