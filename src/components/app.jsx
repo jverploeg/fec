@@ -64,16 +64,19 @@ function App() {
         <RelatedProducts />
       </div>
       <div className="ratings" id="ratings">
-        <RatingsReviews product={response.current} reviews={response.reviews} handleImageSelect={handleImageSelect}/>
-        <div id="modal" class="modal">
+        <RatingsReviews
+          product={response.current}
+          reviews={response.reviews}
+          // handleImageSelect={handleImageSelect}
+        />
+        {/* <div id="modal" class="modal">
           <div class="modal-background"></div>
           <div class="modal-content">
             <p class="image is-4by3">
               <img src={imageSelected.url} alt="" />
             </p>
           </div>
-          <button class="modal-close is-large" aria-label="close"></button>
-        </div>
+          <button class="modal-close is-large" aria-label="close"></button> */}
       </div>
     </div>
   );

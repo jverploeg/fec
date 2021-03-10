@@ -35,7 +35,7 @@ const ProductOverview = (focus) => {
 
   // initialize current photo view to be from first style in collection
   useEffect(() => {
-    console.log(startPhoto);
+    // console.log(startPhoto);
     setPhotos(startPhoto); // array of objects
   }, [focus]);
 
