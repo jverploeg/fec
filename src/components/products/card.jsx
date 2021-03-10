@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ProductImages from './ProductImages.jsx';
 import Images from './Images.jsx';
+import { MdStar } from 'react-icons/md';
 
 const Card = (props) => {
   return (
     <div className="card">
-      <div className="card-content">
+      <div className="card-image">
           <Images theImages={props.moreImages} />
       </div>
 
@@ -19,11 +19,11 @@ const Card = (props) => {
         <div className="content">
           <span>$123</span>
           <br />
-          <span className="fa fa-star checked" />
-          <span className="fa fa-star checked" />
-          <span className="fa fa-star checked" />
-          <span className="fa fa-star" />
-          <span className="fa fa-star" />
+          <MdStar size={20} color='grey'/>
+          <MdStar size={20} color='grey'/>
+          <MdStar size={20} color='grey'/>
+          <MdStar size={20} color='grey'/>
+          <MdStar size={20} color='grey'/>
         </div>
       </div>
     </div>

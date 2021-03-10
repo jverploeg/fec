@@ -184,6 +184,11 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/card.sass";
 @import "~/node_modules/bulma/sass/helpers/_all.sass";
 @import "~/node_modules/bulma/sass/elements/image.sass";
+<<<<<<< HEAD
+
+// Joe needed the modal
+@import "~/node_modules/bulma/sass/components/modal.sass";
+=======
 @import "~/node_modules/bulma/sass/components/modal.sass";
 // Ryne
 @import "~/node_modules/bulma/sass/components/level.sass";
@@ -216,3 +221,4 @@ $tile-spacing: 0;
    width: 100%;
 }
 
+>>>>>>> 9767a39a94b3d34ac55d48dcda593e6b2cbc81c4
