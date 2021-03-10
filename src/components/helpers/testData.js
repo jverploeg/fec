@@ -30,21 +30,33 @@ const testProduct = {
         "numOfOneStars": 0
     },
     "reviewsMeta": {
-        "Fit": {
-            "id": 61056,
-            "value": "3.6666666666666667"
+        "product_id": "18201",
+        "ratings": {
+            "2": "5",
+            "3": "5",
+            "4": "1",
+            "5": "1"
         },
-        "Length": {
-            "id": 61057,
-            "value": "3.1666666666666667"
+        "recommended": {
+            "true": "12"
         },
-        "Comfort": {
-            "id": 61058,
-            "value": "2.3333333333333333"
-        },
-        "Quality": {
-            "id": 61059,
-            "value": "3.0833333333333333"
+        "characteristics": {
+            "Fit": {
+                "id": 61056,
+                "value": "3.6666666666666667"
+            },
+            "Length": {
+                "id": 61057,
+                "value": "3.1666666666666667"
+            },
+            "Comfort": {
+                "id": 61058,
+                "value": "2.3333333333333333"
+            },
+            "Quality": {
+                "id": 61059,
+                "value": "3.0833333333333333"
+            }
         }
     }
 };
