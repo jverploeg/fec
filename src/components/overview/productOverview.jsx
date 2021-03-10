@@ -1,26 +1,35 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, Fragment} from 'react';
 import Image from './image';
 import Details from './details';
 
 // COMPONENT
-function ProductOverview(focus) {
-  const styles = focus.styles; //current product style data
-  const product = focus.product; //current product
-  const stylePhotos = styles.results; //array of arrays or each styles photos
+const ProductOverview = (focus) => {
+  // PROPS
+  const styles = focus.styles; // current product style data
+  const product = focus.product; // current product
+  const stylePhotos = styles.results; // array of arrays or each styles photos
   // const currentPhotos = stylePhotos[0] || {}; //first style photo set
   console.log({styles});
   console.log({product});
   console.log({stylePhotos});
-  console.log({currentPhotos});
+  // console.log({currentPhotos});
 
-  const [current, setCurrent] = useState({}); //focus.product);
+  // STATES
+  const [current, setCurrent] = useState({}); // focus.product);
   // const [current, setCurrent] = useState(focus.product);
-  const [styleData, setStyleData] = useState([]); //data); // focus.styles);
+  const [styleData, setStyleData] = useState([]); // data); // focus.styles);
   // const [styleData, setStyleData] = useState(data); // focus.styles);
   // get photos from children. Pass setPhotos down...
   const [photos, setPhotos] = useState({});
   // const [photos, setPhotos] = useState(styleData.results[0]);
+
+  // FUNCTIONS
+  // async function getProduct() {
+  //   try {
+  //     setCurrent(product);
+  //     const
+  // }
 
   // set current product from props
   useEffect(() => {
@@ -47,7 +56,7 @@ function ProductOverview(focus) {
             <div className="tile is-12">
               <div className="tile is-parent is-6">
                 <div className="tile is-child box is-vertical-center">
-                  <Image pics={photos} />
+                  <Image pics={stylePhotos} />
                   {/* <Image pics={initialPhotos}/> */}
                 </div>
               </div>
@@ -58,12 +67,12 @@ function ProductOverview(focus) {
                         // onChange={handleStyleChange}
                         styles={styleData}
                         product={current} /> */}
-                  <Details
-                    changePhotos={currentPhotos}
+                  Details
+                    {/* // changePhotos={currentPhotos}
                     // onChange={handleStyleChange}
                     styles={styles}
                     product={product}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

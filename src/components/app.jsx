@@ -7,6 +7,7 @@ import api from './helpers/apiHelpers';
 import store2 from 'store2';
 import testData from './helpers/testData.js';
 import contextHelpers from './context/contextHelpers';
+import axios from 'axios';
 
 
 
@@ -16,9 +17,9 @@ function App() {
   const [currentProductID, setCurrentProductID] = useState(testData.testProduct.id);
   const [productList, setProductList] = useState([]);
   const [currentProductReviews, setCurrentProductReviews] = useState([]);
+  const [syleLoad, setLoad] = useState(true);
   const [currentProductStyles, setCurrentProductStyles] = useState([]);
   // const MyContext = React.createContext(defaultValue);
-
 
   // Effects
   useEffect(() => {
@@ -67,6 +68,8 @@ function App() {
         console.log({error});
       });
   };
+
+  // calls api helper to store results in storage
   const fetchAllStylesByProduct = async (currentProductID) => {
     await api.getStyles(currentProductID)
       .then((response) => {
@@ -80,6 +83,17 @@ function App() {
         console.log({error});
       });
   };
+
+  // // workaround to get data rather than AsyncPromise
+  // useEffect(async () => {
+  //   const fetchStyles = async () => {
+  //     const result = await axios(
+  //       `http://localhost:${port}/api/products/${productID}/styles`,
+  //     );
+  //     setCurrentProductStyles(result.data);
+  //   };
+  //   fetchStyles();
+  // }, []);
 
   const handleChangeProduct = (productID) => {
     setCurrentProductID(productID);
@@ -97,7 +111,10 @@ function App() {
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
       <div className="overview">
-        <ProductOverview product={currentProduct} styles={currentProductStyles} />
+        <ProductOverview
+          product={currentProduct}
+          styles={currentProductStyles}
+        />
       </div>
       <div className="related" id="related">
         <RelatedProducts />

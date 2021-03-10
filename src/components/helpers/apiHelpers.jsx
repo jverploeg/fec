@@ -70,6 +70,7 @@ const getStyles = (productID) => {
       const value = results.data; // array of styles and data for given product
       store2(key, value, true); // true indicates to overwrite
       // console.log('store2: ', store2());
+      console.log({results});
       return results;
     })
     .catch((error) => {
