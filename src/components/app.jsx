@@ -13,7 +13,13 @@ function App() {
     styles: null,
   });
   // TODO: ADD State for switching the current product and pass between App <--> RelatedProducts
+  const [currentProductId, setCurrentProductId] = useState(null);
+  // temp set starting id. run once
+  // useEffect(() => {
+  //   setCurrentProductId(18201);
+  // });
 
+  let tempID = 18201;
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
   useEffect(() => {
     const fetchData = async () => {
@@ -21,13 +27,13 @@ function App() {
         `http://localhost:8080/api/products/all`
       );
       const current = await axios(
-        `http://localhost:8080/api/products/18201`
+        `http://localhost:8080/api/products/${tempID}`
       );
       const reviews = await axios(
-        `http://localhost:8080/api/reviews/all/18201`
+        `http://localhost:8080/api/reviews/all/${tempID}`
       );
       const styles = await axios(
-        `http://localhost:8080/api/products/18201/styles`
+        `http://localhost:8080/api/products/${tempID}/styles`
       );
       setAllData({
         data: respGlobal.data,

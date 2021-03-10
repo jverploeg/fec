@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import DropDown from '../helpers/dropDown';
 import OverallStarRating from '../helpers/OverallStarRating';
 // import Styles from '../helpers/styles';
-import StylesGrid from '../helpers/stylesGrid';
+// import StylesGrid from '../helpers/stylesGrid';
 
 // variables
 const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
@@ -19,39 +19,40 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   const { product } = focus;
   // const { changePhoto } = focus; // needs to be passed to style grid...
 
+  // TODO; make these dynamic...
   const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
   const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+
+
   // STATES
   const [styleGrid, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
 
+
+  // EFFECTS
+  // styles
+  useEffect(() => {
+    setStyles(styles);
+  }, [focus]);
+  // initialize currentstyle to the first one in collection
+  useEffect(() => {
+    setCurrentStyle(styles[0]);
+  }, [focus]);
+  // current product
+  useEffect(() => {
+    setCurrent(product);
+  }, [focus.product]);
+
   // FUNCTIONS
   // pass down to details to return the currently selected style. useEffect???
-  const handleChange = (newValue) => {
-    // setPhotos(newValue);
-    // setCurrentStyle(newValue);
-    focus.onChange(newValue);
-  };
   // console.log({newValue});
   // useEffect(() => {
   //   setPhotos(newValue);
   // }, [handleStyleChange]);
   // console.log({photos});
 
-  useEffect(() => {
-    setStyles(styles);
-    console.log({styles});
-  }, []);
 
-  useEffect(() => {
-    setCurrentStyle(styles[0]);
-    console.log({ currentStyle });
-  }, [focus.styles]);
-
-  useEffect(() => {
-    setCurrent(product);
-  }, [focus.product]);
 
   // const handleChange= (event) => {
   //   changePhoto(event);
@@ -63,9 +64,9 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   // EVENT HANDLERS
   const changeStyle = (event) => {
     const newFocus = event.item;
-    console.log({newFocus});
+    // console.log({newFocus});
     setCurrentStyle(newFocus);
-    // options.onChange(newFocus);
+    focus.onChange(newFocus);
   };
 
   return (
@@ -103,7 +104,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
         </div>
         <div className="column is-one-third size">
           $
-          {/* {currentStyle.original_price} */}
+          {currentStyle.original_price}
         </div>
       </div>
       <div className="column slogan">
@@ -128,7 +129,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       {/* <section className="section space" /> */}
       <div className="column styles">
         <strong>Styles</strong>
-        {/* {currentStyle.name} */}
+        {currentStyle.name}
         {/* <StylesGrid
           styles={styles}
           onChange={(value) => handleChange(value)}

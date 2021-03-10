@@ -2,42 +2,47 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 // helpers
-import ImageMap from '../helpers/imageMap';
-import ImageModal from '../helpers/imageModal';
+// import ImageMap from '../helpers/imageMap';
+// import ImageModal from '../helpers/imageModal';
 
 const Image = (focus) => { // focus.pics
   const { styles } = focus; // es6 way of saying pics = focus.pics
   const { current } = focus; // .photos.photos;
-  // const display = styles[0];
-  // console.log({pics});
-  // console.log({photos});
+  const { start } = focus;
+  // console.log({styles});
+  // console.log({current});
+  // console.log({start});
 
   // const [state, setState] = useState({});
   const [photoSet, setPhotos] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
   // ImageModal(options/photos, current) -> returns image render, state, setState
-  const [currentPhoto, setCurrentPhoto] = useState([]);
+  const [currentPhoto, setCurrentPhoto] = useState({});
 
   const [modal, setActive] = useState('');
   // const active = modal ? 'is-active' : '';
-
   // const toggle = () => {
   //   setActive(active);
   //   console.log(active);
   // };
 
-
+  // EFFECTS to rerender
+  // on load
   useEffect(() => {
-    const select = styles[0]; // .photos[0];
-    // console.log({select});
-    setCurrentPhoto(select); // .photos);
+    setPhotos(start);
   }, [focus]);
-  console.log({currentPhoto});
 
   useEffect(() => {
     setCurrentStyle(styles);
   }, [focus.styles]);
-  console.log({currentStyle});
+
+  useEffect(() => {
+    setCurrentPhoto(start[0]);
+  }, [focus.start]);
+
+  // useEffect(() => {
+  //   setCurrentPhoto(current[0]);
+  // }, [focus.current]);
 
 
   const open = () => {
@@ -101,8 +106,8 @@ const Image = (focus) => { // focus.pics
         <figure className="image is-fullwidth">
           <img
             className="is-fullwidth"
-            // src={currentPhoto.url}
-            // alt={currentPhoto.thumbnail_url}
+            src={currentPhoto.url}
+            alt={currentPhoto.thumbnail_url}
             onClick={(e) => open(e)}
           />
           <div className="tile is-child is-overlay is-vertical-center">
