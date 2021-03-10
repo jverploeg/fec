@@ -90,8 +90,8 @@ const ReviewEntry = (props) => {
   };
 
 
-  console.log({ review });
-  console.log('store2: ', store2());
+  // console.log({ review });
+  // console.log('store2: ', store2());
 
   return (
     <>

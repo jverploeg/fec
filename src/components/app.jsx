@@ -22,10 +22,13 @@ function App() {
 
   // Effects
   useEffect(() => {
-    fetchProductList();
-    fetchProductByID(currentProductID);
-    fetchAllReviewsByProduct(currentProductID);
-  }, []);
+    const initialLoad = () => {
+      fetchProductList();
+      fetchProductByID(currentProductID);
+      fetchAllReviewsByProduct(currentProductID);
+    };
+    initialLoad();
+  }, [currentProductID]);
 
   // Functions
   const fetchProductList = async () => {
@@ -66,6 +69,11 @@ function App() {
         console.log({ error });
       });
   };
+
+// ---------------------------------
+
+
+
 
   const handleChangeProduct = (productID) => {
     setCurrentProductID(productID);

@@ -11,10 +11,10 @@ const getProductList = () => {
 
   return axios.get(url)
     .then((results) => {
-      const key = 'allProducts';
-      // console.log(res);
-      const value = results.data; // array of products w/o style options
-      store2(key, value, true); // true indicates to overwrite
+      // const key = 'allProducts';
+      // // console.log(res);
+      // const value = results.data; // array of products w/o style options
+      // store2(key, value, true); // true indicates to overwrite
       // console.log('store2: ', store2());
       return results;
     })
@@ -30,9 +30,9 @@ const getProductByID = (productID) => {
   return axios.get(url)
     .then((results) => {
       // console.log('getproductbyID helper: ', results);
-      const key = `product${productID}`;
-      const value = results.data; // array of products w/o style options
-      store2(key, value, true); // true indicates to overwrite
+      // const key = `product${productID}`;
+      // const value = results.data; // array of products w/o style options
+      // store2(key, value, true); // true indicates to overwrite
       // console.log('store2: ', store2());
       return results;
     })
@@ -47,11 +47,11 @@ const getAllReviewsByProduct = (productID) => {
 
   return axios.get(url)
     .then((results) => {
-      const key = `allReviews${productID}`;
-      console.log(results);
-      const value = results.data; // array of products w/o style options
-      store2(key, value, true); // true indicates to overwrite
-      console.log('store2: ', store2());
+      // const key = `allReviews${productID}`;
+      // console.log(results);
+      // const value = results.data; // array of products w/o style options
+      // store2(key, value, true); // true indicates to overwrite
+      // console.log('store2: ', store2());
       return results;
     })
     .catch((error) => {
