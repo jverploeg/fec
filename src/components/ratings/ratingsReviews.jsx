@@ -33,7 +33,7 @@ const RatingsReviews = (props) => {
   // variables
   const currentProduct = props.product;
   const allReviews = props.reviews;
-  console.log({allReviews});
+  // console.log({allReviews});
   const initialReviews = allReviews.slice(0, 2);
 
   // state

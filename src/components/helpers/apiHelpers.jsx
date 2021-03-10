@@ -60,17 +60,21 @@ const getAllReviewsByProduct = (productID) => {
     })
 };
 
-const getStyles = (productID) => {
+const getStyles = (productID) => { // async?
   const url = `http://localhost:${port}/api/products/${productID}/styles`;
 
+  // await axios.get(url)
   return axios.get(url)
     .then((results) => {
       const key = `allStyles${productID}`;
       // console.log(results);
       const value = results.data; // array of styles and data for given product
+      // console.log({value});
       store2(key, value, true); // true indicates to overwrite
       // console.log('store2: ', store2());
-      console.log({results});
+      // console.log({results});
+      // const data = store2.get(key);
+      // console.log({data})
       return results;
     })
     .catch((error) => {

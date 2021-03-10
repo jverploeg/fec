@@ -5,17 +5,18 @@ import React, { useState, useEffect } from 'react';
 import ImageMap from '../helpers/imageMap';
 import ImageModal from '../helpers/imageModal';
 
-function Image(focus) { // focus.pics
-  const { pics } = focus; // es6 way of saying pics = focus.pics
-  // const { photos } = pics;
-  // const current = photos[0];
-  console.log({pics});
+const Image = (focus) => { // focus.pics
+  const { styles } = focus; // es6 way of saying pics = focus.pics
+  const { current } = focus; // .photos.photos;
+  // const display = styles[0];
+  // console.log({pics});
+  // console.log({photos});
 
-  const [state, setState] = useState({});
+  // const [state, setState] = useState({});
   const [photoSet, setPhotos] = useState([]);
-  const [currentPhoto, setCurrent] = useState({});// photoObject = {url: , thumbnail_url};
+  const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
   // ImageModal(options/photos, current) -> returns image render, state, setState
-  // const [photo, setPhoto] = ImageModal(photos, photos[0]);
+  const [currentPhoto, setCurrentPhoto] = useState([]);
 
   const [modal, setActive] = useState('');
   // const active = modal ? 'is-active' : '';
@@ -25,39 +26,48 @@ function Image(focus) { // focus.pics
   //   console.log(active);
   // };
 
+
+  useEffect(() => {
+    const select = styles[0]; // .photos[0];
+    // console.log({select});
+    setCurrentPhoto(select); // .photos);
+  }, [focus]);
+  console.log({currentPhoto});
+
+  useEffect(() => {
+    setCurrentStyle(styles);
+  }, [focus.styles]);
+  console.log({currentStyle});
+
+
   const open = () => {
     setActive('is-active');
     // toggle();
-    console.log(modal);
+    // console.log(modal);
   };
   const close = () => {
     setActive('');
     // toggle();
-    console.log(modal);
+    // console.log(modal);
   };
   // click handler to change the view/current
-  const change = (e) => {
-    e.persist();
-    // console.log(e);
-    // SyntheticBaseEvent
-    const thumb = e.target.src;
-    const u = e.target.alt;
-    const newFocus = {
-      thumbnail_url: thumb,
-      url: u,
-    };
-    setState(newFocus);
-  };
-
-
-  useEffect(() => {
-    setPhotos(pics);
-  }, [focus.pics]);
-
+  // const change = (e) => {
+  //   e.persist();
+  //   const thumb = e.target.src;
+  //   const u = e.target.alt;
+  //   const newFocus = {
+  //     thumbnail_url: thumb,
+  //     url: u,
+  //   };
+  //   // setState(newFocus);
+  // };
   // useEffect(() => {
-  //   setCurrent(photoSet[0]);
-  // }, [photoSet]);
+  //   setState(current);
+  // });
 
+  // const showImage = () => {
+  //   if(!currentPhoto)
+  // }
 
   // // change current image focus on prop change
   // useEffect(() => {
@@ -75,8 +85,8 @@ function Image(focus) { // focus.pics
             <iframe
               className="iframe"
               title="focus"
-              src={state.url}
-              alt={state.thumbnail_url}
+              // src={currentPhoto.url}
+              // alt={currentPhoto.thumbnail_url}
             />
           </div>
         </div>
@@ -91,8 +101,8 @@ function Image(focus) { // focus.pics
         <figure className="image is-fullwidth">
           <img
             className="is-fullwidth"
-            src={state.url}
-            alt={state.thumbnail_url}
+            // src={currentPhoto.url}
+            // alt={currentPhoto.thumbnail_url}
             onClick={(e) => open(e)}
           />
           <div className="tile is-child is-overlay is-vertical-center">

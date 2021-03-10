@@ -6,7 +6,7 @@ const ReviewList = (props) => {
   // variables
   const currentProduct = props.product;
   const listedReviews = props.reviews;
-  console.log({ listedReviews });
+  // console.log({ listedReviews });
 
   // state
 

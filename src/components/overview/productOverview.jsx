@@ -1,36 +1,34 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, Suspense, Fragment} from 'react';
+import React, { useState, useEffect, useCallback, useRef, useContext} from 'react';
 import Image from './image';
 import Details from './details';
 
 // COMPONENT
 const ProductOverview = (focus) => {
   // PROPS
-  const styles = focus.styles; // current product style data
-  const product = focus.product; // current product
-  const stylePhotos = styles.results; // array of arrays or each styles photos
-  // const currentPhotos = stylePhotos[0] || {}; //first style photo set
-  console.log({styles});
-  console.log({product});
-  console.log({stylePhotos});
-  // console.log({currentPhotos});
+  const { styles } = focus; // current product style data
+  const { product } = focus; // current product
 
   // STATES
-  const [current, setCurrent] = useState({}); // focus.product);
-  // const [current, setCurrent] = useState(focus.product);
-  const [styleData, setStyleData] = useState([]); // data); // focus.styles);
-  // const [styleData, setStyleData] = useState(data); // focus.styles);
-  // get photos from children. Pass setPhotos down...
-  const [photos, setPhotos] = useState({});
-  // const [photos, setPhotos] = useState(styleData.results[0]);
+  const [current, setCurrent] = useState({}); // current product
+  const [styleData, setStyleData] = useState([]); // styleData array for curProd
+  const [callbackSetup, setCallback] = useState(false);
+  const stateRef = useRef();
 
-  // FUNCTIONS
-  // async function getProduct() {
-  //   try {
-  //     setCurrent(product);
-  //     const
-  // }
+  stateRef.current = styleData;
 
+  function setup (callback) {
+    setInterval(callback, 1000);
+  }
+  function handle() {
+    setStyleData(styles);
+    if (!callbackSetup) {
+      setup(() => { });
+      setCallback(true);
+    }
+  }
+
+  // EFFECTS rerender state on prop change
   // set current product from props
   useEffect(() => {
     setCurrent(product);
@@ -40,13 +38,28 @@ const ProductOverview = (focus) => {
   useEffect(() => {
     setStyleData(styles);
   }, [focus.styles]);
-  console.log({ styleData });
 
   // get photos from children. Pass setPhotos down...
+  // useEffect(() => {
+  //   // setPhotos(currentPhotos);
+  //   setPhotos(styleData[0]);
+  // }, [styleData]);
+  // console.log({ photos });
+  // FUNCTIONS
+  // pass down to details to return the currently selected style. useEffect???
+  // need to get styleSet photos from details. Pass setPhotos down...
+  const [photos, setPhotos] = useState({});
+  // need to pass setPhotos back up...
+  const handleStyleChange = (newValue) => {
+    setPhotos(newValue);
+    // newValue = Value;
+    // return newValue;
+  };
+  // console.log({photos});
   useEffect(() => {
-    // setPhotos(currentPhotos);
-    setPhotos(styleData[0]);
-  }, [styleData]);
+    setPhotos(photos);
+  }, [photos]);
+  // console.log({photos});
 
   return (
     <div>
@@ -56,7 +69,7 @@ const ProductOverview = (focus) => {
             <div className="tile is-12">
               <div className="tile is-parent is-6">
                 <div className="tile is-child box is-vertical-center">
-                  <Image pics={stylePhotos} />
+                  <Image styles={styles} current={photos} />
                   {/* <Image pics={initialPhotos}/> */}
                 </div>
               </div>
@@ -67,12 +80,11 @@ const ProductOverview = (focus) => {
                         // onChange={handleStyleChange}
                         styles={styleData}
                         product={current} /> */}
-                  Details
-                    {/* // changePhotos={currentPhotos}
-                    // onChange={handleStyleChange}
+                  <Details
+                    onChange={(value) => handleStyleChange(value)}
                     styles={styles}
                     product={product}
-                  /> */}
+                  />
                 </div>
               </div>
             </div>

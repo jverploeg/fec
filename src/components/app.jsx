@@ -1,108 +1,46 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ProductOverview from './overview/productOverview';
-import OverallStarRating from './helpers/OverallStarRating';
-import RatingsReviews from './ratings/RatingsReviews';
-import RelatedProducts from './products/RelatedProducts';
-import api from './helpers/apiHelpers';
-import store2 from 'store2';
-import testData from './helpers/testData.js';
-import contextHelpers from './context/contextHelpers';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
+import ProductOverview from './overview/productOverview';
+import RatingsReviews from './ratings/ratingsReviews';
+import RelatedProducts from './products/relatedProducts';
 
 function App() {
-  // State
-  const [currentProduct, setCurrentProduct] = useState(testData.testProduct);
-  const [currentProductID, setCurrentProductID] = useState(testData.testProduct.id);
-  const [productList, setProductList] = useState([]);
-  const [currentProductReviews, setCurrentProductReviews] = useState([]);
-  const [syleLoad, setLoad] = useState(true);
-  const [currentProductStyles, setCurrentProductStyles] = useState([]);
-  // const MyContext = React.createContext(defaultValue);
+  const [response, setAllData] = useState({
+    products: null,
+    current: null,
+    reviews: null,
+    styles: null,
+  });
+  // TODO: ADD State for switching the current product and pass between App <--> RelatedProducts
 
-  // Effects
+  // FETCH INITIAL DATA ONCE ON PAGE LOAD
   useEffect(() => {
-    fetchProductList();
-    fetchProductByID(currentProductID);
-    fetchAllReviewsByProduct(currentProductID);
-    fetchAllStylesByProduct(currentProductID);
+    const fetchData = async () => {
+      const respGlobal = await axios(
+        `http://localhost:8080/api/products/all`
+      );
+      const current = await axios(
+        `http://localhost:8080/api/products/18201`
+      );
+      const reviews = await axios(
+        `http://localhost:8080/api/reviews/all/18201`
+      );
+      const styles = await axios(
+        `http://localhost:8080/api/products/18201/styles`
+      );
+      setAllData({
+        data: respGlobal.data,
+        current: current.data,
+        reviews: reviews.data,
+        styles: styles.data,
+      });
+    };
+    fetchData();
   }, []);
 
-  // Functions
-  const fetchProductList = async () => {
-    await api.getProductList()
-      .then((response) => {
-        const allProducts = response.data;
-        setProductList(allProducts);
-        // console.log('current product ID before getbyID: ', currentProductID);
-        // console.log({currentProduct});
-      })
-      .catch((error) => {
-        console.log({error});
-      });
-  };
-
-  const fetchProductByID = async (currentProductID) => {
-    await api.getProductByID(currentProductID)
-      .then((response) => {
-        const product = response.data;
-        setCurrentProduct(product);
-        // console.log('current product ID after getbyID: ', currentProductID);
-        // console.log({currentProduct});
-      })
-      .catch((error) => {
-        console.log({error});
-      });
-  };
-
-  const fetchAllReviewsByProduct = async (currentProductID) => {
-    await api.getAllReviewsByProduct(currentProductID)
-      .then((response) => {
-        const reviews = response.data;
-        setCurrentProductReviews(reviews);
-        // console.log('current product reviews after getbyID: ', currentProductReviews);
-        console.log({currentProductReviews});
-      })
-      .catch((error) => {
-        console.log({error});
-      });
-  };
-
-  // calls api helper to store results in storage
-  const fetchAllStylesByProduct = async (currentProductID) => {
-    await api.getStyles(currentProductID)
-      .then((response) => {
-        const styles = response.data;
-        console.log({styles});
-        setCurrentProductStyles(styles);
-        // console.log('current product styles after getbyID: ', currentProductStyles);
-        console.log({currentProductStyles});
-      })
-      .catch((error) => {
-        console.log({error});
-      });
-  };
-
-  // // workaround to get data rather than AsyncPromise
-  // useEffect(async () => {
-  //   const fetchStyles = async () => {
-  //     const result = await axios(
-  //       `http://localhost:${port}/api/products/${productID}/styles`,
-  //     );
-  //     setCurrentProductStyles(result.data);
-  //   };
-  //   fetchStyles();
-  // }, []);
-
-  const handleChangeProduct = (productID) => {
-    setCurrentProductID(productID);
-    contextHelpers.fetchProductByID(currentProductID);
-    contextHelpers.fetchAllReviewsByProduct(currentProductID);
-  };
-
-  // console.log('current product ID after useEffect: ', currentProductID);
-  // console.log({currentProduct});
+  // prevent loading until data is served
+  if (!response.data) { return null; }
 
   return (
 
@@ -112,18 +50,17 @@ function App() {
       </div>
       <div className="overview">
         <ProductOverview
-          product={currentProduct}
-          styles={currentProductStyles}
+          product={response.current}
+          styles={response.styles}
         />
       </div>
       <div className="related" id="related">
         <RelatedProducts />
       </div>
       <div className="ratings" id="ratings">
-        <RatingsReviews product={currentProduct} reviews={currentProductReviews} />
+        <RatingsReviews product={response.current} reviews={response.reviews} />
       </div>
     </div>
   );
 }
-
 export default App;
