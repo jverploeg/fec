@@ -21,7 +21,7 @@ const getProductList = () => {
     .catch((error) => {
       console.log('err: ', error);
       return error;
-    })
+    });
 };
 
 const getProductByID = (productID) => {
@@ -39,7 +39,7 @@ const getProductByID = (productID) => {
     .catch((error) => {
       console.log('err: cannot get product by ID', error);
       return error;
-    })
+    });
 };
 
 const getAllReviewsByProduct = (productID) => {
@@ -57,11 +57,8 @@ const getAllReviewsByProduct = (productID) => {
     .catch((error) => {
       console.log('err: ', error);
       return error;
-    })
+    });
 };
-
-
-
 
 // EXPORTS
 export default {

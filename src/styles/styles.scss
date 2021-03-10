@@ -1,3 +1,4 @@
+// Entire Bulma Library - do not use in production
 // @charset "utf-8";
 // @import "~bulma/bulma";
 
@@ -17,6 +18,14 @@ html {
 }
 .sticky + content {
   padding-top: 60px;
+}
+// images container
+*.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  // background-size: cover;
+  height: 128px;
+  width: 128px;
 }
 
 // Import a Google Font
@@ -143,6 +152,9 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/helpers/_all.sass";
 @import "~/node_modules/bulma/sass/elements/image.sass";
 @import "~/node_modules/bulma/sass/components/modal.sass";
+// Ryne
+@import "~/node_modules/bulma/sass/components/level.sass";
+
 
 .is-clickable {
   cursor: pointer;
@@ -171,4 +183,3 @@ $tile-spacing: 0;
    width: 100%;
 }
 
-@import "~/node_modules/bulma/sass/components/level.sass";

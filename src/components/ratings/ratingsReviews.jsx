@@ -110,7 +110,7 @@ const RatingsReviews = (props) => {
             <div className="hero-body">
               {/* REVIEWS LIST COMPONENT */}
               <div className="block">
-                <ReviewList product={currentProduct} reviews={listedReviews} />
+                <ReviewList product={currentProduct} reviews={listedReviews} handleImageSelect={props.handleImageSelect}/>
               </div>
 
             </div>

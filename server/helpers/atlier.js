@@ -242,7 +242,7 @@ const getAndAppendReviewsMetaByProduct = (productID) => {
         let product = store2(`product${productID}`);
         if (product.reviewsMeta) {
         } else {
-          product.reviewsMeta = res.data.characteristics;
+          product.reviewsMeta = res.data;
           const key = `product${productID}`
           const value = product; // object of product
           store2(key, value, true);
