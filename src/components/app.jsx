@@ -20,21 +20,20 @@ function App() {
   // });
 
   let tempID = 18201;
-  const port = 3000;
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
   useEffect(() => {
     const fetchData = async () => {
       const respGlobal = await axios(
-        `http://localhost:${port}/api/products/all`
+        `/api/products/all`
       );
       const current = await axios(
-        `http://localhost:${port}/api/products/${tempID}`
+        `/api/products/${tempID}`
       );
       const reviews = await axios(
-        `http://localhost:${port}/api/reviews/all/${tempID}`
+        `/api/reviews/all/${tempID}`
       );
       const styles = await axios(
-        `http://localhost:${port}/api/products/${tempID}/styles`
+        `/api/products/${tempID}/styles`
       );
       setAllData({
         data: respGlobal.data,
