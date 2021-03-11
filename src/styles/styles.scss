@@ -1,7 +1,39 @@
+// Entire Bulma Library - do not use in production
 // @charset "utf-8";
 // @import "~bulma/bulma";
 
 @charset "utf-8";
+
+// APP
+html {
+  scroll-behavior: smooth;
+}
+.content {
+  padding: 16px;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.sticky + content {
+  padding-top: 60px;
+}
+.sticky-card {
+  position: fixed;
+  top: 20px;
+}
+.sticky-card + content {
+  padding-top: 60px;
+}
+// images container
+*.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  // background-size: cover;
+  height: 128px;
+  width: 128px;
+}
 
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
@@ -34,10 +66,8 @@ $container-offset: (2 * $gap);
 // tile-spacing
 $tile-spacing: 0;
 
-// Change Ratings & Reviews Styling
-// input[type="radio"] {
-//   display: none;
-// }
+// REVIEWS & RATINGS
+// new review star rating
 .star-rating {
   input[type="radio"] {
     display: none;
@@ -60,6 +90,161 @@ $tile-spacing: 0;
   color: #f80;
 }
 
+// overall star rating
+.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: lightgray;
+}
+
+.stars-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: gold;
+  overflow: hidden;
+}
+
+.stars-0:after { width: 0%; }
+.stars-5:after { width: 5%; }
+.stars-10:after { width: 10%; }
+.stars-15:after { width: 15%; }
+.stars-20:after { width: 20%; }
+.stars-25:after { width: 25%; }
+.stars-30:after { width: 30%; }
+.stars-35:after { width: 35%; }
+.stars-40:after { width: 40%; }
+.stars-45:after { width: 45%; }
+.stars-50:after { width: 50%; }
+.stars-55:after { width: 55%; }
+.stars-60:after { width: 60%; }
+.stars-65:after { width: 65%; }
+.stars-70:after { width: 70%; }
+.stars-75:after { width: 75%; }
+.stars-80:after { width: 80%; }
+.stars-85:after { width: 85%; }
+.stars-90:after { width: 90%; }
+.stars-95:after { width: 95%; }
+.stars-100:after { width: 100%; }
+
+// fit, length, comfort ratings
+.rating-container-1 {
+  position: relative;
+  text-align: center;
+  // display: inline-block;
+  // top: 50%;
+  // color: transparent;
+}
+
+.rating-container-2 {
+  position: absolute;
+  // display: inline-block;
+  top: 50%;
+  // color: transparent;
+}
+
+// .rating-container:before {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   color: lightgray;
+// }
+
+// .rating-container:after {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   color: gold;
+//   overflow: hidden;
+// }
+
+.rating-0 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-0%, -50%);
+}
+.rating-1 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-20%, -50%);
+}
+.rating-2 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-40%, -50%);
+}
+.rating-3 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-60%, -50%);
+}
+.rating-4 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-80%, -50%);
+}
+.rating-5 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+}
+
+// .rating-0:after {
+//   width: 0%;
+// }
+// .rating-20:after { width: 20%; }
+// .rating-40:after { width: 40%; }
+// .rating-60:after { width: 60%; }
+// .rating-80:after { width: 80%; }
+// .rating-100:after {
+//   width: 100%;
+//   left: 100%;
+//   transform: translate(-100%, -50%);
+// }
+
+// image modal
+.img-modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.img-modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.img-modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 60%;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  z-index: 101;
+  padding: 40px
+}
+
+// IMPORTS
 // Import only what you need from Bulma
 @import "~/node_modules/bulma/sass/utilities/_all.sass";
 @import "~/node_modules/bulma/sass/base/_all.sass";
@@ -70,6 +255,7 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/navbar.sass";
 @import "~/node_modules/bulma/sass/layout/hero.sass";
 @import "~/node_modules/bulma/sass/layout/section.sass";
+@import "~/node_modules/bulma/sass/elements/progress.sass";
 
 // Jack is using tiles, columns
 @import "~/node_modules/bulma/sass/grid/columns.sass";
@@ -78,3 +264,36 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/menu.sass";
 @import "~/node_modules/bulma/sass/components/dropdown.sass";
 @import "~/node_modules/bulma/sass/components/card.sass";
+@import "~/node_modules/bulma/sass/helpers/_all.sass";
+@import "~/node_modules/bulma/sass/elements/image.sass";
+@import "~/node_modules/bulma/sass/components/modal.sass";
+// Ryne
+@import "~/node_modules/bulma/sass/components/level.sass";
+
+.is-clickable {
+  cursor: pointer;
+}
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
+.iframe-modal {
+  width: 800px;
+  height: 600px;
+}
+.iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+}
+
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}
+
