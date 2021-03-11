@@ -18,6 +18,7 @@ app.use(cors());
 
 // set port
 const port = 8080;
+// const port = 3000;
 
 // connect server
 app.listen(port, () => {
