@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import OverallStarRating from '../helpers/OverallStarRating';
-import NewReview from './NewReview';
-import DropDown from '../helpers/dropDown';
-import StickyNavBar from './StickyNavBar';
-import RatingCard from './RatingCard';
+import OverallStarRating from '../helpers/OverallStarRating.jsx';
+import NewReview from './NewReview.jsx';
+import DropDown from '../helpers/dropDown.jsx';
+import StickyNavBar from './StickyNavBar.jsx';
+import RatingCard from './RatingCard.jsx';
 import { FiArrowUpCircle } from 'react-icons/fi';
 import { ProductContext } from '../context/product-context.js'
-import ReviewList from './ReviewList';
+import ReviewList from './ReviewList.jsx';
 
 // COMPONENT
 const RatingsReviews = (props) => {
