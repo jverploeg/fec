@@ -7,6 +7,7 @@ import RatingCard from './RatingCard.jsx';
 import { FiArrowUpCircle } from 'react-icons/fi';
 import { ProductContext } from '../context/product-context.js'
 import ReviewList from './ReviewList.jsx';
+// test
 
 // COMPONENT
 const RatingsReviews = (props) => {
