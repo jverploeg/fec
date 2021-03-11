@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ProductOverview from './overview/productOverview';
-import RatingsReviews from './ratings/ratingsReviews';
+import RatingsReviews from './ratings/RatingsReviews';
 import RelatedProducts from './products/relatedProducts';
 
 function App() {
