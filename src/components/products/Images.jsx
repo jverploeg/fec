@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdStar } from 'react-icons/md';
 
 const Images = (props) => {
+  console.log('Images:', props.theImages);
   useEffect(() => {
     const allGliders = document.querySelectorAll('.glider-images');
     allGliders.forEach(gliderSet => {
@@ -26,16 +27,16 @@ const Images = (props) => {
 
   return (
     <div>
-      <div className="glider-images">
+      {/* <div className="glider-images">
       { props.theImages.map((img, idx) => (
-        <div key={img + "" + idx} className="card-image" style={{position: 'relative'}}>
+        <div key={img.name + "" + idx} className="card-image" style={{position: 'relative'}}>
           <figure className="image is-4by3">
-            <img src={img} alt="" />
+            <img src={img.photos[0].url} alt="" />
             <MdStar onClick={handleClick} size={30} color='white' style={{position: 'absolute', top: '0%', right: '0%'}}/>
           </figure>
         </div>
       ))}
-      </div>
+      </div> */}
     </div>
   )
 };
