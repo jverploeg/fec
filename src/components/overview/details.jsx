@@ -2,26 +2,43 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useCallback } from 'react';
 // helpers
-import DropDown from '../helpers/dropDown';
+// import DropDown from '../helpers/dropDown';
+import DropDown from '../helpers/sizeQ';
 import OverallStarRating from '../helpers/OverallStarRating';
-// import Styles from '../helpers/styles';
-// import StylesGrid from '../helpers/stylesGrid';
 
 // variables
-const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 // temp quantity
 const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+// {styles: Array(4)}
+// styles: Array(4)
+// 0:
+// default?: true
+// name: "Green"
+// original_price: "56.00"
+// photos: [{…}]
+// sale_price: null
+// skus:
+// 565825: {quantity: 45, size: "XS"}
+// 565826: {quantity: 27, size: "S"}
+// 565827: {quantity: 59, size: "M"}
+// 565828: {quantity: 55, size: "L"}
+// 565829: {quantity: 51, size: "XL"}
+// 565830: {quantity: 10, size: "XXL"}
+// __proto__: Object
+// style_id: 97715
 
 // TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
 
 const Details = (focus) => { // focus.product and focus.styles and focus.changePhoto
   const { styles } = focus;
   const { product } = focus;
-  // const { changePhoto } = focus; // needs to be passed to style grid...
+  console.log({styles});
+
+
 
   // TODO; make these dynamic...
-  const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
-  const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+  // const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
+  // const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
 
 
   // STATES
@@ -29,12 +46,15 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
 
+  // let { skus } = currentStyle;
+  // console.log({skus});
 
   // EFFECTS
   // styles
   useEffect(() => {
     setStyles(styles);
   }, [focus.styles]);
+
   // initialize currentstyle to the first one in collection
   useEffect(() => {
     setCurrentStyle(styles[0]);
@@ -159,10 +179,10 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       <section className="section space" />
       <div className="columns">
         <div className="column size">
-          <SizeDropdown />
+          {!!currentStyle && <DropDown style={currentStyle} />}
         </div>
         <div className="column quantity">
-          <QDrop />
+          {/* <QDrop /> */}
         </div>
       </div>
 

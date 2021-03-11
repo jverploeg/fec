@@ -14,7 +14,6 @@ const ProductOverview = (focus) => {
   // STATES
   const [current, setCurrent] = useState({}); // current product
   const [styleData, setStyleData] = useState([]); // array of styles
-  const [currentStyle, setCurrentStyle] = useState({}); // initialize view with first style NEED?
   const [photos, setPhotos] = useState(startPhoto); // change photos on style selection
 
   // update state conditionally
@@ -34,7 +33,6 @@ const ProductOverview = (focus) => {
 
   // initialize current photo view to be from first style in collection
   useEffect(() => {
-    // console.log(startPhoto);
     setPhotos(startPhoto); // array of objects
   }, []);
 

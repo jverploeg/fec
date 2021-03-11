@@ -1,20 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
-// helpers
-// import ImageMap from '../helpers/imageMap';
-// import ImageModal from '../helpers/imageModal';
 
 const Image = (focus) => {
-  // const { styles } = focus; // need?
-  const { current } = focus; // [ {...} ] state. dont use
+  const { current } = focus;
 
-  // const [state, setState] = useState({});
   const [photoSet, setPhotos] = useState([]);
-  // const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
-  // ImageModal(options/photos, current) -> returns image render, state, setState
-  const [currentPhoto, setCurrentPhoto] = useState({}); //current[0]);
-
+  const [currentPhoto, setCurrentPhoto] = useState({});
   const [modal, setActive] = useState('');
   // const active = modal ? 'is-active' : '';
   // const toggle = () => {
@@ -22,24 +14,16 @@ const Image = (focus) => {
   //   console.log(active);
   // };
 
+
   // EFFECTS to rerender
   // on load
   useEffect(() => {
     setPhotos(current);
   }, [focus.current]);
 
-  // useEffect(() => {
-  //   setCurrentStyle(styles);
-  // }, [focus.styles]);
-
   useEffect(() => {
     setCurrentPhoto(current[0]);
   }, [focus.current]);
-
-  // useEffect(() => {
-  //   setCurrentPhoto(current[0]);
-  // }, [focus.current]);
-
 
   const open = () => {
     setActive('is-active');
@@ -63,19 +47,6 @@ const Image = (focus) => {
     };
     setCurrentPhoto(newFocus);
   };
-  // useEffect(() => {
-  //   setState(current);
-  // });
-
-  // const showImage = () => {
-  //   if(!currentPhoto)
-  // }
-
-  // // change current image focus on prop change
-  // useEffect(() => {
-  //   setState(current);
-  //   // setActive(modal);
-  // }, [current]);
 
   // modal functionality needs to be attached to a click listener
   // TODO:modal doesn't work for the images that have wider ratios...works for all vertical images
@@ -87,8 +58,8 @@ const Image = (focus) => {
             <iframe
               className="iframe"
               title="focus"
-              // src={currentPhoto.url}
-              // alt={currentPhoto.thumbnail_url}
+              src={currentPhoto.url}
+              alt={currentPhoto.thumbnail_url}
             />
           </div>
         </div>
