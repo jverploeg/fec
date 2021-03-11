@@ -5,19 +5,15 @@ import React, { useState, useEffect } from 'react';
 // import ImageMap from '../helpers/imageMap';
 // import ImageModal from '../helpers/imageModal';
 
-const Image = (focus) => { // focus.pics
-  const { styles } = focus; // es6 way of saying pics = focus.pics
-  const { current } = focus; // .photos.photos;
-  const { start } = focus;
-  // console.log({styles});
-  // console.log({current});
-  // console.log({start});
+const Image = (focus) => {
+  // const { styles } = focus; // need?
+  const { current } = focus; // [ {...} ] state. dont use
 
   // const [state, setState] = useState({});
   const [photoSet, setPhotos] = useState([]);
-  const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
+  // const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
   // ImageModal(options/photos, current) -> returns image render, state, setState
-  const [currentPhoto, setCurrentPhoto] = useState({});
+  const [currentPhoto, setCurrentPhoto] = useState({}); //current[0]);
 
   const [modal, setActive] = useState('');
   // const active = modal ? 'is-active' : '';
@@ -29,16 +25,16 @@ const Image = (focus) => { // focus.pics
   // EFFECTS to rerender
   // on load
   useEffect(() => {
-    setPhotos(start);
-  }, [focus]);
+    setPhotos(current);
+  }, [focus.current]);
+
+  // useEffect(() => {
+  //   setCurrentStyle(styles);
+  // }, [focus.styles]);
 
   useEffect(() => {
-    setCurrentStyle(styles);
-  }, [focus.styles]);
-
-  useEffect(() => {
-    setCurrentPhoto(start[0]);
-  }, [focus.start]);
+    setCurrentPhoto(current[0]);
+  }, [focus.current]);
 
   // useEffect(() => {
   //   setCurrentPhoto(current[0]);
@@ -55,17 +51,18 @@ const Image = (focus) => { // focus.pics
     // toggle();
     // console.log(modal);
   };
-  // click handler to change the view/current
-  // const change = (e) => {
-  //   e.persist();
-  //   const thumb = e.target.src;
-  //   const u = e.target.alt;
-  //   const newFocus = {
-  //     thumbnail_url: thumb,
-  //     url: u,
-  //   };
-  //   // setState(newFocus);
-  // };
+
+  // click handler to change the view from thumbnail selection
+  const change = (e) => {
+    e.persist();
+    const thumb = e.target.src;
+    const u = e.target.alt;
+    const newFocus = {
+      thumbnail_url: thumb,
+      url: u,
+    };
+    setCurrentPhoto(newFocus);
+  };
   // useEffect(() => {
   //   setState(current);
   // });

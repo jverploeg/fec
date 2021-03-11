@@ -34,11 +34,11 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   // styles
   useEffect(() => {
     setStyles(styles);
-  }, [focus]);
+  }, [focus.styles]);
   // initialize currentstyle to the first one in collection
   useEffect(() => {
     setCurrentStyle(styles[0]);
-  }, [focus]);
+  }, [focus.styles]);
   // current product
   useEffect(() => {
     setCurrent(product);
@@ -64,7 +64,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   // EVENT HANDLERS
   const changeStyle = (event) => {
     const newFocus = event.item;
-    // console.log({newFocus});
+    //console.log({newFocus});
     setCurrentStyle(newFocus);
     focus.onChange(newFocus);
   };

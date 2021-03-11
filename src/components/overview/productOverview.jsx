@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useContext } from 'react';
 import Image from './image';
 import Details from './details';
 
@@ -8,16 +8,20 @@ const ProductOverview = (focus) => {
   // PROPS
   const { styles } = focus; // current product style data
   const { product } = focus; // current product
-  const startPhoto = focus.styles[0].photos;
-  // console.log({styles});
+  let startPhoto = focus.styles[0].photos;
+  console.log({styles});
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
   const [styleData, setStyleData] = useState([]); // array of styles
   const [currentStyle, setCurrentStyle] = useState({}); // initialize view with first style NEED?
-  const [photos, setPhotos] = useState([]); // change photos on style selection
+  const [photos, setPhotos] = useState(startPhoto); // change photos on style selection
+
+  // update state conditionally
+  // if (startPhoto !== photos) setPhotos(startPhoto);
 
   // EFFECTS rerender state on prop change
+
   // set current product from props
   useEffect(() => {
     setCurrent(product);
@@ -28,26 +32,17 @@ const ProductOverview = (focus) => {
     setStyleData(styles);
   }, [focus]);
 
-  // set current style to be shared between details and image
-  useEffect(() => {
-    setCurrentStyle(styles[0]);
-  }, [focus]);
-
   // initialize current photo view to be from first style in collection
   useEffect(() => {
     // console.log(startPhoto);
     setPhotos(startPhoto); // array of objects
-  }, [focus]);
+  }, []);
 
   // Change photos on style selection in details
   // need to pass setPhotos back up...
   const handleStyleChange = (newValue) => {
-    setPhotos(newValue);
+    setPhotos(newValue.photos);
   };
-  // rerender on change... TODO: combine these/refine
-  // useEffect(() => {
-  //   setPhotos(photos);
-  // }, [photos]);
 
   return (
     <div>
@@ -57,7 +52,10 @@ const ProductOverview = (focus) => {
             <div className="tile is-12">
               <div className="tile is-parent is-6">
                 <div className="tile is-child box is-vertical-center">
-                  <Image styles={styles} start={startPhoto} current={photos} />
+                  <Image
+                    // styles={styles}
+                    current={photos}
+                  />
                 </div>
               </div>
               <div className="tile is-parent is-6">
