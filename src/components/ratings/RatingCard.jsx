@@ -3,24 +3,6 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import OverallStarRating from '../helpers/OverallStarRating';
 import { ProductContext } from '../context/product-context.js'
 
-// import {ThemeContext} from './theme-context';
-
-// function ThemeTogglerButton() {
-//   // The Theme Toggler Button receives not only the theme
-//   // but also a toggleTheme function from the context
-//   return (
-//     <ThemeContext.Consumer>
-//       {({theme, toggleTheme}) => (
-//         <button
-//           onClick={toggleTheme}
-//           style={{backgroundColor: theme.background}}>
-//           Toggle Theme
-//         </button>
-//       )}
-//     </ThemeContext.Consumer>
-//   );
-// }
-
 // COMPONENT
 const RatingCard = (props) => {
   // variables
@@ -41,6 +23,7 @@ const RatingCard = (props) => {
 
   const allReviews = props.reviews;
   // console.log({ allReviews });
+  console.log({currentProduct});
 
   // state
   const [listedReviews, setListedReviews] = useState([]);
@@ -54,7 +37,7 @@ const RatingCard = (props) => {
   };
 
   return (
-    <div className="box has-background-light">
+    <div id="rating-card" className="box has-background-light">
       <div className="tile is-ancestor is-vertical">
 
         {/* TITLE */}
@@ -190,17 +173,19 @@ const RatingCard = (props) => {
 
         {/* FIT AND COMFORT RATINGS */}
         <div className="tile is-parent is-vertical">
-          <article className="tile is-child">
+          <div className="tile is-child">
             <p className="has-text-primary is-size-4">Fit</p>
-          </article>
-          <article className="tile is-grey-dark is-small">
+          </div>
+          <div className="tile is-child rating-container-1">
             <IoMdArrowDropdown
-              className="arrow"
+              className="arrow rating-container-2 rating-3"
               size={30}
-              color="is-primary"
+              color="black"
             />
-          </article>
-            <div className="tile is-link"></div>
+          </div>
+            <div className="tile is-child">
+              <div className="box has-background-grey-dark"></div>
+            </div>
         </div>
 
       </div>

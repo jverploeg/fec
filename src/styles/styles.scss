@@ -19,6 +19,13 @@ html {
 .sticky + content {
   padding-top: 60px;
 }
+.sticky-card {
+  position: fixed;
+  top: 20px;
+}
+.sticky-card + content {
+  padding-top: 60px;
+}
 // images container
 *.center-cropped {
   object-fit: cover; /* Do not scale the image */
@@ -127,7 +134,82 @@ $tile-spacing: 0;
 .stars-85:after { width: 85%; }
 .stars-90:after { width: 90%; }
 .stars-95:after { width: 95%; }
-.stars-100:after { width: 100; }
+.stars-100:after { width: 100%; }
+
+// fit, length, comfort ratings
+.rating-container-1 {
+  position: relative;
+  text-align: center;
+  // display: inline-block;
+  // top: 50%;
+  // color: transparent;
+}
+
+.rating-container-2 {
+  position: absolute;
+  // display: inline-block;
+  top: 50%;
+  // color: transparent;
+}
+
+// .rating-container:before {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   color: lightgray;
+// }
+
+// .rating-container:after {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   color: gold;
+//   overflow: hidden;
+// }
+
+.rating-0 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-0%, -50%);
+}
+.rating-1 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-20%, -50%);
+}
+.rating-2 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-40%, -50%);
+}
+.rating-3 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-60%, -50%);
+}
+.rating-4 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-80%, -50%);
+}
+.rating-5 {
+  // width: 100%;
+  left: 100%;
+  transform: translate(-100%, -50%);
+}
+
+// .rating-0:after {
+//   width: 0%;
+// }
+// .rating-20:after { width: 20%; }
+// .rating-40:after { width: 40%; }
+// .rating-60:after { width: 60%; }
+// .rating-80:after { width: 80%; }
+// .rating-100:after {
+//   width: 100%;
+//   left: 100%;
+//   transform: translate(-100%, -50%);
+// }
 
 // image modal
 .img-modal-wrapper {
@@ -184,15 +266,9 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/card.sass";
 @import "~/node_modules/bulma/sass/helpers/_all.sass";
 @import "~/node_modules/bulma/sass/elements/image.sass";
-<<<<<<< HEAD
-
-// Joe needed the modal
-@import "~/node_modules/bulma/sass/components/modal.sass";
-=======
 @import "~/node_modules/bulma/sass/components/modal.sass";
 // Ryne
 @import "~/node_modules/bulma/sass/components/level.sass";
-
 
 .is-clickable {
   cursor: pointer;
@@ -221,4 +297,3 @@ $tile-spacing: 0;
    width: 100%;
 }
 
->>>>>>> 9767a39a94b3d34ac55d48dcda593e6b2cbc81c4

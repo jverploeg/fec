@@ -8,26 +8,6 @@ import { FiArrowUpCircle } from 'react-icons/fi';
 import { ProductContext } from '../context/product-context.js'
 import ReviewList from './ReviewList';
 
-// import {ThemeContext} from './theme-context';
-
-// function ThemeTogglerButton() {
-//   // The Theme Toggler Button receives not only the theme
-//   // but also a toggleTheme function from the context
-//   return (
-//     <ThemeContext.Consumer>
-//       {({theme, toggleTheme}) => (
-//         <button
-//           onClick={toggleTheme}
-//           style={{backgroundColor: theme.background}}>
-//           Toggle Theme
-//         </button>
-//       )}
-//     </ThemeContext.Consumer>
-//   );
-// }
-
-// export default ThemeTogglerButton;
-
 // COMPONENT
 const RatingsReviews = (props) => {
   // variables
@@ -52,6 +32,20 @@ const RatingsReviews = (props) => {
         header.classList.add("sticky");
       } else {
         header.classList.remove("sticky");
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
+  }, []);
+  useEffect(() => {
+    const header = document.getElementById("rating-card");
+    const sticky = header.offsetTop;
+    const scrollCallBack = window.addEventListener("scroll", () => {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky-card");
+      } else {
+        header.classList.remove("sticky-card");
       }
     });
     return () => {

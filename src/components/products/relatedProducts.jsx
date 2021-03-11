@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card.jsx';
-import Images from './Images.jsx';
+import Card from './Card';
+import Images from './Images';
 import axios from 'axios';
-import Modal from './Modal.jsx';
+import Modal from './Modal';
 
 const RelatedProducts = (props) => {
   const cardImages = [
