@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ProductOverview from './overview/productOverview';
-import RatingsReviews from './ratings/ratingsReviews';
+import RatingsReviews from './ratings/RatingsReviews';
 import RelatedProducts from './products/relatedProducts';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   });
   // TODO: ADD State for switching the current product and pass between App <--> RelatedProducts
   const [currentProductId, setCurrentProductId] = useState(null);
+
   // temp set starting id. run once
   // useEffect(() => {
   //   setCurrentProductId(18201);
@@ -49,39 +50,34 @@ function App() {
 
   // prevent loading until data is served
   if (!response.data) { return null; }
-
+  console.log({ response });
   return (
 
     <div className="main">
+      {/* MODALS */}
+      {/* TITLE */}
       <div className="container is-primary has-text-centered">
         <h1 className="title">KamelCasedKids Capstone</h1>
       </div>
-      <div className="overview">
+      {/* OVERVIEW */}
+      <div className="overview" id="overview">
         <ProductOverview
           reviews={response.reviews.length}
           product={response.current}
           styles={response.styles}
         />
       </div>
+      {/* RELATED PRODUCTS */}
       <div className="related" id="related">
         <RelatedProducts />
       </div>
+      {/* RATINGS & REVIEWS */}
       <div className="ratings" id="ratings">
-        <RatingsReviews
-          product={response.current}
-          reviews={response.reviews}
-          // handleImageSelect={handleImageSelect}
-        />
-        {/* <div id="modal" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-content">
-            <p class="image is-4by3">
-              <img src={imageSelected.url} alt="" />
-            </p>
-          </div>
-          <button class="modal-close is-large" aria-label="close"></button> */}
+        <RatingsReviews product={response.current} reviews={response.reviews}/>
       </div>
+
     </div>
   );
 }
+
 export default App;

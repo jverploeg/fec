@@ -15,8 +15,17 @@ html {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 103;
 }
 .sticky + content {
+  padding-top: 60px;
+}
+.sticky-card {
+  position: fixed;
+  top: 20px;
+  z-index: 102;
+}
+.sticky-card + content {
   padding-top: 60px;
 }
 // images container
@@ -128,7 +137,37 @@ $tile-spacing: 0;
 .stars-85:after { width: 85%; }
 .stars-90:after { width: 90%; }
 .stars-95:after { width: 95%; }
-.stars-100:after { width: 100; }
+.stars-100:after { width: 100%; }
+
+// fit, length, comfort ratings
+.rating-container-1 {
+  position: relative;
+  text-align: center;
+}
+.rating-container-2 {
+  position: absolute;
+  top: 100%;
+}
+.rating-1 {
+  left: 0%;
+  transform: translate(0%, 0%);
+}
+.rating-2 {
+  left: 25%;
+  transform: translate(-25%, 0%);
+}
+.rating-3 {
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.rating-4 {
+  left: 75%;
+  transform: translate(-75%, 0%);
+}
+.rating-5 {
+  left: 100%;
+  transform: translate(-100%, 0%);
+}
 
 // image modal
 .img-modal-wrapper {
@@ -188,7 +227,6 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/modal.sass";
 // Ryne
 @import "~/node_modules/bulma/sass/components/level.sass";
-
 
 .is-clickable {
   cursor: pointer;

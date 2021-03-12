@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 // const gzip = require('express-static-gzip');
+const store2 = require('store2');
 const atlier = require('./helpers/atlier');
 
 // initialize app
@@ -30,7 +31,12 @@ app.listen(port, () => {
 // API ROUTES
 app.get('/api/reviews/all/:id', (req, res) => {
   const productID = req.params.id;
+  const local = store2(`allReviews${productID}`);
 
+  if (local) {
+    console.log(`allReviews${productID} sent locally`);
+    return res.status(201).send(local);
+  }
   atlier.getAllReviewsByProduct(productID)
     .then((results) => {
       return res.status(200).send(results)
@@ -41,6 +47,12 @@ app.get('/api/reviews/all/:id', (req, res) => {
 });
 
 app.get('/api/products/all', (req, res) => {
+  const local = store2('allProducts');
+
+  if (local) {
+    console.log('allProducts sent locally');
+    return res.status(201).send(local);
+  }
   atlier.getAllProducts()
     .then((results) => {
       return res.status(200).send(results);
@@ -52,7 +64,12 @@ app.get('/api/products/all', (req, res) => {
 
 app.get('/api/products/:id', (req, res) => {
   const productID = req.params.id;
+  const local = store2(`product${productID}`);
 
+  if (local) {
+    console.log(`product${productID} sent locally`);
+    return res.status(201).send(local);
+  }
   atlier.getProductByID(productID)
     .then((results) => {
       return res.status(200).send(results);
@@ -65,7 +82,12 @@ app.get('/api/products/:id', (req, res) => {
 // styles
 app.get('/api/products/:id/styles', (req, res) => {
   const productID = req.params.id;
+  const local = store2(`allStyles${productID}`);
 
+  if (local) {
+    console.log(`allStyles${productID} sent locally`);
+    return res.status(201).send(local);
+  }
   atlier.getStyles(productID)
     .then((results) => {
       return res.status(200).send(results);
