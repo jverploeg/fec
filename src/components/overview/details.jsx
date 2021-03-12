@@ -48,7 +48,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
 
 
   return (
-    <div>
+    <div className="has-text-primary">
       <div className="columns star">
         <div className="column">
           <strong>Ratings and Reviews</strong>
