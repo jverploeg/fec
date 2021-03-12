@@ -63,7 +63,7 @@ const Image = (focus) => {
   // TODO:modal doesn't work for the images that have wider ratios...works for all vertical images
   return (
     <div>
-      <div className={`modal modal-fx-3dSlit ${modal}`}>
+      <div className={`modal modal-fx-3dFlipVertical ${modal}`}>
         <div className="modal-content is-huge">
           <div className="container is-fluid">
             <img
@@ -84,9 +84,9 @@ const Image = (focus) => {
         />
       </div>
       <div className="tile is-parent is-vertical-center">
-        <figure className="image is-fullwidth">
+        <figure className="fixed-container">
           <img
-            className="is-fullwidth"
+            className="image-container"
             src={currentPhoto.url}
             alt={currentPhoto.thumbnail_url}
             onClick={(e) => open(e)}

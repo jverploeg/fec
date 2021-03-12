@@ -201,6 +201,15 @@ $tile-spacing: 0;
   width: 800px;
   height: 600px;
 }
+.fixed-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container {
+  object-fit: contain;
+}
 // .image-zoom {
 //   transform: scale(2.5);
 //   opacity: 0;

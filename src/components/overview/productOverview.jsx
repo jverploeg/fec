@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-// import , {}
 import Image from './image';
 import Details from './details';
 
@@ -46,12 +45,12 @@ const ProductOverview = (focus) => {
   // DOM
   return (
     <div>
-      <section className="hero is-grey-dark is-fullheight">
-        <div className="container is-fluid is-maxwidth">
+      <section className="hero is-grey-dark is-large">
+        <div className="container is-fluid">
           <div className="tile is-ancestor has-text-centered is-12">
             <div className="tile is-12">
               <div className="tile is-parent is-6">
-                <div className="tile is-child box is-vertical-center">
+                <div className="tile is-child box is-vertical-center fixed-container">
                   <Image
                     // styles={styles}
                     current={photos}
