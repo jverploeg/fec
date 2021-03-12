@@ -56,6 +56,7 @@ function App() {
       </div>
       <div className="overview">
         <ProductOverview
+          reviews={response.reviews.length}
           product={response.current}
           styles={response.styles}
         />

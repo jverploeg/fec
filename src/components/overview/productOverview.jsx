@@ -8,8 +8,9 @@ const ProductOverview = (focus) => {
   // PROPS
   const { styles } = focus; // current product style data
   const { product } = focus; // current product
+  const { reviews } = focus; // current reviews for product -> get count
   let startPhoto = focus.styles[0].photos;
-  // console.log({styles});
+  console.log({ reviews });
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
@@ -62,6 +63,7 @@ const ProductOverview = (focus) => {
                     onChange={(value) => handleStyleChange(value)}
                     styles={styles}
                     product={product}
+                    reviews={reviews}
                     // add reviews for review count
                   />
                 </div>

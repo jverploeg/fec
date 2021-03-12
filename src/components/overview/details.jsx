@@ -9,6 +9,8 @@ import OverallStarRating from '../helpers/OverallStarRating';
 const Details = (focus) => { // focus.product and focus.styles and focus.changePhoto
   const { styles } = focus;
   const { product } = focus;
+  const { reviews } = focus;
+  console.log(styles)
 
   // STATES
   const [styleGrid, setStyles] = useState([]);
@@ -20,7 +22,6 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   useEffect(() => {
     setStyles(styles);
   }, [focus.styles]);
-
   // initialize currentstyle to the first one in collection
   useEffect(() => {
     setCurrentStyle(styles[0]);
@@ -30,6 +31,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
     setCurrent(product);
   }, [focus.product]);
 
+
   // EVENT HANDLERS
   // on style change
   const changeStyle = (event) => {
@@ -37,6 +39,13 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
     setCurrentStyle(newFocus);
     focus.onChange(newFocus);
   };
+  // check for data on prices/description
+  let price = currentStyle.sale_price;
+  let original = currentStyle.original_price;
+  let strikethrough = false;
+  if (price) { strikethrough = true; }
+  if (!price) { price = currentStyle.original_price; }
+
 
   return (
     <div>
@@ -48,7 +57,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
           <OverallStarRating product={current} />
         </div>
         <div className="column">
-          <a className="review-link" href="#ratings">Read all [#] Reviews</a>
+          <a className="review-link" href="#ratings">Read all {reviews} Reviews</a>
         </div>
       </div>
       <div className="columns category">
@@ -72,9 +81,13 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
           <strong>Price</strong>
         </div>
         <div className="column is-one-third size">
-          $
-          {/* {TODO: determine if price discounted} */}
-          {currentStyle.original_price}
+          <strong>$:   </strong>
+          {price}
+        </div>
+        <div className="column is-one-third size">
+          {strikethrough &&
+            <s className="redStrike">{original}</s>
+          }
         </div>
       </div>
       <div className="column slogan">
@@ -100,7 +113,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       <div className="column styles">
         <strong>Styles</strong>
       </div>
-      <div className="column is-italic has-text-weight-semibold">
+      <div className="column is-italic has-text-weight-bold">
         {currentStyle.name}
       </div>
       <div>
@@ -119,7 +132,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
                   alt=""
                   onClick={() => changeStyle({ item })}
                 />
-                <strong>{item.name}</strong>
+                {/* <strong>{item.name}</strong> */}
               </figure>
             </div>
           ))}
@@ -134,13 +147,3 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
 };
 
 export default Details;
-/* <div className="columns">
-  <div className="column cart">
-    <button type="button">Add to Bag +</button>
-  </div>
-  <div className="column favorite">
-    <button type="button">
-      <a href="#related">Favorite</a>
-    </button>
-  </div>
-</div> */

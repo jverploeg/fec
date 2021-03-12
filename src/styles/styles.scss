@@ -37,6 +37,7 @@ $sky-blue: #8FBEEA;
 $cloud-blue: #D0DBE5;
 $navy: #3E5366;
 $grey: #A2ABB3;
+$red: red;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -214,5 +215,9 @@ $tile-spacing: 0;
    position: absolute;
    top: 0;
    width: 100%;
+}
+.redStrike {
+  color:red;
+  text-decoration:line-through;
 }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 // make this dropDown universal if we need to use for multiple features
-const DropDown = (props) => {
+const DropDown = (focus) => {
   // PROPS
-  const { style } = props; // each style has a set of skus
+  const { style } = focus; // each style has a set of skus
   const { skus } = style; // skus for current style
   // configure skus for easier use
   let options = [];
@@ -11,16 +11,18 @@ const DropDown = (props) => {
   // TODO: limit the available q to 15 if more in stock.
   const maxLength = 15;
 
+
   // TODO: ADDTOCART move here and add interaction with size and style
   // STATES
-  const [state, setState] = useState('');
+  const [state, setState] = useState('Select Size');
   const [sizes, setSizes] = useState([]);
   const [currentSize, setCurrentSize] = useState('-');
-
+  const [show, setShow] = useState(false);
 
   // HANDLERS for changes
   // oon size seletion, update size and set q to 1
   const set = (event) => {
+    setShow(false);
     setState(event);
     setCurrentSize(1);
   };
@@ -28,6 +30,13 @@ const DropDown = (props) => {
   const setSize = (event) => {
     setCurrentSize(event);
   };
+  // TODO: add logic for clicking with various size and q states
+  // add to cart functionality
+  const reset = () => {
+    if (state === 'Select Size') { setShow(true); }
+    setState('Select Size');
+    setCurrentSize('-');
+  }
 
 
   // EFFECTS to rerender
@@ -41,17 +50,29 @@ const DropDown = (props) => {
     setSizes(arr);
   }, [state]);
 
+  // reset on style change
+  useEffect(() => {
+    setState('Select Size');
+    setSizes([]);
+    setCurrentSize('-');
+    setShow(false);
+  }, [focus.style]);
+
+  console.log({show})
   // DOM
   return (
     <div>
       <div className="columns">
         <div className="column size">
+          {show &&
+            <span>Please Select a Size</span>
+          }
           <select
             id="size"
             value={state}
             onChange={(e) => set(e.target.value)}
           >
-            <option>Select Size</option>
+            <option id="open">{state}</option>
             {!!options && options.map((item) =>
               <option key={item.id} value={item.size}>{item.size}</option>)}
           </select>
@@ -64,13 +85,18 @@ const DropDown = (props) => {
             onChange={(e) => setSize(e.target.value)}
             // disabled={!sizes.length}
           >
-            <option> - </option>
+            <option>{currentSize}</option>
             {sizes.map((index) =>
               <option key={index.toString()} value={index}>{index}</option>)}
           </select>
         </div>
         <div className="column cart">
-          <button type="button">Add to Cart +</button>
+          <button
+            type="button"
+            onClick={(e) => reset(e)}
+            >
+            Add to Cart +
+          </button>
         </div>
       </div>
     </div>
