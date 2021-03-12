@@ -1,53 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useCallback } from 'react';
-// helpers
-// import DropDown from '../helpers/dropDown';
+
 import DropDown from '../helpers/sizeQ';
 import OverallStarRating from '../helpers/OverallStarRating';
 
-// variables
-// temp quantity
-const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-// {styles: Array(4)}
-// styles: Array(4)
-// 0:
-// default?: true
-// name: "Green"
-// original_price: "56.00"
-// photos: [{…}]
-// sale_price: null
-// skus:
-// 565825: {quantity: 45, size: "XS"}
-// 565826: {quantity: 27, size: "S"}
-// 565827: {quantity: 59, size: "M"}
-// 565828: {quantity: 55, size: "L"}
-// 565829: {quantity: 51, size: "XL"}
-// 565830: {quantity: 10, size: "XXL"}
-// __proto__: Object
-// style_id: 97715
-
-// TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
 
 const Details = (focus) => { // focus.product and focus.styles and focus.changePhoto
   const { styles } = focus;
   const { product } = focus;
-  console.log({styles});
-
-
-
-  // TODO; make these dynamic...
-  // const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
-  // const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
-
 
   // STATES
   const [styleGrid, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
-
-  // let { skus } = currentStyle;
-  // console.log({skus});
 
   // EFFECTS
   // styles
@@ -64,27 +30,10 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
     setCurrent(product);
   }, [focus.product]);
 
-  // FUNCTIONS
-  // pass down to details to return the currently selected style. useEffect???
-  // console.log({newValue});
-  // useEffect(() => {
-  //   setPhotos(newValue);
-  // }, [handleStyleChange]);
-  // console.log({photos});
-
-
-
-  // const handleChange= (event) => {
-  //   changePhoto(event);
-  //   useEffect(() => {
-  //     setCurrentStyle(event);
-  //   });
-  // };
-
   // EVENT HANDLERS
+  // on style change
   const changeStyle = (event) => {
     const newFocus = event.item;
-    //console.log({newFocus});
     setCurrentStyle(newFocus);
     focus.onChange(newFocus);
   };
@@ -124,6 +73,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
         </div>
         <div className="column is-one-third size">
           $
+          {/* {TODO: determine if price discounted} */}
           {currentStyle.original_price}
         </div>
       </div>
@@ -149,11 +99,11 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       {/* <section className="section space" /> */}
       <div className="column styles">
         <strong>Styles</strong>
+      </div>
+      <div className="column is-italic has-text-weight-semibold">
         {currentStyle.name}
-        {/* <StylesGrid
-          styles={styles}
-          onChange={(value) => handleChange(value)}
-        /> */}
+      </div>
+      <div>
         <div className="columns">
           {styles && styles.map((item) => (
             <div className="column" key={item.style_id}>
@@ -175,52 +125,22 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
           ))}
         </div>
       </div>
-      {/* <section className="section space" /> */}
       <section className="section space" />
-      <div className="columns">
-        <div className="column size">
-          {!!currentStyle && <DropDown style={currentStyle} />}
-        </div>
-        <div className="column quantity">
-          {/* <QDrop /> */}
-        </div>
-      </div>
-
-      <div className="columns">
-        <div className="column cart">
-          <button type="button">Add to Bag +</button>
-        </div>
-        <div className="column favorite">
-          <button type="button">
-            <a href="#related">Favorite</a>
-          </button>
-        </div>
+      <div>
+        {!!currentStyle && <DropDown style={currentStyle} />}
       </div>
     </div>
   );
 };
 
 export default Details;
-
-// useEffect(() => {
-//   setCurrentStyle(changePhoto);
-// }, [focus.changePhoto]);
-
-// FUNCTIONS/LISTENERS
-// do we need to declare changePhoto here?
-
-// const [newStyle, NewStyleGrid] = Styles2(focus.styles.results, focus.styles.results[0]);
-// const setCurrent =
-// pass style state back up to parent
-// focus.setPhotos(newStyle);
-// useEffect(() => {
-//   focus.setPhotos(newStyle);
-// });
-
-// const callback = () => {
-//   styleCallback.setPhotos(newStyle);
-// };
-// styleCallback.setPhotos(newStyle);
-// const [photos, setPhotos] = focus.setPhotos(newStyle);
-
-// const details = () => (
+/* <div className="columns">
+  <div className="column cart">
+    <button type="button">Add to Bag +</button>
+  </div>
+  <div className="column favorite">
+    <button type="button">
+      <a href="#related">Favorite</a>
+    </button>
+  </div>
+</div> */

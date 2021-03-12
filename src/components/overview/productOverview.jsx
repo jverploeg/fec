@@ -9,7 +9,7 @@ const ProductOverview = (focus) => {
   const { styles } = focus; // current product style data
   const { product } = focus; // current product
   let startPhoto = focus.styles[0].photos;
-  console.log({styles});
+  // console.log({styles});
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
@@ -20,7 +20,6 @@ const ProductOverview = (focus) => {
   // if (startPhoto !== photos) setPhotos(startPhoto);
 
   // EFFECTS rerender state on prop change
-
   // set current product from props
   useEffect(() => {
     setCurrent(product);
@@ -42,6 +41,7 @@ const ProductOverview = (focus) => {
     setPhotos(newValue.photos);
   };
 
+  // DOM
   return (
     <div>
       <section className="hero is-grey-dark is-fullheight">
@@ -62,6 +62,7 @@ const ProductOverview = (focus) => {
                     onChange={(value) => handleStyleChange(value)}
                     styles={styles}
                     product={product}
+                    // add reviews for review count
                   />
                 </div>
               </div>
