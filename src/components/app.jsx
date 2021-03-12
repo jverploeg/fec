@@ -19,8 +19,10 @@ function App() {
   // useEffect(() => {
   //   setCurrentProductId(18201);
   // });
+  const products = [18201, 18078, 18445, 18079, 18080];
+  let tempID = products[0];
+  console.log({tempID})
 
-  let tempID = 18201;
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +62,7 @@ function App() {
       {/* OVERVIEW */}
       <div className="overview" id="overview">
         <ProductOverview
+          reviews={response.reviews.length}
           product={response.current}
           styles={response.styles}
         />
