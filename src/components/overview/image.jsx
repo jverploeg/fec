@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
+// import Modal from 'bulma-modal-fx';
+// import "bulma/css/bulma.css";
 
 const Image = (focus) => {
   const { current } = focus;
@@ -8,6 +10,9 @@ const Image = (focus) => {
   const [photoSet, setPhotos] = useState([]);
   const [currentPhoto, setCurrentPhoto] = useState({});
   const [modal, setActive] = useState('');
+  const [zoom, setZoom] = useState(true);
+
+
   // const active = modal ? 'is-active' : '';
   // const toggle = () => {
   //   setActive(active);
@@ -35,6 +40,12 @@ const Image = (focus) => {
     // toggle();
     // console.log(modal);
   };
+  const toggleO = () => {
+    // const active = !zoom;
+    // const active = zoom ? 'is-active' : '';
+    console.log(zoom);
+    setZoom(!zoom);
+  };
 
   // click handler to change the view from thumbnail selection
   const change = (e) => {
@@ -52,14 +63,16 @@ const Image = (focus) => {
   // TODO:modal doesn't work for the images that have wider ratios...works for all vertical images
   return (
     <div>
-      <div className={`modal ${modal}`}>
-        <div className="modal-content">
-          <div className="iframe-container is-fluid">
-            <iframe
-              className="iframe"
-              title="focus"
+      <div className={`modal modal-fx-3dSlit ${modal}`}>
+        <div className="modal-content is-huge">
+          <div className="container is-fluid">
+            <img
+              // giclassName={`image-zoom ${zoom}`}
+              className="image"
+              // title="focus"
               src={currentPhoto.url}
               alt={currentPhoto.thumbnail_url}
+              onClick={() => toggleO()}
             />
           </div>
         </div>

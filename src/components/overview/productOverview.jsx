@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, useLayoutEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+// import , {}
 import Image from './image';
 import Details from './details';
 
