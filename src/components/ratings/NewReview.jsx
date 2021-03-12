@@ -69,6 +69,7 @@ const NewReview = (props) => {
 
       {/* Characteristics */}
     </div>
+    
   );
 };
 

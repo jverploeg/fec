@@ -12,10 +12,10 @@ import { shallow, mount, render } from 'enzyme';
 // RENDER is for generating HTML from react tree and analyzing the HTML structure
 
 // files
-import ProductOverview from 'components/overview/productOverview';
-import Details from 'components/overview/details';
-import Image from 'components/overview/image';
-import Description from 'components/overview/description';
+import ProductOverview from '../src/components/overview/productOverview.jsx';
+import Details from '../src/components/overview/details.jsx';
+import Image from '../src/components/overview/image.jsx';
+import Description from '../src/components/overview/description.jsx';
 
 // component
 describe('ProductOverview', () => {

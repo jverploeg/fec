@@ -15,6 +15,7 @@ html {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 103;
 }
 .sticky + content {
   padding-top: 60px;
@@ -22,6 +23,7 @@ html {
 .sticky-card {
   position: fixed;
   top: 20px;
+  z-index: 102;
 }
 .sticky-card + content {
   padding-top: 60px;
@@ -140,76 +142,31 @@ $tile-spacing: 0;
 .rating-container-1 {
   position: relative;
   text-align: center;
-  // display: inline-block;
-  // top: 50%;
-  // color: transparent;
 }
-
 .rating-container-2 {
   position: absolute;
-  // display: inline-block;
-  top: 50%;
-  // color: transparent;
-}
-
-// .rating-container:before {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   color: lightgray;
-// }
-
-// .rating-container:after {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   color: gold;
-//   overflow: hidden;
-// }
-
-.rating-0 {
-  // width: 100%;
-  left: 100%;
-  transform: translate(-0%, -50%);
+  top: 100%;
 }
 .rating-1 {
-  // width: 100%;
-  left: 100%;
-  transform: translate(-20%, -50%);
+  left: 0%;
+  transform: translate(0%, 0%);
 }
 .rating-2 {
-  // width: 100%;
-  left: 100%;
-  transform: translate(-40%, -50%);
+  left: 25%;
+  transform: translate(-25%, 0%);
 }
 .rating-3 {
-  // width: 100%;
-  left: 100%;
-  transform: translate(-60%, -50%);
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 .rating-4 {
-  // width: 100%;
-  left: 100%;
-  transform: translate(-80%, -50%);
+  left: 75%;
+  transform: translate(-75%, 0%);
 }
 .rating-5 {
-  // width: 100%;
   left: 100%;
-  transform: translate(-100%, -50%);
+  transform: translate(-100%, 0%);
 }
-
-// .rating-0:after {
-//   width: 0%;
-// }
-// .rating-20:after { width: 20%; }
-// .rating-40:after { width: 40%; }
-// .rating-60:after { width: 60%; }
-// .rating-80:after { width: 80%; }
-// .rating-100:after {
-//   width: 100%;
-//   left: 100%;
-//   transform: translate(-100%, -50%);
-// }
 
 // image modal
 .img-modal-wrapper {
