@@ -1,46 +1,18 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import OverallStarRating from '../helpers/OverallStarRating';
+import RatingSlider from './RatingSlider';
 import { ProductContext } from '../context/product-context.js'
-
-// import {ThemeContext} from './theme-context';
-
-// function ThemeTogglerButton() {
-//   // The Theme Toggler Button receives not only the theme
-//   // but also a toggleTheme function from the context
-//   return (
-//     <ThemeContext.Consumer>
-//       {({theme, toggleTheme}) => (
-//         <button
-//           onClick={toggleTheme}
-//           style={{backgroundColor: theme.background}}>
-//           Toggle Theme
-//         </button>
-//       )}
-//     </ThemeContext.Consumer>
-//   );
-// }
 
 // COMPONENT
 const RatingCard = (props) => {
   // variables
   const currentProduct = props.product;
+  const allReviews = props.reviews;
   const { aveRating, percentRecommended, ratingsBreakdown } = props.product;
-  let { reviewsMeta } = props.product;
-  reviewsMeta = reviewsMeta.characteristics;
 
-
-  // console.log({ratingsBreakdown});
   const { total, max, numOfFiveStars, numOfFourStars, numOfThreeStars, numOfTwoStars, numOfOneStars } = ratingsBreakdown;
 
-
-  const { Fit, Length, Comfort, Quality  } = reviewsMeta;
-  const { fitRating } = Fit;
-  const { lengthRating } = Length;
-  const { qualityRating } = Quality;
-
-  const allReviews = props.reviews;
-  // console.log({ allReviews });
 
   // state
   const [listedReviews, setListedReviews] = useState([]);
@@ -54,16 +26,16 @@ const RatingCard = (props) => {
   };
 
   return (
-    <div className="box has-background-light">
+    <div id="rating-card" className="box has-background-light">
       <div className="tile is-ancestor is-vertical">
 
         {/* TITLE */}
-        <div className="tile is-child">
+        <div className="tile is-parent pb-1 mb-1">
           <h1 className="has-text-primary is-size-4">RATINGS & REVIEWS</h1>
         </div>
 
         {/* AVERAGE RATING AND STAR BAR */}
-        <div className="tile is-child">
+        <div className="tile is-child pt-1 mt-1">
           <div className="container has-text-centered">
             <nav className="level">
               <div className="level-left">
@@ -189,19 +161,7 @@ const RatingCard = (props) => {
         <div className="tile is-child"></div>
 
         {/* FIT AND COMFORT RATINGS */}
-        <div className="tile is-parent is-vertical">
-          <article className="tile is-child">
-            <p className="has-text-primary is-size-4">Fit</p>
-          </article>
-          <article className="tile is-grey-dark is-small">
-            <IoMdArrowDropdown
-              className="arrow"
-              size={30}
-              color="is-primary"
-            />
-          </article>
-            <div className="tile is-link"></div>
-        </div>
+        <RatingSlider product={currentProduct} />
 
       </div>
     </div>

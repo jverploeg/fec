@@ -104,8 +104,7 @@ dist
 .tern-port
 
 # atlier api
-<<<<<<< HEAD
 atlier-config.js
-=======
-atlier-config.js
->>>>>>> 02d7806d8e4daed5999ec3c68401a11092ed3ab4
+
+# aws
+fec-ryne.pem
