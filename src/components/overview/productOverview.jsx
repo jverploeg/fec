@@ -9,15 +9,12 @@ const ProductOverview = (focus) => {
   const { styles } = focus; // current product style data
   const { product } = focus; // current product
   const { reviews } = focus; // current reviews for product -> get count
-  let startPhoto = focus.styles[0].photos;
+  const startPhoto = styles[0].photos;
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
   const [styleData, setStyleData] = useState([]); // array of styles
   const [photos, setPhotos] = useState(startPhoto); // change photos on style selection
-
-  // update state conditionally
-  // if (startPhoto !== photos) setPhotos(startPhoto);
 
   // EFFECTS rerender state on prop change
   // set current product from props
@@ -44,26 +41,22 @@ const ProductOverview = (focus) => {
   // DOM
   return (
     <div>
-      <section className="hero is-grey-dark is-large">
-        <div className="container is-fluid">
+      <section className="hero is-grey-dark is-large justify-content-center">
+        <div className="overview-container">
           <div className="tile is-ancestor has-text-centered is-12">
             <div className="tile">
-            {/* <div className="tile is-12"> */}
-              <div className="tile is-parent is-6 fixed-container">
-                <div className="tile is-child box is-vertical-center">
-                  <Image
-                    current={photos}
-                  />
-                </div>
+              <div className="tile is-parent is-7">
+                <Image
+                  current={photos}
+                />
               </div>
-              <div className="tile is-parent is-6 fixed-container">
-                <div className="tile is-child box is-vertical-center">
+              <div className="tile is-parent is-5 fixed-container">
+                <div className="tile is-child box">
                   <Details
                     onChange={(value) => handleStyleChange(value)}
                     styles={styles}
                     product={product}
                     reviews={reviews}
-                    // add reviews for review count
                   />
                 </div>
               </div>

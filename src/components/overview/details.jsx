@@ -46,8 +46,6 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
 
   const selected = (e) => {
     const target = e.currentTarget;
-    // console.log({select});
-    // console.log({target});
     // if nothing selected yet
     if (!select) {
       setButton(target);
