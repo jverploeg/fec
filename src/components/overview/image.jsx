@@ -91,7 +91,7 @@ const Image = (focus) => {
           aria-label="close"
         />
       </div>
-      <div className="fixed container">
+      <div className="fixed-container">
         <img
           className="image-container"
           src={currentPhoto.url}
@@ -112,22 +112,51 @@ const Image = (focus) => {
         >
           <i className="fa fa-angle-double-right" />
         </button>
-        <div className="tile is-child is-overlay is-vertical-center">
-          <div className="tile is-vertical">
-            {photoSet && photoSet.map((item, index) => (
-              <figure className="image is-32x32">
-                <img
-                  className="is-square"
-                  index={index}
-                  src={item.thumbnail_url}
-                  alt={item.url}
-                  onClick={(e) => change(e)}
-                />
-              </figure>
-            ))}
+        <div className="tile is-parent">
+          <div className="tile is-child">
+            <div className="level">
+              {photoSet && photoSet.map((item, index) => (
+                <div className="level-item">
+                  {/* <div className="fixed-thumb"> */}
+                  <div className="fixed-thumb">
+                    <img
+                      // className="thumb"
+                      className="thumb-image"
+                      //layout="fill"
+                      index={index}
+                      src={item.thumbnail_url}
+                      alt={item.url}
+                      onClick={(e) => change(e)}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+      {/* <div className="tile is-child is-overlay"> */}
+      {/* <div className="fixed-container">
+        <div className="tile is-child">
+          <div className="tile">
+            <div className="level">
+              {photoSet && photoSet.map((item, index) => (
+                <div className="level-item has-text-centered">
+                  <figure className="image is-64x64">
+                    <img
+                      className="image-container"
+                      index={index}
+                      src={item.thumbnail_url}
+                      alt={item.url}
+                      onClick={(e) => change(e)}
+                    />
+                  </figure>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 };

@@ -48,7 +48,7 @@ const ProductOverview = (focus) => {
         <div className="container is-fluid">
           <div className="tile is-ancestor has-text-centered is-12">
             <div className="tile is-12">
-              <div className="tile is-parent is-6">
+              <div className="tile is-parent is-6 fixed-container">
                 <div className="tile is-child box is-vertical-center fixed-container">
                   <Image
                     current={photos}
