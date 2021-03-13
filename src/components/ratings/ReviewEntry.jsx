@@ -106,7 +106,7 @@ const ReviewEntry = (props) => {
 
   return (
     <>
-      <div className="box has-background-light">
+      <div className="box rating-list has-background-light">
         <div className="tile is-ancestor is-vertical">
 
           {/* STAR RATING, USERNAME, DATE */}
@@ -130,10 +130,12 @@ const ReviewEntry = (props) => {
               </nav>
             </div>
           </div>
+          {/* REVIEW SUMMARY */}
           <div className="tile is-child">
             <h6 className="title is-4">{reviewSummary}</h6>
           </div>
-          <div className="tile is-child">
+          {/* REVIEW BODY */}
+          <div className="tile is-child is-flex-shrink-5 is-flex-wrap-wrap">
             <p className="has-text-primary is-size-6">{reviewBody}</p>
           </div>
           {isBodyTruncated

@@ -3,9 +3,11 @@ import { FaStar } from 'react-icons/fa';
 
 // COMPONENT
 const StarRating = forwardRef((props, ref) => {
+  // state
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
+  // validation
   let ratingDescription = '';
   if (rating === 1) {
     ratingDescription = 'Poor';
@@ -19,12 +21,14 @@ const StarRating = forwardRef((props, ref) => {
     ratingDescription = 'Great';
   }
 
+  // ref hooks
   useImperativeHandle(ref, () => {
     return {
       returnStarRating: () => returnStarRating()
     }
   });
 
+  // hook methods
   const returnStarRating = () => {
     return rating;
   };
