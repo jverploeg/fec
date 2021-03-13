@@ -10,8 +10,9 @@ function App() {
     products: null,
     current: null,
     reviews: null,
-    styles: null,
+    styles: null
   });
+  const [arr, setArr] = useState([]);
   // TODO: ADD State for switching the current product and pass between App <--> RelatedProducts
   const [currentProductId, setCurrentProductId] = useState(null);
 
@@ -24,6 +25,10 @@ function App() {
   console.log({tempID})
 
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
+  // const makeSingleRequest = async (product => {
+  //   return await axios(`/api/products/${product.id}/styles`);
+  // }
+
   useEffect(() => {
     const fetchData = async () => {
       const respGlobal = await axios(
@@ -38,11 +43,18 @@ function App() {
       const styles = await axios(
         `/api/products/${tempID}/styles`
       );
+
+      let prodStyles = await respGlobal.data.map(async product => {
+        const response = await axios.get(`/api/products/${product.id}/styles`);
+        setArr(response.data);
+        //return response.data;
+      });
+
       setAllData({
         data: respGlobal.data,
         current: current.data,
         reviews: reviews.data,
-        styles: styles.data,
+        styles: styles.data
       });
     };
     fetchData();
@@ -69,7 +81,7 @@ function App() {
       </div>
       {/* RELATED PRODUCTS */}
       <div className="related" id="related">
-        <RelatedProducts />
+        <RelatedProducts product={response.data} styles={arr}/>
       </div>
       {/* RATINGS & REVIEWS */}
       <div className="ratings" id="ratings">
