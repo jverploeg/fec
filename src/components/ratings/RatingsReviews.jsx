@@ -19,7 +19,7 @@ const RatingsReviews = (props) => {
 
   // sticky navbar handler
   useEffect(() => {
-    const offset = 2300;
+    const offset = 320;
     const initializeReviewListNavBar = () => {
       const header = document.getElementById("list-navbar");
       const sticky = header.offsetTop + offset;
