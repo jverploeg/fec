@@ -11,22 +11,26 @@ html {
 .content {
   padding: 16px;
 }
-.sticky {
+.list-sticky {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 103;
 }
-.sticky + content {
-  padding-top: 60px;
+.list-sticky + content {
+  padding-top: 100px;
 }
-.sticky-card {
+.card-sticky {
   position: fixed;
   top: 20px;
+  // width: inherit;
   z-index: 102;
 }
-.sticky-card + content {
-  padding-top: 60px;
+.card-sticky + content {
+  padding-top: 100px;
+}
+.rating-card {
+  width: inherit;
 }
 // images container
 *.center-cropped {
@@ -169,37 +173,12 @@ $tile-spacing: 0;
   transform: translate(-100%, 0%);
 }
 
-// image modal
-.img-modal-wrapper {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+// modals
+.review-image-modal {
+  z-index: 104;
 }
-
-.img-modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background-color: rgba(0,0,0,0.3);
-}
-
-.img-modal-box {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 70%;
-  width: 60%;
-  overflow-y: auto;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  z-index: 101;
-  padding: 40px
+.new-review-modal {
+  z-index: 107;
 }
 
 // IMPORTS
@@ -227,6 +206,7 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/modal.sass";
 // Ryne
 @import "~/node_modules/bulma/sass/components/level.sass";
+@import "~/node_modules/bulma/sass/elements/icon.sass";
 
 .is-clickable {
   cursor: pointer;
