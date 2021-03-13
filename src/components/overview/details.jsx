@@ -10,12 +10,13 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   const { styles } = focus;
   const { product } = focus;
   const { reviews } = focus;
-  // console.log(styles)
+
 
   // STATES
   const [styleGrid, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
+
 
   // EFFECTS
   // styles

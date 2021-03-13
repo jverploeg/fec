@@ -51,7 +51,6 @@ const ProductOverview = (focus) => {
               <div className="tile is-parent is-6">
                 <div className="tile is-child box is-vertical-center fixed-container">
                   <Image
-                    // styles={styles}
                     current={photos}
                   />
                 </div>

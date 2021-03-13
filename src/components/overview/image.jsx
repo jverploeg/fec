@@ -6,41 +6,26 @@ import React, { useState, useEffect } from 'react';
 
 const Image = (focus) => {
   const { current } = focus;
-  //console.log({current});
 
-  // const currentIndex = 0;
-
+  // STATES
   const [photoSet, setPhotos] = useState([]);
   const [currentIndex, setIndex] = useState(0);
   const [currentPhoto, setCurrentPhoto] = useState({});
   const [modal, setActive] = useState('');
   const [zoom, setZoom] = useState(true);
 
-  // add state for current index
-
-
-
-  // const active = modal ? 'is-active' : '';
-  // const toggle = () => {
-  //   setActive(active);
-  //   console.log(active);
-  // };
-
-
-  // EFFECTS to rerender
+  // EFFECTS FOR RERENDERING
   // on load
   useEffect(() => {
     setPhotos(current);
-  }, [focus.current]);
-
-  useEffect(() => {
     setIndex(0);
   }, [focus.current]);
-
+  // on index change
   useEffect(() => {
     setCurrentPhoto(current[currentIndex]);
   }, [focus.current, currentIndex]);
 
+  // MODAL HANDLERS
   const open = () => {
     setActive('is-active');
     // toggle();
@@ -58,56 +43,32 @@ const Image = (focus) => {
     setZoom(!zoom);
   };
 
+  // IMAGE SELECTION
   // Right image select
   const right = () => {
-    // what is current? where in array?
-    const length = (photoSet.length - 1); // destructure length
+    const length = (photoSet.length - 1);
     const cur = currentIndex;
     if (cur !== length) {
       const newIndex = cur + 1;
       setIndex(newIndex);
-      // setCurrentPhoto(photoSet[currentIndex]);
     }
   };
   // LEFT image select
   const left = () => {
-    // what is current? where in array?
-    // const length = photoSet; // destructure length
     const cur = currentIndex;
     if (cur !== 0) {
       const newIndex = cur - 1;
       setIndex(newIndex);
-      // setCurrentPhoto(photoSet[currentIndex]);
     }
   };
-
-  // click handler to change the view from thumbnail selection
+  // THUMBNAIL select
   const change = (e) => {
-    // e.persist();
-    let iString = e.target.getAttribute('index');
-    //console.log(typeof(index));
-    let index = Number(iString);
-    console.log({index});
-    // save index for left right buttons to make logic easier
-    // const thumb = e.target.src;
-    // const u = e.target.alt;
-    // const newFocus = {
-    //   // id: index,
-    //   thumbnail_url: thumb,
-    //   url: u,
-    // };
+    const iString = e.target.getAttribute('index');
+    const index = Number(iString);
     setIndex(index);
-    // setCurrentPhoto(newFocus);
-    // setCurrentPhoto(photoSet[currentIndex]);
-
-
-    console.log({photoSet});
-    console.log({currentIndex});
-    console.log({currentPhoto});
   };
 
-  // modal functionality needs to be attached to a click listener
-  // TODO:modal doesn't work for the images that have wider ratios...works for all vertical images
+  // DOM
   return (
     <div>
       <div className={`modal modal-fx-3dFlipVertical ${modal}`}>
@@ -153,13 +114,11 @@ const Image = (focus) => {
         </button>
         <div className="tile is-child is-overlay is-vertical-center">
           <div className="tile is-vertical">
-            {/* <div className="tile is-4" /> */}
             {photoSet && photoSet.map((item, index) => (
               <figure className="image is-32x32">
                 <img
                   className="is-square"
                   index={index}
-                  // value={JSON.stringify(key)}
                   src={item.thumbnail_url}
                   alt={item.url}
                   onClick={(e) => change(e)}
@@ -175,54 +134,3 @@ const Image = (focus) => {
 
 export default Image;
 
-{/* <figure className="fixed-container">
-<img
-  className="image-container"
-  src={currentPhoto.url}
-  alt={currentPhoto.thumbnail_url}
-  onClick={(e) => open(e)}
-/>
-<div className="tile is-child is-overlay is-vertical-center">
-  <div className="tile is-vertical">
-    {/* <div className="tile is-4" /> */}
-//     {photoSet && photoSet.map((item) => (
-//       <figure className="image is-32x32" key={item.thumbnail_url}>
-//         <img
-//           className="is-square"
-//           src={item.thumbnail_url}
-//           alt={item.url}
-//           onClick={(e) => change(e)}
-//         />
-//       </figure>
-//     ))}
-//   </div>
-// </div>
-// </figure> */}
-
-// .box-five {
-//   background-image: url("https://images.unsplash.com/photo-1455218873509-8097305ee378?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=9a01d670daebc6fcf8e67f912178e164");
-//   background-size: cover;
-//   background-position: center;
-//   background-repeat:no-repeat;
-// }
-// <div class="tile is-parent">
-// <article class="tile is-child notification is-dark box-five">
-//   <h1 class="title">05.</h1>
-//   <p class="subtitle">Fuel your imagination</p>
-//   <hr>
-
-//   <p>This tile has a background Image</p>
-// </article>
-
-// </div>
-
-
-      //   {/* <figure
-      //     className="tile is-child notification is-dark image-fit"
-      //     background-image={currentPhoto.url}
-      //   > */}
-      //   <h1 className="title">05.</h1>
-      //   <p className="subtitle">Fuel your imagination</p>
-
-      //   <p>This tile has a background Image</p>
-      // </figure>
