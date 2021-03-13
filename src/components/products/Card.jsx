@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Images from './Images.jsx';
 import { MdStar } from 'react-icons/md';
-import axios from 'axios';
+// test
 
 const Card = (props) => {
   console.log('More Images: ', props.moreImages);

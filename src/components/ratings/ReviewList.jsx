@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReviewEntry from './ReviewEntry';
 
 // COMPONENT
@@ -6,9 +6,6 @@ const ReviewList = (props) => {
   // variables
   const currentProduct = props.product;
   const listedReviews = props.reviews;
-  // console.log({ listedReviews });
-
-  // state
 
   return (
     <>

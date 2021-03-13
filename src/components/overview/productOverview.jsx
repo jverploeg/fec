@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, useCallback, useRef, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from './image';
 import Details from './details';
 
@@ -8,14 +8,17 @@ const ProductOverview = (focus) => {
   // PROPS
   const { styles } = focus; // current product style data
   const { product } = focus; // current product
-  const startPhoto = focus.styles[0].photos;
-  // console.log({styles});
+  const { reviews } = focus; // current reviews for product -> get count
+  let startPhoto = focus.styles[0].photos;
+  console.log({ reviews });
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
   const [styleData, setStyleData] = useState([]); // array of styles
-  const [currentStyle, setCurrentStyle] = useState({}); // initialize view with first style NEED?
-  const [photos, setPhotos] = useState([]); // change photos on style selection
+  const [photos, setPhotos] = useState(startPhoto); // change photos on style selection
+
+  // update state conditionally
+  // if (startPhoto !== photos) setPhotos(startPhoto);
 
   // EFFECTS rerender state on prop change
   // set current product from props
@@ -28,36 +31,30 @@ const ProductOverview = (focus) => {
     setStyleData(styles);
   }, [focus]);
 
-  // set current style to be shared between details and image
-  useEffect(() => {
-    setCurrentStyle(styles[0]);
-  }, [focus]);
-
   // initialize current photo view to be from first style in collection
   useEffect(() => {
-    console.log(startPhoto);
     setPhotos(startPhoto); // array of objects
-  }, [focus]);
+  }, []);
 
   // Change photos on style selection in details
   // need to pass setPhotos back up...
   const handleStyleChange = (newValue) => {
-    setPhotos(newValue);
+    setPhotos(newValue.photos);
   };
-  // rerender on change... TODO: combine these/refine
-  // useEffect(() => {
-  //   setPhotos(photos);
-  // }, [photos]);
 
+  // DOM
   return (
     <div>
-      <section className="hero is-grey-dark is-fullheight">
-        <div className="container is-fluid is-maxwidth">
+      <section className="hero is-grey-dark is-large">
+        <div className="container is-fluid">
           <div className="tile is-ancestor has-text-centered is-12">
             <div className="tile is-12">
               <div className="tile is-parent is-6">
-                <div className="tile is-child box is-vertical-center">
-                  <Image styles={styles} start={startPhoto} current={photos} />
+                <div className="tile is-child box is-vertical-center fixed-container">
+                  <Image
+                    // styles={styles}
+                    current={photos}
+                  />
                 </div>
               </div>
               <div className="tile is-parent is-6">
@@ -66,6 +63,8 @@ const ProductOverview = (focus) => {
                     onChange={(value) => handleStyleChange(value)}
                     styles={styles}
                     product={product}
+                    reviews={reviews}
+                    // add reviews for review count
                   />
                 </div>
               </div>
