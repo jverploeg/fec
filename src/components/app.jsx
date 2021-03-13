@@ -67,8 +67,8 @@ function App() {
     <div className="main">
       {/* MODALS */}
       {/* TITLE */}
-      <div className="container is-primary has-text-centered">
-        <h1 className="title">KamelCasedKids Capstone</h1>
+      <div className="box has-background-light has-text-centered">
+        <em><h1 className="title is-1 has-text-link">KamelCasedKids FEC Capstone</h1></em>
       </div>
       {/* OVERVIEW */}
       <div className="overview" id="overview">
