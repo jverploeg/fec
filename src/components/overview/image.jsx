@@ -28,18 +28,13 @@ const Image = (focus) => {
   // MODAL HANDLERS
   const open = () => {
     setActive('is-active');
-    // toggle();
-    // console.log(modal);
   };
   const close = () => {
     setActive('');
-    // toggle();
-    // console.log(modal);
   };
   const toggleO = () => {
     // const active = !zoom;
     // const active = zoom ? 'is-active' : '';
-    console.log(zoom);
     setZoom(!zoom);
   };
 
@@ -70,19 +65,17 @@ const Image = (focus) => {
 
   // DOM
   return (
-    <div>
+    <div className="tile is-child box">
       <div className={`modal modal-fx-3dFlipVertical ${modal}`}>
-        <div className="modal-content is-huge">
-          <div className="container is-fluid">
-            <img
-              // className={`image-zoom ${zoom}`}
-              className="image"
-              // title="focus"
-              src={currentPhoto.url}
-              alt={currentPhoto.thumbnail_url}
-              onClick={() => toggleO()}
-            />
-          </div>
+        <div className="modal-content is-huge is-image">
+          <img
+            // className={`image-zoom ${zoom}`}
+            className="image"
+            // title="focus"
+            src={currentPhoto.url}
+            alt={currentPhoto.thumbnail_url}
+            onClick={() => toggleO()}
+          />
         </div>
         <button
           className="modal-close is-large"
@@ -91,13 +84,19 @@ const Image = (focus) => {
           aria-label="close"
         />
       </div>
+
       <div className="fixed-container">
-        <img
-          className="image-container"
-          src={currentPhoto.url}
-          alt={currentPhoto.thumbnail_url}
-          onClick={(e) => open(e)}
-        />
+
+        <div className="fixed-container-image">
+          <div className="fixed-parent">
+            <img
+              className="image-container"
+              src={currentPhoto.url}
+              alt={currentPhoto.thumbnail_url}
+              onClick={(e) => open(e)}
+            />
+          </div>
+        </div>
         <button
           className="left"
           type="button"
@@ -112,54 +111,26 @@ const Image = (focus) => {
         >
           <i className="fa fa-angle-double-right" />
         </button>
-        <div className="tile is-parent">
-          <div className="tile is-child">
-            <div className="level">
-              {photoSet && photoSet.map((item, index) => (
-                <div className="level-item">
-                  {/* <div className="fixed-thumb"> */}
-                  <div className="fixed-thumb">
-                    <img
-                      // className="thumb"
-                      className="thumb-image"
-                      //layout="fill"
-                      index={index}
-                      src={item.thumbnail_url}
-                      alt={item.url}
-                      onClick={(e) => change(e)}
-                    />
-                  </div>
-                </div>
-              ))}
+
+
+        <div className="fixed-container-thumbs">
+          {photoSet && photoSet.map((item, index) => (
+            <div className="level-item">
+              <div className="fixed-thumb">
+                <img
+                  className="thumb-image"
+                  index={index}
+                  src={item.thumbnail_url}
+                  alt={item.url}
+                  onClick={(e) => change(e)}
+                />
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-      {/* <div className="tile is-child is-overlay"> */}
-      {/* <div className="fixed-container">
-        <div className="tile is-child">
-          <div className="tile">
-            <div className="level">
-              {photoSet && photoSet.map((item, index) => (
-                <div className="level-item has-text-centered">
-                  <figure className="image is-64x64">
-                    <img
-                      className="image-container"
-                      index={index}
-                      src={item.thumbnail_url}
-                      alt={item.url}
-                      onClick={(e) => change(e)}
-                    />
-                  </figure>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };
 
 export default Image;
-
