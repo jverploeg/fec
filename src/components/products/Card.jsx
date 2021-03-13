@@ -4,7 +4,7 @@ import { MdStar } from 'react-icons/md';
 // test
 
 const Card = (props) => {
-  console.log('More Images: ', props.moreImages);
+  // console.log('More Images: ', props.moreImages);
   return (
     <div className="card">
       <div className="card-image">
