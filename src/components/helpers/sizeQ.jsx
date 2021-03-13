@@ -58,7 +58,6 @@ const DropDown = (focus) => {
     setShow(false);
   }, [focus.style]);
 
-  console.log({show})
   // DOM
   return (
     <div>

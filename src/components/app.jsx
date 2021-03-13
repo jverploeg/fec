@@ -20,8 +20,7 @@ function App() {
   //   setCurrentProductId(18201);
   // });
   const products = [18201, 18078, 18445, 18079, 18080];
-  let tempID = products[0];
-  console.log({tempID})
+  let tempID = products[1];
 
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
   useEffect(() => {
@@ -50,7 +49,7 @@ function App() {
 
   // prevent loading until data is served
   if (!response.data) { return null; }
-  console.log({ response });
+  // console.log({ response });
   return (
 
     <div className="main">

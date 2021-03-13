@@ -10,7 +10,6 @@ const ProductOverview = (focus) => {
   const { product } = focus; // current product
   const { reviews } = focus; // current reviews for product -> get count
   let startPhoto = focus.styles[0].photos;
-  console.log({ reviews });
 
   // STATES
   const [current, setCurrent] = useState({}); // current product
