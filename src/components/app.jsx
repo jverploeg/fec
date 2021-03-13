@@ -10,17 +10,24 @@ function App() {
     products: null,
     current: null,
     reviews: null,
-    styles: null,
+    styles: null
   });
+  const [arr, setArr] = useState([]);
   // TODO: ADD State for switching the current product and pass between App <--> RelatedProducts
   const [currentProductId, setCurrentProductId] = useState(null);
+
   // temp set starting id. run once
   // useEffect(() => {
   //   setCurrentProductId(18201);
   // });
+  const products = [18201, 18078, 18445, 18079, 18080];
+  let tempID = products[1];
 
-  let tempID = 18201;
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
+  // const makeSingleRequest = async (product => {
+  //   return await axios(`/api/products/${product.id}/styles`);
+  // }
+
   useEffect(() => {
     const fetchData = async () => {
       const respGlobal = await axios(
@@ -35,11 +42,18 @@ function App() {
       const styles = await axios(
         `/api/products/${tempID}/styles`
       );
+
+      let prodStyles = await respGlobal.data.map(async product => {
+        const response = await axios.get(`/api/products/${product.id}/styles`);
+        setArr(response.data);
+        //return response.data;
+      });
+
       setAllData({
         data: respGlobal.data,
         current: current.data,
         reviews: reviews.data,
-        styles: styles.data,
+        styles: styles.data
       });
     };
     fetchData();
@@ -47,35 +61,34 @@ function App() {
 
   // prevent loading until data is served
   if (!response.data) { return null; }
-
+  // console.log({ response });
   return (
 
     <div className="main">
-      <div className="container is-primary has-text-centered">
-        <h1 className="title">KamelCasedKids Capstone</h1>
+      {/* MODALS */}
+      {/* TITLE */}
+      <div className="box has-background-light has-text-centered">
+        <em><h1 className="title is-1 has-text-link">KamelCasedKids FEC Capstone</h1></em>
       </div>
-      <div className="overview">
+      {/* OVERVIEW */}
+      <div className="overview" id="overview">
         <ProductOverview
+          reviews={response.reviews.length}
           product={response.current}
           styles={response.styles}
         />
       </div>
+      {/* RELATED PRODUCTS */}
       <div className="related" id="related">
-        <RelatedProducts />
+        <RelatedProducts product={response.data} styles={arr}/>
       </div>
+      {/* RATINGS & REVIEWS */}
       <div className="ratings" id="ratings">
         <RatingsReviews product={response.current} reviews={response.reviews}/>
-        {/* <div id="modal" class="modal">
-          <div class="modal-background"></div>
-          <div class="modal-content">
-            <p class="image is-4by3">
-              <img src={imageSelected.url} alt="" />
-            </p>
-          </div>
-          <button class="modal-close is-large" aria-label="close"></button>
-        </div> */}
       </div>
+
     </div>
   );
 }
+
 export default App;

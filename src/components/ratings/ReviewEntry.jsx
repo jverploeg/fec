@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import store2 from 'store2';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import OverallStarRating from '../helpers/OverallStarRating';
 
 // COMPONENT
 const ReviewEntry = (props) => {
   // variables
-  const currentProduct = props.product;
   let { review } = props;
   const starRatingProduct = {
     aveRating: review.rating,
@@ -35,8 +33,7 @@ const ReviewEntry = (props) => {
   const reviewer = review.reviewer_name;
   const isRecommended = review.recommend;
   const response = review.response;
-  // let reviewHelpfulYesCount = review.helpfulness;
-  // let reviewHelpfulNoCount = 0;
+
 
   // state
   const [reviewBody, setReviewBody] = useState('');
@@ -46,6 +43,8 @@ const ReviewEntry = (props) => {
   const [reviewHelpfulYesCount, setReviewHelpfulYesCount] = useState(review.helpfulness);
   const [reviewHelpfulNoCount, setReviewHelpfulNoCount] = useState(0); // no count for not helpful in incoming API data. Need to store locally.
   const [hasSelectedHelpfulButton, setHasSelectedHelpfulButton] = useState(false);
+  const [isImageModalVisible, setIsImageModalVisible] = useState('');
+  const [selectedImage, setSelectedImage] = useState({url: 'https://images.unsplash.com/photo-1519862170344-6cd5e49cb996?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'});
 
   // effects
   useEffect(() => {
@@ -88,14 +87,26 @@ const ReviewEntry = (props) => {
       setHasSelectedHelpfulButton(true);
     }
   };
-
-
-  // console.log({ review });
-  // console.log('store2: ', store2());
+  const open = () => {
+    setIsImageModalVisible('is-active');
+    // console.log({ isVisible });
+  };
+  const close = () => {
+    setIsImageModalVisible('');
+  };
+  const change = (e) => {
+    e.persist();
+    const url = e.target.src;
+    const image = {
+      url: url,
+    };
+    setSelectedImage(image);
+    setIsImageModalVisible('is-active');
+  };
 
   return (
     <>
-      <div className="box has-background-light">
+      <div className="box rating-list has-background-light">
         <div className="tile is-ancestor is-vertical">
 
           {/* STAR RATING, USERNAME, DATE */}
@@ -119,10 +130,12 @@ const ReviewEntry = (props) => {
               </nav>
             </div>
           </div>
+          {/* REVIEW SUMMARY */}
           <div className="tile is-child">
             <h6 className="title is-4">{reviewSummary}</h6>
           </div>
-          <div className="tile is-child">
+          {/* REVIEW BODY */}
+          <div className="tile is-child is-flex-shrink-5 is-flex-wrap-wrap">
             <p className="has-text-primary is-size-6">{reviewBody}</p>
           </div>
           {isBodyTruncated
@@ -144,14 +157,10 @@ const ReviewEntry = (props) => {
                     return (
                       <div className="level-item">
                         <div className="box mx-0 my-0 px-0 py-0">
-                            {/* <div className="box has-background-light mx-0 my-0 px-0 py-0"> */}
-                              {/* <div className="tile is-child"> */}
-                                <figure className="image is-128x128 button modal-button" value={photo.url} data-target="#modal" onClick={(e) => props.handleImageSelect(e)}>
-                                  <img className="center-cropped" src={photo.url}></img>
-                                </figure>
-                              {/* </div> */}
-                            {/* </div> */}
-                          </div>
+                          <figure className="image is-128x128 button modal-button" value={photo.url} data-target="#modal" onClick={(e) => change(e)}>
+                            <img className="center-cropped" src={photo.url}></img>
+                          </figure>
+                        </div>
                       </div>
                     );
                   })}
@@ -159,14 +168,27 @@ const ReviewEntry = (props) => {
             </div>
           </div>
 
-          {/* IMAGE POPUP */}
-          {/* {isImageSelected
-            ?
-
-            :
-              null
-          } */}
-
+          {/* IMAGE MODAL */}
+          <div className="review-image-modal">
+            <div className={`modal modal-fx-3dFlipVertical ${isImageModalVisible}`}>
+              <div className="modal-content is-huge">
+                <div className="container is-fluid">
+                  <img
+                    // giclassName={`image-zoom ${zoom}`}
+                    className="image"
+                    // title="focus"
+                    src={selectedImage.url}
+                  />
+                </div>
+              </div>
+              <button
+                className="modal-close is-large"
+                onClick={() => close()}
+                type="button"
+                aria-label="close"
+              />
+            </div>
+          </div>
 
           {/* SPACER */}
           <div className="tile is-child"></div>

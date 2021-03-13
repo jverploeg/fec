@@ -1,50 +1,31 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
-// helpers
-// import ImageMap from '../helpers/imageMap';
-// import ImageModal from '../helpers/imageModal';
+// import Modal from 'bulma-modal-fx';
+// import "bulma/css/bulma.css";
 
-const Image = (focus) => { // focus.pics
-  const { styles } = focus; // es6 way of saying pics = focus.pics
-  const { current } = focus; // .photos.photos;
-  const { start } = focus;
-  // console.log({styles});
-  // console.log({current});
-  // console.log({start});
+const Image = (focus) => {
+  const { current } = focus;
 
-  // const [state, setState] = useState({});
+  // STATES
   const [photoSet, setPhotos] = useState([]);
-  const [currentStyle, setCurrentStyle] = useState({});// photoObject = {url: , thumbnail_url};
-  // ImageModal(options/photos, current) -> returns image render, state, setState
+  const [currentIndex, setIndex] = useState(0);
   const [currentPhoto, setCurrentPhoto] = useState({});
-
   const [modal, setActive] = useState('');
-  // const active = modal ? 'is-active' : '';
-  // const toggle = () => {
-  //   setActive(active);
-  //   console.log(active);
-  // };
+  const [zoom, setZoom] = useState(true);
 
-  // EFFECTS to rerender
+  // EFFECTS FOR RERENDERING
   // on load
   useEffect(() => {
-    setPhotos(start);
-  }, [focus]);
-
+    setPhotos(current);
+    setIndex(0);
+  }, [focus.current]);
+  // on index change
   useEffect(() => {
-    setCurrentStyle(styles);
-  }, [focus.styles]);
+    setCurrentPhoto(current[currentIndex]);
+  }, [focus.current, currentIndex]);
 
-  useEffect(() => {
-    setCurrentPhoto(start[0]);
-  }, [focus.start]);
-
-  // useEffect(() => {
-  //   setCurrentPhoto(current[0]);
-  // }, [focus.current]);
-
-
+  // MODAL HANDLERS
   const open = () => {
     setActive('is-active');
     // toggle();
@@ -55,43 +36,51 @@ const Image = (focus) => { // focus.pics
     // toggle();
     // console.log(modal);
   };
-  // click handler to change the view/current
-  // const change = (e) => {
-  //   e.persist();
-  //   const thumb = e.target.src;
-  //   const u = e.target.alt;
-  //   const newFocus = {
-  //     thumbnail_url: thumb,
-  //     url: u,
-  //   };
-  //   // setState(newFocus);
-  // };
-  // useEffect(() => {
-  //   setState(current);
-  // });
+  const toggleO = () => {
+    // const active = !zoom;
+    // const active = zoom ? 'is-active' : '';
+    console.log(zoom);
+    setZoom(!zoom);
+  };
 
-  // const showImage = () => {
-  //   if(!currentPhoto)
-  // }
+  // IMAGE SELECTION
+  // Right image select
+  const right = () => {
+    const length = (photoSet.length - 1);
+    const cur = currentIndex;
+    if (cur !== length) {
+      const newIndex = cur + 1;
+      setIndex(newIndex);
+    }
+  };
+  // LEFT image select
+  const left = () => {
+    const cur = currentIndex;
+    if (cur !== 0) {
+      const newIndex = cur - 1;
+      setIndex(newIndex);
+    }
+  };
+  // THUMBNAIL select
+  const change = (e) => {
+    const iString = e.target.getAttribute('index');
+    const index = Number(iString);
+    setIndex(index);
+  };
 
-  // // change current image focus on prop change
-  // useEffect(() => {
-  //   setState(current);
-  //   // setActive(modal);
-  // }, [current]);
-
-  // modal functionality needs to be attached to a click listener
-  // TODO:modal doesn't work for the images that have wider ratios...works for all vertical images
+  // DOM
   return (
     <div>
-      <div className={`modal ${modal}`}>
-        <div className="modal-content">
-          <div className="iframe-container is-fluid">
-            <iframe
-              className="iframe"
-              title="focus"
-              // src={currentPhoto.url}
-              // alt={currentPhoto.thumbnail_url}
+      <div className={`modal modal-fx-3dFlipVertical ${modal}`}>
+        <div className="modal-content is-huge">
+          <div className="container is-fluid">
+            <img
+              // className={`image-zoom ${zoom}`}
+              className="image"
+              // title="focus"
+              src={currentPhoto.url}
+              alt={currentPhoto.thumbnail_url}
+              onClick={() => toggleO()}
             />
           </div>
         </div>
@@ -102,33 +91,75 @@ const Image = (focus) => { // focus.pics
           aria-label="close"
         />
       </div>
-      <div className="tile is-parent is-vertical-center">
-        <figure className="image is-fullwidth">
-          <img
-            className="is-fullwidth"
-            src={currentPhoto.url}
-            alt={currentPhoto.thumbnail_url}
-            onClick={(e) => open(e)}
-          />
-          <div className="tile is-child is-overlay is-vertical-center">
-            <div className="tile is-vertical">
-              {/* <div className="tile is-4" /> */}
-              {photoSet && photoSet.map((item) => (
-                <figure className="image is-32x32" key={item.thumbnail_url}>
-                  <img
-                    className="is-square"
-                    src={item.thumbnail_url}
-                    alt={item.url}
-                    onClick={(e) => change(e)}
-                  />
-                </figure>
+      <div className="fixed-container">
+        <img
+          className="image-container"
+          src={currentPhoto.url}
+          alt={currentPhoto.thumbnail_url}
+          onClick={(e) => open(e)}
+        />
+        <button
+          className="left"
+          type="button"
+          onClick={(e) => left(e)}
+        >
+          <i className="fa fa-angle-double-left" />
+        </button>
+        <button
+          className="right"
+          type="button"
+          onClick={() => right()}
+        >
+          <i className="fa fa-angle-double-right" />
+        </button>
+        <div className="tile is-parent">
+          <div className="tile is-child">
+            <div className="level">
+              {photoSet && photoSet.map((item, index) => (
+                <div className="level-item">
+                  {/* <div className="fixed-thumb"> */}
+                  <div className="fixed-thumb">
+                    <img
+                      // className="thumb"
+                      className="thumb-image"
+                      //layout="fill"
+                      index={index}
+                      src={item.thumbnail_url}
+                      alt={item.url}
+                      onClick={(e) => change(e)}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </div>
-        </figure>
+        </div>
       </div>
+      {/* <div className="tile is-child is-overlay"> */}
+      {/* <div className="fixed-container">
+        <div className="tile is-child">
+          <div className="tile">
+            <div className="level">
+              {photoSet && photoSet.map((item, index) => (
+                <div className="level-item has-text-centered">
+                  <figure className="image is-64x64">
+                    <img
+                      className="image-container"
+                      index={index}
+                      src={item.thumbnail_url}
+                      alt={item.url}
+                      onClick={(e) => change(e)}
+                    />
+                  </figure>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div> */}
     </div>
   );
-}
+};
 
 export default Image;
+

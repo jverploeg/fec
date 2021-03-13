@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 // make this dropDown universal if we need to use for multiple features
+// const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
 const DropDown = (name, label, defaultState, options) => {
   const [state, setState] = useState(defaultState);
   const maker = () => (

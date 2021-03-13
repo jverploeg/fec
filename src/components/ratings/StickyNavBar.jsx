@@ -1,65 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FiArrowUpCircle } from 'react-icons/fi';
-import '../../styles/styles.scss';
 
-const StickyNavBar = (props) => {
+const StickyNavBar = () => {
 
   return (
-    <div id="navbar">
-      <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+    <div id="list-navbar">
+      <nav className="navbar is-light has-background-grey is-mobile" role="navigation" aria-label="main navigation">
+
         <div class="navbar-brand">
           <a class="navbar-item" href="#Ratings-Reviews">
             <FiArrowUpCircle className="return-to-top-reviews" size={50}/>
-          </a>
-
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
           </a>
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
-              Home
+            <a class="navbar-item" href="#related">
+              See Related Products
             </a>
-
-            <a class="navbar-item">
-              Documentation
+            <a class="navbar-item" href="#overview">
+              Return to Top of Page
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
-                More
+                Sort By
               </a>
 
               <div class="navbar-dropdown">
                 <a class="navbar-item">
-                  About
+                  Helpful
                 </a>
                 <a class="navbar-item">
-                  Jobs
+                  Newest
                 </a>
                 <a class="navbar-item">
-                  Contact
-                </a>
-                <hr class="navbar-divider"/>
-                <a class="navbar-item">
-                  Report an issue
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light">
-                  Log in
+                  Relevant
                 </a>
               </div>
             </div>

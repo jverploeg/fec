@@ -1,76 +1,83 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect, useCallback } from 'react';
-// helpers
-import DropDown from '../helpers/dropDown';
+
+import DropDown from '../helpers/sizeQ';
 import OverallStarRating from '../helpers/OverallStarRating';
-// import Styles from '../helpers/styles';
-// import StylesGrid from '../helpers/stylesGrid';
 
-// variables
-const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-// temp quantity
-const quantity = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
-// TODO!!!!! modify styles, q, sizes to use the data gathered from styles route
 
 const Details = (focus) => { // focus.product and focus.styles and focus.changePhoto
   const { styles } = focus;
   const { product } = focus;
-  // const { changePhoto } = focus; // needs to be passed to style grid...
-
-  // TODO; make these dynamic...
-  const [size, SizeDropdown] = DropDown('Select Size', '', '', sizes);
-  const [q, QDrop] = DropDown('Select Quantity', '', '', quantity);
+  const { reviews } = focus;
 
 
   // STATES
   const [styleGrid, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
-
+  const [select, setButton] = useState(''); // sets the state for styling currentStyle
 
   // EFFECTS
   // styles
   useEffect(() => {
     setStyles(styles);
-  }, [focus]);
+  }, [focus.styles]);
   // initialize currentstyle to the first one in collection
   useEffect(() => {
     setCurrentStyle(styles[0]);
-  }, [focus]);
+  }, [focus.styles]);
   // current product
   useEffect(() => {
     setCurrent(product);
   }, [focus.product]);
 
-  // FUNCTIONS
-  // pass down to details to return the currently selected style. useEffect???
-  // console.log({newValue});
+  // trying to get the default style to begin with the effect. not working
+  // const start = document.getElementById('0');
   // useEffect(() => {
-  //   setPhotos(newValue);
-  // }, [handleStyleChange]);
-  // console.log({photos});
+  //   if (start) {
+  //     start.classList.toggle('selected');
+  //     setButton(start);
+  //     // console.log(select);
+  //     // start.classList.toggle('selected');
+  //   }
+  // }, [focus]);
 
 
-
-  // const handleChange= (event) => {
-  //   changePhoto(event);
-  //   useEffect(() => {
-  //     setCurrentStyle(event);
-  //   });
-  // };
+  const selected = (e) => {
+    const target = e.currentTarget;
+    // console.log({select});
+    // console.log({target});
+    // if nothing selected yet
+    if (!select) {
+      setButton(target);
+      target.classList.toggle('selected');
+    } else if (select !== target) {
+      // toggle off old
+      select.classList.toggle('selected');
+      // update state
+      setButton(target);
+      // toggle new
+      target.classList.toggle('selected');
+    }
+  };
 
   // EVENT HANDLERS
+  // on style change
   const changeStyle = (event) => {
     const newFocus = event.item;
-    // console.log({newFocus});
     setCurrentStyle(newFocus);
     focus.onChange(newFocus);
   };
+  // check for data on prices/description
+  let price = currentStyle.sale_price;
+  let original = currentStyle.original_price;
+  let strikethrough = false;
+  if (price) { strikethrough = true; }
+  if (!price) { price = currentStyle.original_price; }
 
   return (
-    <div>
+    <div className="has-text-primary">
       <div className="columns star">
         <div className="column">
           <strong>Ratings and Reviews</strong>
@@ -79,7 +86,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
           <OverallStarRating product={current} />
         </div>
         <div className="column">
-          <a className="review-link" href="#ratings">Read all [#] Reviews</a>
+          <a className="review-link" href="#ratings">Read all {reviews} Reviews</a>
         </div>
       </div>
       <div className="columns category">
@@ -103,8 +110,13 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
           <strong>Price</strong>
         </div>
         <div className="column is-one-third size">
-          $
-          {currentStyle.original_price}
+          <strong>$:   </strong>
+          {price}
+        </div>
+        <div className="column is-one-third size">
+          {strikethrough &&
+            <s className="redStrike">{original}</s>
+          }
         </div>
       </div>
       <div className="column slogan">
@@ -129,78 +141,37 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       {/* <section className="section space" /> */}
       <div className="column styles">
         <strong>Styles</strong>
+      </div>
+      <div className="column is-italic has-text-weight-bold">
         {currentStyle.name}
-        {/* <StylesGrid
-          styles={styles}
-          onChange={(value) => handleChange(value)}
-        /> */}
-        <div className="columns">
-          {styles && styles.map((item) => (
-            <div className="column" key={item.style_id}>
-              <figure
-                className="image is-64x64"
-                key={item.style_id}
-                value={item}
-                // onClick={() => handleChange({ item })}
-              >
-                <img
-                  className="is-rounded is-focused"
-                  src={item.photos[0].thumbnail_url}
-                  alt=""
-                  onClick={() => changeStyle({ item })}
-                />
-                <strong>{item.name}</strong>
-              </figure>
-            </div>
-          ))}
+      </div>
+      <div>
+        <div className="columns is-justify-content-center">
+          <div className="level">
+            {styles && styles.map((item, index) => (
+              <div className="level-item">
+                <div className="column">
+                  <figure className="fixed-thumb" onClick={(e) => selected(e)}>
+                    <img
+                      className="thumb-image"
+                      id={index}
+                      src={item.photos[0].thumbnail_url}
+                      alt=""
+                      onClick={() => changeStyle({ item })}
+                    />
+                  </figure>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      {/* <section className="section space" /> */}
       <section className="section space" />
-      <div className="columns">
-        <div className="column size">
-          <SizeDropdown />
-        </div>
-        <div className="column quantity">
-          <QDrop />
-        </div>
-      </div>
-
-      <div className="columns">
-        <div className="column cart">
-          <button type="button">Add to Bag +</button>
-        </div>
-        <div className="column favorite">
-          <button type="button">
-            <a href="#related">Favorite</a>
-          </button>
-        </div>
+      <div>
+        {!!currentStyle && <DropDown style={currentStyle} />}
       </div>
     </div>
   );
 };
 
 export default Details;
-
-// useEffect(() => {
-//   setCurrentStyle(changePhoto);
-// }, [focus.changePhoto]);
-
-// FUNCTIONS/LISTENERS
-// do we need to declare changePhoto here?
-
-// const [newStyle, NewStyleGrid] = Styles2(focus.styles.results, focus.styles.results[0]);
-// const setCurrent =
-// pass style state back up to parent
-// focus.setPhotos(newStyle);
-// useEffect(() => {
-//   focus.setPhotos(newStyle);
-// });
-
-// const callback = () => {
-//   styleCallback.setPhotos(newStyle);
-// };
-// styleCallback.setPhotos(newStyle);
-// const [photos, setPhotos] = focus.setPhotos(newStyle);
-
-// const details = () => (
