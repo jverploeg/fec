@@ -284,6 +284,7 @@ $modal-bg-color: rgba($black,.86);
     flex: 1;
     overflow: hidden;
   }
+
 .fixed-container .left {
     position: absolute;
     // vertical-align: top;
@@ -299,6 +300,7 @@ $modal-bg-color: rgba($black,.86);
     // transform: rotate(135deg);
     // -webkit-transform: rotate(135deg);
 }
+
 .fixed-thumb {
     position:relative;
     width: 64px;

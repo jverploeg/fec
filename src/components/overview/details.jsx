@@ -76,7 +76,6 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   if (price) { strikethrough = true; }
   if (!price) { price = currentStyle.original_price; }
 
-
   return (
     <div className="has-text-primary">
       <div className="columns star">
@@ -147,7 +146,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
         {currentStyle.name}
       </div>
       <div>
-        <div className="columns">
+        <div className="columns is-justify-content-center">
           <div className="level">
             {styles && styles.map((item, index) => (
               <div className="level-item">
