@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { FiArrowUpCircle } from 'react-icons/fi';
 
-const StickyNavBar = (props) => {
+const StickyNavBar = () => {
 
   return (
-    <div id="navbar">
+    <div id="list-navbar">
       <nav className="navbar is-light has-background-grey is-mobile" role="navigation" aria-label="main navigation">
 
         <div class="navbar-brand">
