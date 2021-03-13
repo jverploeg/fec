@@ -19,7 +19,7 @@ const RelatedProducts = (props) => {
         next: '.glider-next'
       }
     });
-  });
+  },[]);
 
   let Arrows = () => {
     return (

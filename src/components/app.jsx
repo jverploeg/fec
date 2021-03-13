@@ -22,6 +22,10 @@ function App() {
 
   let tempID = 18201;
   // FETCH INITIAL DATA ONCE ON PAGE LOAD
+  // const makeSingleRequest = async (product => {
+  //   return await axios(`/api/products/${product.id}/styles`);
+  // }
+
   useEffect(() => {
     const fetchData = async () => {
       const respGlobal = await axios(
