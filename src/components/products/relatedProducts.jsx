@@ -5,17 +5,6 @@ import axios from 'axios';
 import Modal from './Modal.jsx';
 
 const RelatedProducts = (props) => {
-  const cardImages = [
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg'],
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg'],
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg'],
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg'],
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg'],
-    ['https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F28%2F2021%2F02%2F24%2Fcancun-beach-hotels-CANCUNBREAK0221.jpg', 'https://cdn.travelpulse.com/images/99999999-9999-9999-9999-999999999999/d81ac21c-c8bc-9ff2-348a-a7d1672a93af/630x355.jpg', 'https://www.fodors.com/wp-content/uploads/2019/12/SEO__HowToStaySafeCancun_iStock-1140795100.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg', 'https://www.riu.com/en/binaris/DestinoCancun_tcm55-176476.jpg']
-  ];
-
-  const cards = [<Card moreImages={cardImages[0]}/>, <Card moreImages={cardImages[1]}/>, <Card moreImages={cardImages[2]}/>, <Card moreImages={cardImages[3]}/>, <Card moreImages={cardImages[4]}/>, <Card moreImages={cardImages[5]}/>];
-
   const [products, setProducts] = useState([]);
   const [productStyles, setProductStyles] = useState([]);
   const [theCards, addCard] = useState([]);
@@ -30,7 +19,7 @@ const RelatedProducts = (props) => {
         next: '.glider-next'
       }
     });
-  });
+  },[]);
 
   let Arrows = () => {
     return (
@@ -53,9 +42,9 @@ const RelatedProducts = (props) => {
     <div className='p-6'>
       <div className="glider-contain">
         <div className="glider">
-          { cards.map((card, idx) => (
+          { props.product.map((card, idx) => (
             <div key={card + ' ' + idx} className='p-4'>
-              {card}
+              <Card product={card} moreImages={props.styles[idx]}/>
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import { MdStar } from 'react-icons/md';
 // test
 
 const Card = (props) => {
+  console.log('More Images: ', props.moreImages);
   return (
     <div className="card">
       <div className="card-image">
@@ -12,13 +13,13 @@ const Card = (props) => {
 
       <div className="card-content">
         <div className="content">
-          <span>Category</span>
+          <span>{ props.product.category }</span>
           <br />
-          <strong>Expanded Product Name with Extra Text</strong>
+          <strong>{ props.product.description.substring(0,30) }</strong>
         </div>
 
         <div className="content">
-          <span>$123</span>
+          <span>{ props.product.default_price }</span>
           <br />
           <MdStar size={20} color='grey'/>
           <MdStar size={20} color='grey'/>

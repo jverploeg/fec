@@ -106,6 +106,7 @@ dist
 # atlier api
 atlier-config.js
 
+fec.pem
 #pim
 final.pem
 # aws
