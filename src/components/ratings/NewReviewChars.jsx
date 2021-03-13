@@ -1,40 +1,29 @@
 import React from 'react';
-import { IoMdArrowDropdown } from 'react-icons/io';
 
 // COMPONENT
-const RatingSlider = (props) => {
+const NewReviewChars = (props) => {
   // variables
   const reviewsMetaObj = props.product.reviewsMeta.characteristics;
   const reviewsMetaKeys = Object.keys(reviewsMetaObj);
 
   return (
     <>
-
-    {reviewsMetaKeys.map((key) => {
+      {reviewsMetaKeys.map((key) => {
       const ratingParam = reviewsMetaObj[key];
-      const tempValue = ratingParam.value;
-      const roundedValue = Math.round(tempValue).toFixed(0);
+      // const tempValue = ratingParam.value;
+      // const roundedValue = Math.round(tempValue).toFixed(0);
 
-      let styleTag = '';
-      if (roundedValue == 1 ) {
-        styleTag = 'rating-1'
-      } else if (roundedValue == 2 ) {
-        styleTag = 'rating-2'
-      } else if (roundedValue == 3 ) {
-        styleTag = 'rating-3'
-      } else if (roundedValue == 4 ) {
-        styleTag = 'rating-4'
-      } else if (roundedValue == 5 ) {
-        styleTag = 'rating-5'
-      }
-
-      // let scaleParams = [];
-      // if (key === 'Comfort' || key === 'Quality') {
-      //   scaleParams = ['worst', 'poor', 'average', 'better', 'great'];
-      // } else if (key === 'Size' || key === 'Fit' || key === 'Length'|| key === 'Width') {
-      //   scaleParams = ['too small', 'tight', 'snug', 'loose', 'too big'];
-      // } else if (key === 'Size' || key === 'Fit' || key === 'Length'|| key === 'Width') {
-      //   scaleParams = ['too small', 'tight', 'snug', 'loose', 'too big'];
+      // let styleTag = '';
+      // if (roundedValue == 1 ) {
+      //   styleTag = 'rating-1'
+      // } else if (roundedValue == 2 ) {
+      //   styleTag = 'rating-2'
+      // } else if (roundedValue == 3 ) {
+      //   styleTag = 'rating-3'
+      // } else if (roundedValue == 4 ) {
+      //   styleTag = 'rating-4'
+      // } else if (roundedValue == 5 ) {
+      //   styleTag = 'rating-5'
       // }
 
       let scaleParams = [];
@@ -75,7 +64,7 @@ const RatingSlider = (props) => {
                 {scaleParams.map((param) => {
                   return (
                     <div className="level-item">
-                      <span className="has-text-primary has-text-centered is-size-7 px-0 mx-3">{param}</span>
+                      <span className="has-text-primary is-size-7">{param}</span>
                     </div>
                   );
                 })}
@@ -91,4 +80,4 @@ const RatingSlider = (props) => {
 };
 
 // EXPORTS
-export default RatingSlider;
+export default NewReviewChars;
