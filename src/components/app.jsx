@@ -67,17 +67,21 @@ function App() {
     <div className="main">
       {/* MODALS */}
       {/* TITLE */}
-      <div className="box has-background-light has-text-centered">
-        <em><h1 className="title is-1 has-text-link">KamelCasedKids FEC Capstone</h1></em>
-      </div>
+      <section className="title-box">
+        <div className="box has-background-light has-text-centered">
+          <em><h1 className="title is-1 has-text-link">KamelCasedKids FEC Capstone</h1></em>
+        </div>
+      </section>
       {/* OVERVIEW */}
-      <div className="overview" id="overview">
-        <ProductOverview
-          reviews={response.reviews.length}
-          product={response.current}
-          styles={response.styles}
-        />
-      </div>
+      <section>
+        <div className="overview" id="overview">
+          <ProductOverview
+            reviews={response.reviews.length}
+            product={response.current}
+            styles={response.styles}
+          />
+        </div>
+      </section>
       {/* RELATED PRODUCTS */}
       <div className="related" id="related">
         <RelatedProducts product={response.data} styles={arr}/>
