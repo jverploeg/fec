@@ -16,7 +16,7 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   const [styleGrid, setStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({}); // styles[0]);
   const [current, setCurrent] = useState(product);
-
+  const [select, setButton] = useState(''); // sets the state for styling currentStyle
 
   // EFFECTS
   // styles
@@ -32,6 +32,28 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
     setCurrent(product);
   }, [focus.product]);
 
+  // trying to get the default style to begin with the effect. not working
+  // const start = document.getElementById('0');
+  // useEffect(() => {
+  //   setButton(start);
+  //   start.classList.toggle('selected');
+  // }, [start]);
+
+  const selected = (e) => {
+    const target = e.currentTarget;
+    // if nothing selected yet
+    if (!select) {
+      setButton(target);
+      target.classList.toggle('selected');
+    } else if (select !== target) {
+      // toggle off old
+      select.classList.toggle('selected');
+      // update state
+      setButton(target);
+      // toggle new
+      target.classList.toggle('selected');
+    }
+  };
 
   // EVENT HANDLERS
   // on style change
@@ -119,24 +141,23 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
       </div>
       <div>
         <div className="columns">
-          {styles && styles.map((item) => (
-            <div className="column" key={item.style_id}>
-              <figure
-                className="image is-64x64"
-                key={item.style_id}
-                value={item}
-                // onClick={() => handleChange({ item })}
-              >
-                <img
-                  className="is-rounded is-focused"
-                  src={item.photos[0].thumbnail_url}
-                  alt=""
-                  onClick={() => changeStyle({ item })}
-                />
-                {/* <strong>{item.name}</strong> */}
-              </figure>
-            </div>
-          ))}
+          <div className="level">
+            {styles && styles.map((item, index) => (
+              <div className="level-item">
+                <div className="column">
+                  <figure className="fixed-thumb" onClick={(e) => selected(e)}>
+                    <img
+                      className="thumb-image"
+                      id={index}
+                      src={item.photos[0].thumbnail_url}
+                      alt=""
+                      onClick={() => changeStyle({ item })}
+                    />
+                  </figure>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <section className="section space" />

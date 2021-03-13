@@ -47,15 +47,16 @@ const ProductOverview = (focus) => {
       <section className="hero is-grey-dark is-large">
         <div className="container is-fluid">
           <div className="tile is-ancestor has-text-centered is-12">
-            <div className="tile is-12">
+            <div className="tile">
+            {/* <div className="tile is-12"> */}
               <div className="tile is-parent is-6 fixed-container">
-                <div className="tile is-child box is-vertical-center fixed-container">
+                <div className="tile is-child box is-vertical-center">
                   <Image
                     current={photos}
                   />
                 </div>
               </div>
-              <div className="tile is-parent is-6">
+              <div className="tile is-parent is-6 fixed-container">
                 <div className="tile is-child box is-vertical-center">
                   <Details
                     onChange={(value) => handleStyleChange(value)}
