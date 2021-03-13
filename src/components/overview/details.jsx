@@ -35,12 +35,19 @@ const Details = (focus) => { // focus.product and focus.styles and focus.changeP
   // trying to get the default style to begin with the effect. not working
   // const start = document.getElementById('0');
   // useEffect(() => {
-  //   setButton(start);
-  //   start.classList.toggle('selected');
-  // }, [start]);
+  //   if (start) {
+  //     start.classList.toggle('selected');
+  //     setButton(start);
+  //     // console.log(select);
+  //     // start.classList.toggle('selected');
+  //   }
+  // }, [focus]);
+
 
   const selected = (e) => {
     const target = e.currentTarget;
+    // console.log({select});
+    // console.log({target});
     // if nothing selected yet
     if (!select) {
       setButton(target);
