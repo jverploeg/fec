@@ -88,9 +88,23 @@ const getStyles = (productID) => { // async?
     });
 };
 
+const postReview = (productID, review) => {
+  const url = `http://localhost:${port}/api/reviews/submit/${productID}`;
+
+  return axios.post(url, review)
+    .then((results) => {
+      return results;
+    })
+    .catch((error) => {
+      console.log('err: cannot submit review', error);
+      return error;
+    });
+};
+
 // EXPORTS
 export default {
   getAllReviewsByProduct,
   getProductList,
   getProductByID,
+  postReview,
 };

@@ -224,6 +224,25 @@ const getAndAppendReviewsMetaByProduct = (productID) => {
   });
 };
 
+const submitReview = (productID, review) => {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/${config.campus}/reviews`;
+  const options = {
+    headers: {
+      'Authorization': config.key
+    },
+  };
+  return new Promise((resolve, reject) => {
+    axios.post(url, review, options)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((error) => {
+        console.log('err: cannot submit review', error);
+        reject(error);
+      });
+  });
+};
+
 //
 //
 //
@@ -309,6 +328,7 @@ module.exports = {
   getAllProducts,
   getProductByID,
   getStyles,
+  submitReview,
 };
 
 //

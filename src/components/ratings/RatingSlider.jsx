@@ -74,7 +74,7 @@ const RatingSlider = (props) => {
               <div className="level">
                 {scaleParams.map((param) => {
                   return (
-                    <div className="level-item">
+                    <div className="level-item is-flex-shrink-5">
                       <span className="has-text-primary has-text-centered is-size-7 px-0 mx-3">{param}</span>
                     </div>
                   );

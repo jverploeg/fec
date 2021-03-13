@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StarRating from './starRating';
+import NewReviewChars from './NewReviewChars';
 
 const NewReviewModal = (props) => {
   // variables and state
@@ -25,9 +26,16 @@ const NewReviewModal = (props) => {
   const [reviewEmailValidationStyle, setReviewEmailValidationStyle] = useState('is-danger');
   const [reviewUsernameValidationMessage, setReviewUsernameValidationMessage] = useState('must enter a username');
   const [reviewUsernameValidationStyle, setReviewUsernameValidationStyle] = useState('is-danger');
+  const [newReviewCharRatings, setNewReviewCharRatings] = useState({});
 
-
+  // const inputRef = React.useRef({});
+  // console.log(inputRef.current);
   const starRatingRef = React.useRef();
+  // console.log(starRatingRef.current);
+  const ratingCharRef = React.useRef();
+  // console.log(ratingCharRef.current);
+
+
 
   // form validation
   const formValidation = () => {
@@ -84,6 +92,10 @@ const NewReviewModal = (props) => {
     const rating = starRatingRef.current.returnStarRating();
     setNewReviewStarRating(rating);
   };
+  const getNewReviewCharRatings = () => {
+    const charRatings = ratingCharRef.current.returnCharRatings();
+    setNewReviewCharRatings(charRatings);
+  };
   const handleChange = (e) => {
     // e.preventDefault();
     const name = e.target.name;
@@ -102,6 +114,7 @@ const NewReviewModal = (props) => {
     formValidation();
   };
   const resetState = () => {
+    setNewReviewCharRatings({});
     setNewReviewStarRating(null);
     setNewReviewSummary('');
     setNewReviewBody('');
@@ -126,7 +139,9 @@ const NewReviewModal = (props) => {
   };
   const handleSubmit = () => {
     getNewReviewStarRating();
+    getNewReviewCharRatings();
     returnNewReview();
+    resetState();
     props.closeNewReviewModal();
   };
   const handleClose = () => {
@@ -173,6 +188,7 @@ const NewReviewModal = (props) => {
         </div>
 
         {/* CHARACTERISTICS */}
+        <NewReviewChars product={product} ref={ratingCharRef} />
 
         {/* REVIEW SUMMARY (<60 chars) */}
         <div className="field">
@@ -226,30 +242,6 @@ const NewReviewModal = (props) => {
           </div>
           <p className={'help ' + reviewEmailValidationStyle}>{reviewEmailValidationMessage}</p>
         </div>
-
-        <div className="field">
-          <label className="label">Subject</label>
-          <div className="control">
-            <div className="select">
-              <select>
-                <option>Select dropdown</option>
-                <option>With options</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-
-
-        {/* <div class="field">
-          <div class="control">
-            <label class="checkbox">
-              <input type="checkbox">
-              I agree to the <a href="#">terms and conditions</a>
-              </input>
-            </label>
-          </div>
-        </div> */}
 
         {/* SUBMIT & CANCEL BUTTONS */}
         <div className="field is-grouped">

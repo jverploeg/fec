@@ -14,24 +14,37 @@ html {
 .list-sticky {
   position: fixed;
   top: 0;
-  width: 100%;
+  // width: 100%;
+  width: calc(100% - 40px);
   z-index: 103;
 }
 .list-sticky + content {
-  padding-top: 100px;
+  padding-top: 10px;
 }
 .card-sticky {
   position: fixed;
   top: 20px;
-  // width: inherit;
+  width: calc(50vw - 100px);
   z-index: 102;
 }
 .card-sticky + content {
-  padding-top: 100px;
+  padding-top: 10px;
 }
 .rating-card {
-  width: inherit;
+  // width: inherit;
+  box-sizing: content-box;
+  display: flex;
+  max-height: calc(100vh - 50px);
+  width: calc(40vw - 100px);
 }
+.rating-list {
+  max-height: calc(100vh - 50px);
+  width: calc(50vw - 100px);
+}
+.char-label {
+  width: calc(10vw - 10px);
+}
+
 // images container
 *.center-cropped {
   object-fit: cover; /* Do not scale the image */

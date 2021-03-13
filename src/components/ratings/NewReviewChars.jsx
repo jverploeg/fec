@@ -1,30 +1,68 @@
-import React from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
+// TODO change to forwardRef component to access state at NewReviewModal
 // COMPONENT
-const NewReviewChars = (props) => {
+const NewReviewChars = forwardRef((props, ref) => {
   // variables
   const reviewsMetaObj = props.product.reviewsMeta.characteristics;
   const reviewsMetaKeys = Object.keys(reviewsMetaObj);
+  // state
+  const [selection1Key, setSelection1Key] = useState('');
+  const [selection2Key, setSelection2Key] = useState('');
+  const [selection3Key, setSelection3Key] = useState('');
+  const [selection4Key, setSelection4Key] = useState('');
+  const [selection5Key, setSelection5Key] = useState('');
+  const [selection1, setSelection1] = useState('');
+  const [selection2, setSelection2] = useState('');
+  const [selection3, setSelection3] = useState('');
+  const [selection4, setSelection4] = useState('');
+  const [selection5, setSelection5] = useState('');
+
+  // ref hooks
+  useImperativeHandle(ref, () => {
+    return {
+      returnCharRatings: () => returnCharRatings()
+    }
+  });
+
+  // hook methods
+  const returnCharRatings = () => {
+    return {
+      selection1: {key: selection1Key, value: selection1},
+      selection2: {key: selection2Key, value: selection2},
+      selection3: {key: selection3Key, value: selection3},
+      selection4: {key: selection4Key, value: selection4},
+      selection5: {key: selection5Key, value: selection5},
+    };
+  };
+
+  // setSelection1Key(scaleParams[0]);
+  // setSelection2Key(scaleParams[1]);
+  // setSelection3Key(scaleParams[2]);
+  // setSelection4Key(scaleParams[3]);
+  // setSelection5Key(scaleParams[4]);
+
+  // utility methods
+  const handleChange = (e) => {
+    // e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    if (name === 'selection1') {
+      setSelection1(value);
+    } else if (name === 'selection2') {
+      setSelection2(value);
+    } else if (name === 'selection3') {
+      setSelection3(value);
+    } else if (name === 'selection4') {
+      setSelection4(value);
+    } else if (name === 'selection5') {
+      setSelection5(value);
+    }
+  };
 
   return (
     <>
       {reviewsMetaKeys.map((key) => {
-      const ratingParam = reviewsMetaObj[key];
-      // const tempValue = ratingParam.value;
-      // const roundedValue = Math.round(tempValue).toFixed(0);
-
-      // let styleTag = '';
-      // if (roundedValue == 1 ) {
-      //   styleTag = 'rating-1'
-      // } else if (roundedValue == 2 ) {
-      //   styleTag = 'rating-2'
-      // } else if (roundedValue == 3 ) {
-      //   styleTag = 'rating-3'
-      // } else if (roundedValue == 4 ) {
-      //   styleTag = 'rating-4'
-      // } else if (roundedValue == 5 ) {
-      //   styleTag = 'rating-5'
-      // }
 
       let scaleParams = [];
       if (key === 'Size') {
@@ -42,33 +80,22 @@ const NewReviewChars = (props) => {
       }
 
       return (
-        <div className="tile is-parent is-vertical">
-          <div className="tile is-parent pb-0 mb-0">
-            <p className="has-text-primary is-size-5 pb-0 mb-0">{key}</p>
-          </div>
-          <div className="tile is-child rating-container-1 pb-0 mb-0">
-              <IoMdArrowDropdown
-                className={`arrow rating-container-2 pt-0 mb-0 ${styleTag}`}
-                size={25}
-                color="black"
-              />
-          </div>
-          <div className="tile is-parent">
-            <div className="tile is-child">
-              <div className="box has-background-grey-dark py-2"></div>
+        <div className="box">
+          <div className="tile is-ancestor new-review-chars">
+            <div className="char-label">
+              <p className="has-text-dark is-size-6">{key}</p>
             </div>
-          </div>
-          <div className="tile is-parent pb-5">
-            <div className="tile is-child">
-              <div className="level">
-                {scaleParams.map((param) => {
-                  return (
-                    <div className="level-item">
-                      <span className="has-text-primary is-size-7">{param}</span>
-                    </div>
-                  );
-                })}
-              </div>
+            <div className="tile is-parent is-pulled-left">
+              {scaleParams.map((param, i) => {
+                return(
+                  <div className="tile is-child">
+                    <label className="radio">
+                      <input type="radio" name={'selection' + i} value={param} onChange={handleChange} />
+                      {param}
+                    </label>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
@@ -77,7 +104,7 @@ const NewReviewChars = (props) => {
 
     </>
   );
-};
+});
 
 // EXPORTS
 export default NewReviewChars;
