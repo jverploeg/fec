@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card.jsx';
-import Images from './Images.jsx';
+import Card from './Card';
+import Images from './Images';
 import axios from 'axios';
-import Modal from './Modal.jsx';
+import Modal from './Modal';
 
 const RelatedProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -34,10 +34,6 @@ const RelatedProducts = (props) => {
     )
   }
 
-  let getClick = (status) => {
-    console.log('Inside of Related Products Component: ', status);
-  }
-
   return (
     <div className='p-6'>
       <div className="glider-contain">
@@ -50,7 +46,6 @@ const RelatedProducts = (props) => {
         </div>
         <Arrows />
       </div>
-      <Modal />
     </div>
   );
 }
