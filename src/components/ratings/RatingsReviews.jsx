@@ -19,7 +19,7 @@ const RatingsReviews = (props) => {
 
   // sticky navbar handler
   useEffect(() => {
-    const offset = 350;
+    const offset = 2300;
     const initializeReviewListNavBar = () => {
       const header = document.getElementById("list-navbar");
       const sticky = header.offsetTop + offset;
@@ -51,9 +51,6 @@ const RatingsReviews = (props) => {
     };
     initializeRatingCardNavBar();
   }, []);
-  // useEffect(() => {
-
-  // }, []);
 
   useEffect(() => {
     setListedReviews(initialReviews);
@@ -99,9 +96,9 @@ const RatingsReviews = (props) => {
             {/* OVERALL RATING CARD */}
             <div className="column is-5">
               <section className="hero is-grey-light">
-                <div className="hero-head">
+                <div className="hero-head rating-card">
                   {/* INDIVIDUAL RATING CARD */}
-                  <RatingCard product={currentProduct} reviews={allReviews}/>
+                  <RatingCard product={currentProduct} reviews={allReviews} />
                 </div>
               </section>
             </div>
@@ -119,30 +116,30 @@ const RatingsReviews = (props) => {
 
                 <div className="hero-body">
                   {/* REVIEWS LIST COMPONENT */}
-                  <div className="block">
+                  <div className="block review-list">
                     <ReviewList product={currentProduct} reviews={listedReviews} handleImageSelect={props.handleImageSelect}/>
                   </div>
 
                 </div>
                 <div className="hero-foot">
                   {/* MORE REVIEWS BUTTON */}
-                  {areAllReviewsListed
-                    ?
-                      null
-                    :
-                    <div className="container has-text-centered">
-                      <nav class="level">
-                        <div className="level-item">
-                          <button className="button is-primary" onClick={() => addTwoReviews()}>
-                            Show More Reviews
-                          </button>
-                        </div>
-                        <div className="level-item">
-                        <button className="button is-primary" onClick={() => openNewReviewModal()}>Add New Review</button>
-                        </div>
-                      </nav>
-                    </div>
-                  }
+                  <div className="container has-text-centered">
+                    <nav class="level">
+                      {areAllReviewsListed
+                        ?
+                          null
+                        :
+                      <div className="level-item">
+                        <button className="button is-primary" onClick={() => addTwoReviews()}>
+                          Show More Reviews
+                        </button>
+                      </div>
+                      }
+                      <div className="level-item">
+                      <button className="button is-primary" onClick={() => openNewReviewModal()}>Add New Review</button>
+                      </div>
+                    </nav>
+                  </div>
 
 
                 </div>

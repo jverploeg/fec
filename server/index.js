@@ -29,23 +29,7 @@ app.listen(port, () => {
 
 // routes
 // API ROUTES
-app.get('/api/reviews/all/:id', (req, res) => {
-  const productID = req.params.id;
-  const local = store2(`allReviews${productID}`);
-
-  if (local) {
-    console.log(`allReviews${productID} sent locally`);
-    return res.status(201).send(local);
-  }
-  atlier.getAllReviewsByProduct(productID)
-    .then((results) => {
-      return res.status(200).send(results)
-    })
-    .catch((error) => {
-      return res.status(400).send(error)
-    });
-});
-
+// product
 app.get('/api/products/all', (req, res) => {
   const local = store2('allProducts');
 
@@ -76,6 +60,39 @@ app.get('/api/products/:id', (req, res) => {
     })
     .catch((error) => {
       return res.status(405).send(error);
+    });
+});
+
+// reviews
+app.get('/api/reviews/all/:id', (req, res) => {
+  const productID = req.params.id;
+  const local = store2(`allReviews${productID}`);
+
+  if (local) {
+    console.log(`allReviews${productID} sent locally`);
+    return res.status(201).send(local);
+  }
+  atlier.getAllReviewsByProduct(productID)
+    .then((results) => {
+      return res.status(200).send(results)
+    })
+    .catch((error) => {
+      return res.status(400).send(error)
+    });
+});
+
+app.post('/api/reviews/submit/:id', (req, res) => {
+  const productID = req.params.id;
+  const review = req.body;
+
+  console.log(review);
+
+  atlier.submitReview(productID, review)
+    .then((results) => {
+      return res.status(200).send(results);
+    })
+    .catch((error) => {
+      return res.status(400).send(error);
     });
 });
 
