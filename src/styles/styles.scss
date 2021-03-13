@@ -252,7 +252,7 @@ $modal-bg-color: rgba($black,.86);
     max-width: calc(100vw - 200px);
     // padding-left: 5vw;
     // padding-right: 5vw;
-    margin: 0 auto
+    margin: auto
 }
 .fixed-container {
     position: relative;
@@ -272,12 +272,13 @@ $modal-bg-color: rgba($black,.86);
     position: relative;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    // margin: auto 0;
     width: 100%;
     height: 80%;
 }
 .image-container {
     object-fit: cover;
+    object-position: center;
     flex: 1;
     overflow: hidden;
 }
