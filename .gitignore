@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# atlier api
+atlier-config.js
+
+fec.pem
+#pim
+final.pem
+# aws
+fec-ryne.pem

@@ -1,7 +1,61 @@
+// Entire Bulma Library - do not use in production
 // @charset "utf-8";
 // @import "~bulma/bulma";
 
 @charset "utf-8";
+
+// APP
+html {
+  scroll-behavior: smooth;
+}
+.title-box {
+  height: 200px ;
+}
+.content {
+  padding: 16px;
+}
+.list-sticky {
+  position: fixed;
+  top: 0;
+  // width: 100%;
+  width: calc(100% - 40px);
+  z-index: 103;
+}
+.list-sticky + content {
+  padding-top: 10px;
+}
+.card-sticky {
+  position: fixed;
+  top: 20px;
+  width: calc(50vw - 100px);
+  z-index: 102;
+}
+.card-sticky + content {
+  padding-top: 10px;
+}
+.rating-card {
+  // width: inherit;
+  box-sizing: content-box;
+  display: flex;
+  max-height: calc(100vh - 50px);
+  width: calc(40vw - 100px);
+}
+.rating-list {
+  max-height: calc(100vh - 50px);
+  width: calc(50vw - 100px);
+}
+.char-label {
+  width: calc(10vw - 10px);
+}
+
+// images container
+*.center-cropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  // background-size: cover;
+  height: 128px;
+  width: 128px;
+}
 
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
@@ -12,6 +66,7 @@ $sky-blue: #8FBEEA;
 $cloud-blue: #D0DBE5;
 $navy: #3E5366;
 $grey: #A2ABB3;
+$red: red;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -29,15 +84,13 @@ $input-border-color: transparent;
 $input-shadow: none;
 
 //container offset
-$gap: 200px;
+$gap: 100px;
 $container-offset: (2 * $gap);
 // tile-spacing
 $tile-spacing: 0;
 
-// Change Ratings & Reviews Styling
-// input[type="radio"] {
-//   display: none;
-// }
+// REVIEWS & RATINGS
+// new review star rating
 .star-rating {
   input[type="radio"] {
     display: none;
@@ -60,6 +113,91 @@ $tile-spacing: 0;
   color: #f80;
 }
 
+// overall star rating
+.stars-container {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+
+.stars-container:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: lightgray;
+}
+
+.stars-container:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  color: gold;
+  overflow: hidden;
+}
+
+.stars-0:after { width: 0%; }
+.stars-5:after { width: 5%; }
+.stars-10:after { width: 10%; }
+.stars-15:after { width: 15%; }
+.stars-20:after { width: 20%; }
+.stars-25:after { width: 25%; }
+.stars-30:after { width: 30%; }
+.stars-35:after { width: 35%; }
+.stars-40:after { width: 40%; }
+.stars-45:after { width: 45%; }
+.stars-50:after { width: 50%; }
+.stars-55:after { width: 55%; }
+.stars-60:after { width: 60%; }
+.stars-65:after { width: 65%; }
+.stars-70:after { width: 70%; }
+.stars-75:after { width: 75%; }
+.stars-80:after { width: 80%; }
+.stars-85:after { width: 85%; }
+.stars-90:after { width: 90%; }
+.stars-95:after { width: 95%; }
+.stars-100:after { width: 100%; }
+
+// fit, length, comfort ratings
+.rating-container-1 {
+  position: relative;
+  text-align: center;
+}
+.rating-container-2 {
+  position: absolute;
+  top: 100%;
+}
+.rating-1 {
+  left: 0%;
+  transform: translate(0%, 0%);
+}
+.rating-2 {
+  left: 25%;
+  transform: translate(-25%, 0%);
+}
+.rating-3 {
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.rating-4 {
+  left: 75%;
+  transform: translate(-75%, 0%);
+}
+.rating-5 {
+  left: 100%;
+  transform: translate(-100%, 0%);
+}
+
+// modals
+.review-image-modal {
+  z-index: 104;
+}
+.new-review-modal {
+  z-index: 107;
+}
+
+// IMPORTS
 // Import only what you need from Bulma
 @import "~/node_modules/bulma/sass/utilities/_all.sass";
 @import "~/node_modules/bulma/sass/base/_all.sass";
@@ -70,6 +208,7 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/navbar.sass";
 @import "~/node_modules/bulma/sass/layout/hero.sass";
 @import "~/node_modules/bulma/sass/layout/section.sass";
+@import "~/node_modules/bulma/sass/elements/progress.sass";
 
 // Jack is using tiles, columns
 @import "~/node_modules/bulma/sass/grid/columns.sass";
@@ -78,3 +217,278 @@ $tile-spacing: 0;
 @import "~/node_modules/bulma/sass/components/menu.sass";
 @import "~/node_modules/bulma/sass/components/dropdown.sass";
 @import "~/node_modules/bulma/sass/components/card.sass";
+@import "~/node_modules/bulma/sass/helpers/_all.sass";
+@import "~/node_modules/bulma/sass/elements/image.sass";
+@import "~/node_modules/bulma/sass/components/modal.sass";
+// Ryne
+@import "~/node_modules/bulma/sass/components/level.sass";
+@import "~/node_modules/bulma/sass/elements/icon.sass";
+
+
+// Bulma essential variables, functions and mixins
+@import "~/node_modules/bulma/sass/utilities/initial-variables";
+@import "~/node_modules/bulma/sass/utilities/functions";
+@import "~/node_modules/bulma/sass/utilities/derived-variables";
+@import "~/node_modules/bulma/sass/utilities/mixins.sass";
+
+
+// Modal minimal setup
+$transition-duration: .5s;
+$transition-duration-newsPaper: .7s;
+$transition-duration-3dslit: 1s;
+
+$modal-perspective: 1300px;
+$modal-bg-color: rgba($black,.86);
+
+.is-vertical-center {
+  display: flex;
+  align-items: center;
+}
+.overview-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 1em;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    max-height: calc(100vh - 100px);
+    max-width: calc(100vw - 200px);
+    // padding-left: 5vw;
+    // padding-right: 5vw;
+    margin: 0 auto
+}
+.fixed-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+}
+.fixed-parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 60%;
+    margin: auto
+}
+.fixed-container-image {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 80%;
+}
+.image-container {
+    object-fit: cover;
+    flex: 1;
+    overflow: hidden;
+}
+.fixed-container-thumbs {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+.fixed-thumb {
+    position:relative;
+    width: 64px;
+    height: 64px;
+    border: 1px solid black;
+}
+.thumbs {
+    object-fit: cover;
+}
+.left {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 32px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.right {
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    transform: translate(50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 32px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+.thumb-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.thumb-image {
+    object-fit: cover;
+    flex: 1;
+    //margin: 1rem;
+    overflow: hidden;
+    height: 64px;
+    width: 64px;
+}
+
+.selected {
+    border: 1px solid black;
+    // background-color: #555;
+    transform: scale(1.4);
+    opacity: 1;
+    transition: all $transition-duration;
+  }
+
+
+
+.fixed-container .left:hover {
+    background-color: black;
+}
+.fixed-container .right:hover {
+    background-color: black;
+}
+
+
+.image-fit {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url();
+}
+
+.redStrike {
+  color:red;
+  text-decoration:line-through;
+}
+
+.image-zoom {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: all $transition-duration;
+}
+.image-zoom is-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal {
+  display: flex;
+  visibility: hidden;
+
+  // Common fx modal background
+  .modal-background {
+      transition: all $transition-duration;
+      opacity: 0;
+  }
+
+  &.is-active {
+      visibility: visible;
+      .modal-background {
+          opacity: 1;
+      }
+  }
+
+  &.modal-full-screen {
+      .modal-background {
+          background-color: #fff;
+      }
+      .modal-content {
+          width: 100%;
+          height: 100%;
+          max-height: 100vh;
+          margin: 0;
+          background-color: #fff;
+      }
+
+  }
+
+  // Fx modal content
+  // .modal-fx-fadeInScale
+  &.modal-fx {
+
+      &-3dFlipVertical {
+          &.modal {
+              perspective: $modal-perspective;
+          }
+
+          .modal-content {
+              transform-style: preserve-3d;
+              transform: rotateX(-70deg);
+              transition: all $transition-duration;
+              opacity: 0;
+          }
+
+          &.is-active .modal-content {
+              transform: rotateX(0deg);
+              opacity: 1;
+          }
+      }
+
+  }
+
+  .modal-content {
+      // size
+      &.is-huge {
+          width: 100%;
+          margin: 0px 20px;
+          max-height: calc(100vh - 40px);
+      }
+      @include from($tablet) {
+          &.is-huge {
+              width: 100%;
+              margin: 0px 20px;
+              max-height: calc(100vh - 40px);
+          }
+      }
+      &.is-tiny {
+          max-width: 400px;
+      }
+
+      // type
+      &.is-image {
+          text-align: center;
+
+          &.is-huge {
+              width:auto;
+          }
+
+          img {
+              max-height: calc(100vh - 50px);
+          }
+      }
+  }
+
+  // Positioning, center is default
+  // .modal-pos-top
+  &.modal-pos {
+      &-top {
+          align-items: flex-start;
+          .modal-content {
+              margin-top: 1rem;
+          }
+      }
+      &-bottom {
+          align-items: flex-end;
+          .modal-content {
+              margin-bottom: 1rem;
+          }
+      }
+  }
+
+  .modal-background {
+      background-color: $modal-bg-color;
+  }
+}

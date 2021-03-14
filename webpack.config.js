@@ -7,6 +7,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   // the output bundle won't be optimized for production but suitable for development
@@ -18,6 +19,7 @@ module.exports = {
     new CleanWebpackPlugin(), // clears dist folder after each build
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
     new MiniCssExtractPlugin({ filename: './src/styles/styles.css' }),
+    // new CompressionPlugin(),
   ],
 
   // Output
@@ -60,3 +62,4 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
 };
+
